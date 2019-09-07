@@ -16,10 +16,16 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Get a reference to the database service
-var database = firebase.database();
+var database = firebase.database(); 
+
+var name = "Robinosn Ortega";
 
 module.exports = {
     db: function (ref) {
         console.log("text: " + ref);
+    },
+    name: function(nombre) {
+        name = nombre;
+        return name;
     }
 }

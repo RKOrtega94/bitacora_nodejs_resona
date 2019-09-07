@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 var firebase = require('../firebaseclass');
-
-console.log(firebase.db("hello"));
+var nombre = firebase.name("sin nombre");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express',
+                        name: nombre });
 });
 
 /* GET error page. */
