@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-//Firebase SDK
-var firebase = require("firebase");
+var firebase = require('../firebaseclass');
+
+console.log(firebase.db("hello"));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
