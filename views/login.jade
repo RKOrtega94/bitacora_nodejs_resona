@@ -22,9 +22,11 @@ block content
                       button.btn.btn-primary.btn-user.btn-block(type='subbmit')
                         | Login
                     hr
+                    .text-center.text-danger
+                      p.text-danger=errorMessage
                     .text-center
                       a.small(href='forgot-password.html') Forgot Password?
                     .text-center
                       a.small(href='register.html') Create an Account!
                     .text-center
-                      p.alert=usename
+                      p.small=conteo

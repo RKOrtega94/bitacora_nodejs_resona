@@ -6,9 +6,12 @@ var nombre = firebase.name("sin nombre");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  if(!req.session.user){
+    res.redirect('/login');
+  }
   res.render('index', { 
     title: 'Express',
-    name: nombre });
+    name: req.session.user });
 });
 
 /* GET error page. */
