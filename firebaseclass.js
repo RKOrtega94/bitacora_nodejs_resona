@@ -12,20 +12,9 @@ var firebaseConfig = {
   appId: "1:187156215283:web:ab05d9f668a8cb2f"
 };
 
-// Initialize FireBase
-firebase.initializeApp(firebaseConfig);
-
-// Get a reference to the database service
-var database = firebase.database(); 
-
-var name = "Robinosn Ortega";
-
 module.exports = {
-    db: function (ref) {
-        console.log("text: " + ref);
-    },
-    name: function(nombre) {
-        name = nombre;
-        return name;
-    }
+    // Initialize FireBase
+    config: firebase.initializeApp(firebaseConfig),
+    // Get a reference to the database service
+    database: firebase.database()
 }

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var firebase = require('../firebaseclass');
-var nombre = firebase.name("sin nombre");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
