@@ -14,15 +14,17 @@ block content
                   .p-5
                     .text-center
                       h1.h4.text-gray-900.mb-4 Welcome Back!
-                    form.user
+                    form.user(action='/login', method='POST')
                       .form-group
-                        input#exampleInputEmail.form-control.form-control-user(type='email', aria-describedby='emailHelp', placeholder='Enter Email Address...')
+                        input#txtUsername.form-control.form-control-user(type='email', aria-describedby='emailHelp', placeholder='Enter Email Address...', name='txtUsername', required='true')
                       .form-group
-                        input#exampleInputPassword.form-control.form-control-user(type='password', placeholder='Password')
-                      a.btn.btn-primary.btn-user.btn-block(href='index.html')
+                        input#txtPassword.form-control.form-control-user(type='password', placeholder='Password', name='txtPassword', required='true')
+                      button.btn.btn-primary.btn-user.btn-block(type='subbmit')
                         | Login
                     hr
                     .text-center
                       a.small(href='forgot-password.html') Forgot Password?
                     .text-center
                       a.small(href='register.html') Create an Account!
+                    .text-center
+                      p.alert=usename

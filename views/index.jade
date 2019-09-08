@@ -6,7 +6,7 @@ block content
     // Sidebar
     ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
       // Sidebar - Brand
-      a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='index.html')
+      a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='/')
         .sidebar-brand-icon.rotate-n-15
           i.fas.fa-laugh-wink
         .sidebar-brand-text.mx-3
@@ -16,7 +16,7 @@ block content
       hr.sidebar-divider.my-0
       // Nav Item - Dashboard
       li.nav-item.active
-        a.nav-link(href='index.html')
+        a.nav-link(href='/')
           i.fas.fa-fw.fa-tachometer-alt
           span Dashboard
       // Divider
@@ -42,10 +42,10 @@ block content
         #collapseUtilities.collapse(aria-labelledby='headingUtilities', data-parent='#accordionSidebar')
           .bg-white.py-2.collapse-inner.rounded
             h6.collapse-header Custom Utilities:
-            a.collapse-item(href='utilities-color.html') Colors
-            a.collapse-item(href='utilities-border.html') Borders
-            a.collapse-item(href='utilities-animation.html') Animations
-            a.collapse-item(href='utilities-other.html') Other
+            a.collapse-item(href='#') Colors
+            a.collapse-item(href='#') Borders
+            a.collapse-item(href='#') Animations
+            a.collapse-item(href='#') Other
       // Divider
       hr.sidebar-divider
       // Heading
@@ -59,21 +59,21 @@ block content
         #collapsePages.collapse(aria-labelledby='headingPages', data-parent='#accordionSidebar')
           .bg-white.py-2.collapse-inner.rounded
             h6.collapse-header Login Screens:
-            a.collapse-item(href='login.html') Login
-            a.collapse-item(href='register.html') Register
-            a.collapse-item(href='forgot-password.html') Forgot Password
+            a.collapse-item(href='/login') Login
+            a.collapse-item(href='/register') Register
+            a.collapse-item(href='/forgot-password') Forgot Password
             .collapse-divider
             h6.collapse-header Other Pages:
-            a.collapse-item(href='404.html') 404 Page
-            a.collapse-item(href='blank.html') Blank Page
+            a.collapse-item(href='/404') 404 Page
+            a.collapse-item(href='/blank') Blank Page
       // Nav Item - Charts
       li.nav-item
-        a.nav-link(href='charts.html')
+        a.nav-link(href='#')
           i.fas.fa-fw.fa-chart-area
           span Charts
       // Nav Item - Tables
       li.nav-item
-        a.nav-link(href='tables.html')
+        a.nav-link(href='#')
           i.fas.fa-fw.fa-table
           span Tables
       // Divider

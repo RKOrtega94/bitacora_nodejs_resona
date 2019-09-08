@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//Routers
+var loginRouter = require('./routes/login');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var notFoundRouter = require('./routes/404');
@@ -21,12 +23,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
 app.use('/users', usersRouter);
 app.use('/404', notFoundRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.redirect('/404');
+  console.log("path: " + path.relative().toString());
+  return res.status(404).redirect('/404');
+  
 });
 
 // error handler
