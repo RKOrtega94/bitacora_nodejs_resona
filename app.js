@@ -4,6 +4,23 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//FireBase SDK
+var firebase = require("firebase");
+
+//Configure FireBase
+var firebaseConfig = {
+  apiKey: "AIzaSyB6vST0GD8Dmo4H0AkIcnqz1xk4wvL397Q",
+  authDomain: "asistencia-esp8266.firebaseapp.com",
+  databaseURL: "https://asistencia-esp8266.firebaseio.com",
+  projectId: "asistencia-esp8266",
+  storageBucket: "asistencia-esp8266.appspot.com",
+  messagingSenderId: "187156215283",
+  appId: "1:187156215283:web:ab05d9f668a8cb2f"
+};
+
+//Initialice Firebase
+firebase.initializeApp(firebaseConfig)
+
 //Session
 const session = require('express-session');
 
@@ -32,7 +49,7 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
-app.use('/users', usersRouter);
+app.use('/admin/users', usersRouter);
 app.use('/404', notFoundRouter)
 
 // catch 404 and forward to error handler

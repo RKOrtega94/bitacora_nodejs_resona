@@ -13,6 +13,7 @@
     "express-session": "^1.16.2",
     "express-validator": "^6.2.0",
     "firebase": "^6.6.0",
+    "firebase-admin": "^8.5.0",
     "firebaseui": "^4.2.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
