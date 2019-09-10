@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //Firebase
-var firebase = require('../firebaseclass');
-var admin = require('firebase');
+var firebase = require('firebase');
 
 function writeNewPost(uid, username, picture, title, body) {
   // A post entry.
@@ -17,7 +16,7 @@ function writeNewPost(uid, username, picture, title, body) {
   };
 
   // Get a key for a new Post.
-  var newPostKey = admin.database().ref().child('posts').push().key;
+  var newPostKey = firebase.database().ref().child('posts').push().key;
 
   console.log(newPostKey);
 
@@ -39,8 +38,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { 
     title: 'Home',
     name: req.session.user });
-    req.session.user = firebase.config.auth().currentUser.email;
-    console.log(req.session.user);
 });
 
 /* GET error page. */
