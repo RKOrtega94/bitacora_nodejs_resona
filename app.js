@@ -26,6 +26,7 @@ const session = require('express-session');
 
 //Routers
 var loginRouter = require('./routes/login');
+var logoutRouter = require('./routes/logout');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var notFoundRouter = require('./routes/404');
@@ -49,6 +50,7 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/admin/users', usersRouter);
 app.use('/404', notFoundRouter)
 
