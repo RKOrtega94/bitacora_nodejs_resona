@@ -2,10 +2,7 @@ var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
 
-console.log("Ref: " + firebase.database().ref().child('users'));
-
-console.log(firebase.auth().currentUser);
-
+const dbRef = firebase.database().ref('users');
 /* GET login page */
 router.get('/', function (req, res, next) {
     if (!req.session.user) {
@@ -30,6 +27,11 @@ router.post('/', function (req, res, next) {
         firebase.auth().onAuthStateChanged(firebaseUser => {
             if(firebase.auth().currentUser){
                 req.session.user = firebaseUser.email;
+                dbRef.orderByChild('email').equalTo(firebaseUser.email).once('value', snapshot => {
+                    for(var data in snapshot.val()){
+                        var id = data;
+                    }
+                })
                 res.redirect('/');
             }
         })
