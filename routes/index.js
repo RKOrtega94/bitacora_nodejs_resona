@@ -5,6 +5,9 @@ var router = express.Router();
 var firebase = require('firebase');
 
 const dbRef = firebase.database().ref('users');
+var dbRefTickets;
+
+var htmlIndex;
 
 //Add Ticket
 function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
@@ -13,9 +16,7 @@ function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
   console.log('Userkey: ' + userKey);
   dbRef.orderByChild('email').equalTo(userKey).once('value', snapshot => {
     snapshot.forEach((function (child) {
-      console.log("UserID: " + child.key);
       var newTicketKey = firebase.database().ref().child('users').child(child.key).push().key;
-      console.log('url: ' + newTicketKey);
       var postData = {
         tiket: ticket,
         anillamador: anillamador,
@@ -27,28 +28,41 @@ function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
 
       var updates = {};
 
-      updates['/users/' + child.key + '/' + newTicketKey] = postData;
+      updates['/users/' + child.key + '/tickets/' + newTicketKey] = postData;
 
       return firebase.database().ref().update(updates);
     }))
   })
 }
 
+//Read Data
+function readNewData(user) {
+  console.log("Actual user: " + user);
+  dbRef.orderByChild('email').equalTo(user).once('value', snapshot => {
+    snapshot.forEach(function (child) {
+      console.log("UserID: " + child.key);
+      dbRefTickets = firebase.database().ref().child('users').child(child.key).child('tickets');
+      console.log("Database: " + dbRefTickets);
+      return htmlIndex = "<h1>Hola</h1>";
+    })
+  });
+}
+
 /* GET home page. */
 router.get('', function (req, res, next) {
-  console.log("current user: " + req.session.user)
   if (!req.session.user) {
     res.redirect('/login');
   }
+  readNewData(firebase.auth().currentUser.email);
   res.render('index', {
     title: 'Home',
-    name: firebase.auth().currentUser.email
+    name: firebase.auth().currentUser.email,
+    dataTable: htmlIndex
   });
 });
 
 //Post ticket
 router.post('/', function (req, res, next) {
-  console.log('UserID request: ' + req.session.user);
   addNewTicket(
     req.body.txtAnillamador,
     req.body.txtDni,
