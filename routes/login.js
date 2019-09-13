@@ -16,25 +16,21 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var username = req.body.txtUsername;
     var password = req.body.txtPassword;
-        firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            res.render('login', {
-                codigo: errorCode,
-                mensaje: errorMessage
-            })
+    var token = "";
+    firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        res.render('login', {
+            codigo: errorCode,
+            mensaje: errorMessage
         })
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-            if(firebase.auth().currentUser){
-                req.session.user = firebaseUser.email;
-                dbRef.orderByChild('email').equalTo(firebaseUser.email).once('value', snapshot => {
-                    for(var data in snapshot.val()){
-                        var id = data;
-                    }
-                })
-                res.redirect('/');
-            }
-        })
+    })
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+        if (firebase.auth().currentUser) {
+            req.session.user = firebaseUser.email;
+            res.redirect('/');
+        }
+    })
 });
 
 module.exports = router;

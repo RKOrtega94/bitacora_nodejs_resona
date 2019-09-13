@@ -6,19 +6,6 @@ var firebase = require('firebase');
 //DB reference
 const dbRef = firebase.database().ref('users');
 
-console.log('ref' + dbRef);
-
-var user;
-
-dbRef.orderByChild('email').equalTo('rkortega1994@gmail.com').once("value", snapshot => {
-    for(var data in snapshot.val()){
-        var id = data;
-        console.log("Dato: " + id)
-        user = snapshot.child(id).val();
-    }
-    console.log(user.firstname + " " + user.lastname)
-})
-
 //Add user
 function addNewUser(firstname, lastname, dni, email) {
     //Get a key for new post
@@ -36,7 +23,7 @@ function addNewUser(firstname, lastname, dni, email) {
     updates['/users/' + newUserKey] = postData;
 
     firebase.auth().createUserWithEmailAndPassword(email, dni)
-        .catch(function(error) {
+        .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -44,11 +31,10 @@ function addNewUser(firstname, lastname, dni, email) {
                 alert('The password is too weak.');
             } else {
                 alert(errorMessage);
-    }
-  console.log(error);
-});
-
-    return firebase.database().ref().update(updates);
+            }
+        }).then(
+            firebase.database().ref().update(updates)
+        );
 }
 
 //Get user page

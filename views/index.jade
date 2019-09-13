@@ -15,22 +15,22 @@ block content
           .d-sm-flex.align-items-center.justify-content-between.mb-4
             h1.h3.mb-0.text-gray-800 Dashboard
           .row(style='width: 100%')
-            form.user(action='/home', method='POST', style='width: 100%')
+            form.user(action='/', method='POST', style='width: 100%')
               .row(style='width: 100%')
                 .col
-                  input#txtAnillamador.form-control(type='text', aria-describedby='emailHelp', placeholder='Anillamador')
+                  input#txtAnillamador.form-control(type='text', aria-describedby='emailHelp', placeholder='Anillamador', name='txtAnillamador')
                 .col
-                  input#txtIdentificacion.form-control(type='text', aria-describedby='emailHelp', placeholder='Cédula / Pasaporte')
+                  input#txtDni.form-control(type='text', aria-describedby='emailHelp', placeholder='Cédula / Pasaporte', name='txtDni')
                 .col
-                  input#txtPir.form-control(type='text', aria-describedby='emailHelp', placeholder='PIR')
+                  input#txtPir.form-control(type='text', aria-describedby='emailHelp', placeholder='PIR', name='txtPir')
                 .col
-                  input#txtTiket.form-control(type='text', aria-describedby='emailHelp', placeholder='Ticket')
+                  input#txtTicket.form-control(type='text', aria-describedby='emailHelp', placeholder='Ticket', name='txtTicket')
                 .col
-                  input#txtTmo.form-control(type='text', aria-describedby='emailHelp', placeholder='Duración')
+                  input#txtTmo.form-control(type='text', aria-describedby='emailHelp', placeholder='Duración', name='txtTmo')
               .row(style='width: 100%')
                 .col
                   br
-                  textarea#txtComentario.form-control(rows='5', cols='10', placeholder='Comentario')
+                  textarea#txtComment.form-control(rows='5', cols='10', placeholder='Comentario', name='txtComment')
               .row.text-center(style='width: 100%')
                 .col
                   br

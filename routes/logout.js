@@ -7,7 +7,6 @@ var firebase = require('firebase')
 router.get('/', function(req, res, next){
     firebase.auth().signOut().then(function() {
         req.session.user = null;
-        console.log(req.session.user);
         res.redirect('/');
       }).catch(function(error) {
         console.error(error);
