@@ -43,7 +43,7 @@ function readNewData(user) {
       console.log("UserID: " + child.key);
       dbRefTickets = firebase.database().ref().child('users').child(child.key).child('tickets');
       console.log("Database: " + dbRefTickets);
-      return htmlIndex = "<h1>Hola</h1>";
+      return htmlIndex = "";
     })
   });
 }
