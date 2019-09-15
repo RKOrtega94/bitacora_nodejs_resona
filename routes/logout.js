@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router();
 
 //Firebase
-var admin = require('firebase-admin')
+var firebase = require('firebase')
 
 router.get('/', function(req, res, next){
     firebase.auth().signOut().then(function() {

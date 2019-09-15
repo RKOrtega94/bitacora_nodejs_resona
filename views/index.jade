@@ -15,28 +15,53 @@ block content
           .d-sm-flex.align-items-center.justify-content-between.mb-4
             h1.h3.mb-0.text-gray-800 Dashboard
           .row(style='width: 100%')
-            form.user(action='/', method='POST', style='width: 100%')
+            form.user(action='/' method='POST' style='width: 100%')
               .row(style='width: 100%')
                 .col
-                  input#txtAnillamador.form-control(type='text', aria-describedby='emailHelp', placeholder='Anillamador', name='txtAnillamador')
+                  input#txtAnillamador.form-control(type='text' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true')
                 .col
-                  input#txtDni.form-control(type='text', aria-describedby='emailHelp', placeholder='Cédula / Pasaporte', name='txtDni')
+                  input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Personal Pdentification' name='txtDni' required='true')
                 .col
-                  input#txtPir.form-control(type='text', aria-describedby='emailHelp', placeholder='PIR', name='txtPir')
+                  input#txtPir.form-control(type='text' aria-describedby='emailHelp' placeholder='PIR' name='txtPir' required='true')
                 .col
-                  input#txtTicket.form-control(type='text', aria-describedby='emailHelp', placeholder='Ticket', name='txtTicket')
+                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true')
                 .col
-                  input#txtTmo.form-control(type='text', aria-describedby='emailHelp', placeholder='Duración', name='txtTmo')
+                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Time' name='txtTmo' required='true')
               .row(style='width: 100%')
                 .col
                   br
-                  textarea#txtComment.form-control(rows='5', cols='10', placeholder='Comentario', name='txtComment')
+                  textarea#txtComment.form-control(rows='5' cols='10' placeholder='commentary' name='txtComment')
               .row.text-center(style='width: 100%')
                 .col
                   br
                   button.btn.btn-outline-success.align-content-center(type='submit') Agregar
-        // /.container-fluid
-        =data
+            // /.container-fluid
+          br
+          // DataTales Example
+          .card.shadow.mb-4
+            .card-header.py-3
+              h6.m-0.font-weight-bold.text-primary Registry Data
+            .card-body
+              .table-responsive
+                table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                  thead
+                    tr
+                      th Anillamador
+                      th Identification
+                      th PIR
+                      th Ticket
+                      th Time
+                      th Commentary
+                  tfoot
+                    tr
+                      th Anillamador
+                      th Identification
+                      th PIR
+                      th Ticket
+                      th Time
+                      th Commentary
+                  tbody
+                    tr
         // End of Main Content
         // Footer
         br
@@ -55,3 +80,21 @@ block content
         a.scroll-to-top.rounded(href='#page-top')
           i.fas.fa-angle-up
         include helpers/logout
+  script.
+    var testObject = !{result};
+    var table = document.getElementById("dataTable");
+    for (i in testObject){
+      var row = table.insertRow(1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+      cell1.innerHTML = testObject[i].anillamador
+      cell2.innerHTML = testObject[i].dni
+      cell3.innerHTML = testObject[i].pir
+      cell4.innerHTML = testObject[i].ticket
+      cell5.innerHTML = testObject[i].time
+      cell6.innerHTML = testObject[i].comment
+    }

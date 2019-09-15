@@ -5,7 +5,9 @@ var firebase = require('firebase');
 /* GET login page */
 router.get('/', function (req, res, next) {
     if (!req.session.user) {
-        res.render('login');
+        res.render('login', {
+            title: 'Login'
+        });
     } else {
         req.session.user = firebase.auth().currentUser.email;
         res.redirect('/');
@@ -19,6 +21,7 @@ router.post('/', function (req, res, next) {
         var errorCode = error.code;
         var errorMessage = error.message;
         res.render('login', {
+            title: 'Login Error',
             codigo: errorCode,
             mensaje: errorMessage
         })

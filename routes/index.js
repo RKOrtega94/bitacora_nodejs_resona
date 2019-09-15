@@ -33,26 +33,29 @@ function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
   })
 }
 
-//Read Data
-function readNewData() {
-  dbRef.orderByChild('email').equalTo(firebase.auth().currentUser.email).once('value', snapshot => {
-    snapshot.forEach(function (child) {
-      var result = child.val();
-      return result.tickets
-    })
-  });
-}
+
 
 /* GET home page. */
-router.get('', function (req, res, next) {
+router.get('/', function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/login');
   }
-  res.render('index', {
-    title: 'Home',
-    name: firebase.auth().currentUser.email,
-    data: readNewData
-  });
+  dbRef.orderByChild('email').equalTo(firebase.auth().currentUser.email).once('value', snapshot => {
+    snapshot.forEach(function (child) {
+      var result = child.val();
+      console.log("User ID: " + result.id)
+      var resultDbRef = admin.database().ref('users').child(result.id).child('tickets');
+      console.log("Tikets: " + resultDbRef);
+      resultDbRef.once("value", function (snapshot) {
+        console.log(snapshot.val())
+        res.render('index', {
+          title: 'Home',
+          name: firebase.auth().currentUser.email,
+          result: JSON.stringify(snapshot.val())
+        });
+      })
+    })
+  })
 });
 
 //Post ticket
@@ -66,7 +69,7 @@ router.post('/', function (req, res, next) {
     req.body.txtComment,
     req.session.user
   )
-  res.redirect('/');
+  res.redirect('/login');
 })
 
 /* GET error page. */
