@@ -34,11 +34,11 @@ function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
 }
 
 //Read Data
-tickets = function readNewData() {
+function readNewData() {
   dbRef.orderByChild('email').equalTo(firebase.auth().currentUser.email).once('value', snapshot => {
     snapshot.forEach(function (child) {
       var result = child.val();
-      return result.tickets
+      tickets = result.tickets
     })
   });
 }
