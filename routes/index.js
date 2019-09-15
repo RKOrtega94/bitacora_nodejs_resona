@@ -2,23 +2,21 @@ var express = require('express');
 var router = express.Router();
 
 //Firebase
+var admin = require('firebase-admin');
 var firebase = require('firebase');
 
-const dbRef = firebase.database().ref('users');
-var dbRefTickets;
+const dbRef = admin.database().ref('users');
 
-var htmlIndex;
+var tickets;
 
 //Add Ticket
 function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
-  console.log("tiket: " + ticket)
   //Get ticket key
-  console.log('Userkey: ' + userKey);
   dbRef.orderByChild('email').equalTo(userKey).once('value', snapshot => {
     snapshot.forEach((function (child) {
-      var newTicketKey = firebase.database().ref().child('users').child(child.key).push().key;
+      var newTicketKey = admin.database().ref().child('users').child(child.key).push().key;
       var postData = {
-        tiket: ticket,
+        ticket: ticket,
         anillamador: anillamador,
         dni: dni,
         pir: pir,
@@ -30,17 +28,17 @@ function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
 
       updates['/users/' + child.key + '/tickets/' + newTicketKey] = postData;
 
-      return firebase.database().ref().update(updates);
+      return admin.database().ref().update(updates);
     }))
   })
 }
 
 //Read Data
-function readNewData(user) {
-  dbRef.orderByChild('email').equalTo(user).once('value', snapshot => {
+tickets = function readNewData() {
+  dbRef.orderByChild('email').equalTo(firebase.auth().currentUser.email).once('value', snapshot => {
     snapshot.forEach(function (child) {
-      console.log(child.key)
-      return htmlIndex = child.key;
+      var result = child.val();
+      return result.tickets
     })
   });
 }
@@ -50,11 +48,12 @@ router.get('', function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/login');
   }
-  readNewData(firebase.auth().currentUser.email);
+  for (i in tickets) {
+    console.log("Ticket:" + tickets[i].anillamador)
+  }
   res.render('index', {
     title: 'Home',
     name: firebase.auth().currentUser.email,
-    dataTable: htmlIndex
   });
 });
 

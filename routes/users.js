@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 //Firebase
-var firebase = require('firebase');
+var admin = require('firebase-admin');
 //DB reference
-const dbRef = firebase.database().ref('users');
+const dbRef = admin.database().ref('users');
 
 //Add user
 function addNewUser(firstname, lastname, dni, email) {

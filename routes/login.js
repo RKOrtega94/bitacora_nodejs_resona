@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
 
-const dbRef = firebase.database().ref('users');
 /* GET login page */
 router.get('/', function (req, res, next) {
     if (!req.session.user) {
@@ -16,7 +15,6 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var username = req.body.txtUsername;
     var password = req.body.txtPassword;
-    var token = "";
     firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
