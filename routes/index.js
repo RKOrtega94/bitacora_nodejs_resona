@@ -48,6 +48,7 @@ router.get('', function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/login');
   }
+  console.log("Hola desde la consola");
   for (i in tickets) {
     console.log("Ticket:" + tickets[i].anillamador)
   }
