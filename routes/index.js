@@ -38,7 +38,7 @@ function readNewData() {
   dbRef.orderByChild('email').equalTo(firebase.auth().currentUser.email).once('value', snapshot => {
     snapshot.forEach(function (child) {
       var result = child.val();
-      tickets = result.tickets
+      return result.tickets
     })
   });
 }
@@ -48,14 +48,10 @@ router.get('', function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/login');
   }
-  console.log("Hola desde la consola");
-  console.log(tickets);
-  for (i in tickets) {
-    console.log("Ticket:" + tickets[i].anillamador)
-  }
   res.render('index', {
     title: 'Home',
     name: firebase.auth().currentUser.email,
+    data: readNewData
   });
 });
 
