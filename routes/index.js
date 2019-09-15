@@ -49,6 +49,7 @@ router.get('', function (req, res, next) {
     res.redirect('/login');
   }
   console.log("Hola desde la consola");
+  console.log(tickets);
   for (i in tickets) {
     console.log("Ticket:" + tickets[i].anillamador)
   }
