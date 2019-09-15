@@ -37,14 +37,20 @@ function addNewUser(firstname, lastname, dni, email) {
         );
 }
 
+function getUsersData(){
+    console.log(dbRef)
+}
+
 //Get user page
 router.get('/', function (req, res, next) {
     if (!req.session.user) {
         res.redirect('/login');
     }
+    getUsersData();
     res.render('users', {
         title: 'Manage users',
-        name: req.session.user
+        name: req.session.user,
+        data: ""
     })
 })
 

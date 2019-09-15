@@ -37,13 +37,10 @@ function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
 
 //Read Data
 function readNewData(user) {
-  console.log("Actual user: " + user);
   dbRef.orderByChild('email').equalTo(user).once('value', snapshot => {
     snapshot.forEach(function (child) {
-      console.log("UserID: " + child.key);
-      dbRefTickets = firebase.database().ref().child('users').child(child.key).child('tickets');
-      console.log("Database: " + dbRefTickets);
-      return htmlIndex = "";
+      console.log(child.key)
+      return htmlIndex = child.key;
     })
   });
 }
