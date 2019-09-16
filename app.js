@@ -17,8 +17,6 @@ admin.initializeApp({
   databaseURL: 'https://asistencia-esp8266.firebaseio.com/'
 });
 
-console.log('Admin database: ' + admin.database().ref())
-
 //Configure Firebase Aapp
 var firebaseConfig = {
   apiKey: "AIzaSyB6vST0GD8Dmo4H0AkIcnqz1xk4wvL397Q",

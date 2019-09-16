@@ -7,10 +7,37 @@ var firebase = require('firebase');
 
 const dbRef = admin.database().ref('users');
 
-var tickets;
-
 //Add Ticket
-function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
+function addNewTicket(anillamador, dni, pir, ticket, time, userKey) {
+  var date = new Date;
+  var day = '' + date.getDate();
+  var month = '' + date.getMonth();
+  var hour = '' + date.getHours();
+  var minutes = '' + date.getMinutes();
+  var seconds = '' + date.getSeconds();
+
+
+  if (day.length <= 1) {
+    day = '0' + day;
+  }
+
+  if (month.length <= 1) {
+    month = '0' + month;
+  }
+
+  if (hour.length <= 1) {
+    hour = '0' + hour;
+  }
+
+  if (minutes.length <= 1) {
+    minutes = '0' + minutes;
+  }
+
+  if (seconds.length <= 1) {
+    seconds = '0' + seconds;
+  }
+
+  var currentDate = day + '/' + month + '/' + date.getFullYear() + ' ' + hour + ':' + minutes + ':' + seconds;
   //Get ticket key
   dbRef.orderByChild('email').equalTo(userKey).once('value', snapshot => {
     snapshot.forEach((function (child) {
@@ -21,7 +48,7 @@ function addNewTicket(anillamador, dni, pir, ticket, time, comment, userKey) {
         dni: dni,
         pir: pir,
         time: time,
-        comment: comment
+        date: currentDate
       }
 
       var updates = {};
@@ -46,8 +73,7 @@ router.get('/', function (req, res, next) {
       console.log("User ID: " + result.id)
       var resultDbRef = admin.database().ref('users').child(result.id).child('tickets');
       console.log("Tikets: " + resultDbRef);
-      resultDbRef.once("value", function (snapshot) {
-        console.log(snapshot.val())
+      resultDbRef.orderByChild('ticket').once("value", function (snapshot) {
         res.render('index', {
           title: 'Home',
           name: firebase.auth().currentUser.email,
@@ -66,7 +92,6 @@ router.post('/', function (req, res, next) {
     req.body.txtPir,
     req.body.txtTicket,
     req.body.txtTmo,
-    req.body.txtComment,
     req.session.user
   )
   res.redirect('/login');

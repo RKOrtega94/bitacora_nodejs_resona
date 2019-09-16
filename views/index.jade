@@ -18,24 +18,29 @@ block content
             form.user(action='/' method='POST' style='width: 100%')
               .row(style='width: 100%')
                 .col
-                  input#txtAnillamador.form-control(type='text' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true')
+                  input#txtAnillamador.form-control(type='tel' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true', pattern='[0-9]+', title='Only numbers')
                 .col
                   input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Personal Pdentification' name='txtDni' required='true')
                 .col
-                  input#txtPir.form-control(type='text' aria-describedby='emailHelp' placeholder='PIR' name='txtPir' required='true')
+                  select.form-control(name='txtPir', required='true')
+                    option(selected='') Select one..
+                    option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
+                    option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
+                    option(value='CONSULTA / TÉCNICO') CONSULTA / TÉCNICO
+                    option(value='PETICIÓN / COMERCIAL') CONSULTA / COMERCIAL
+                    option(value='PETICIÓN / FACTURACIÓN') CONSULTA / FACTURACIÓN
+                    option(value='RECLAMO / FACTURACIÓN') RECLAMO / FACTURACIÓN
+                    option(value='SOPORTE / COMERCIAL') SOPORTE / COMERCIAL
+                    option(value='SOPORTE / TÉCNICO') SOPORTE / TÉCNICO
                 .col
-                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true')
+                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true', pattern='[0-9]+', title='Only numbers')
                 .col
-                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Time' name='txtTmo' required='true')
-              .row(style='width: 100%')
-                .col
-                  br
-                  textarea#txtComment.form-control(rows='5' cols='10' placeholder='commentary' name='txtComment')
+                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Time mm:ss' name='txtTmo' required='true', pattern='[0-9]{2}:[0-9]{2}', title='Invalid format')
               .row.text-center(style='width: 100%')
                 .col
                   br
                   button.btn.btn-outline-success.align-content-center(type='submit') Agregar
-            // /.container-fluid
+          // /.container-fluid
           br
           // DataTales Example
           .card.shadow.mb-4
@@ -51,7 +56,7 @@ block content
                       th PIR
                       th Ticket
                       th Time
-                      th Commentary
+                      th Date
                   tfoot
                     tr
                       th Anillamador
@@ -59,9 +64,15 @@ block content
                       th PIR
                       th Ticket
                       th Time
-                      th Commentary
+                      th Date
                   tbody
-                    tr
+                    tr(height='0')
+                      td(height='0')
+                      td(height='0')
+                      td(height='0')
+                      td(height='0')
+                      td(height='0')
+                      td(height='0')
         // End of Main Content
         // Footer
         br
@@ -90,11 +101,11 @@ block content
       var cell3 = row.insertCell(2);
       var cell4 = row.insertCell(3);
       var cell5 = row.insertCell(4);
-      var cell6 = row.insertCell(5);
+      var cell6 = row.insertCell(5)
       cell1.innerHTML = testObject[i].anillamador
       cell2.innerHTML = testObject[i].dni
       cell3.innerHTML = testObject[i].pir
       cell4.innerHTML = testObject[i].ticket
       cell5.innerHTML = testObject[i].time
-      cell6.innerHTML = testObject[i].comment
+      cell6.innerHTML = testObject[i].date
     }
