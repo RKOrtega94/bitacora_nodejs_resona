@@ -70,9 +70,7 @@ router.get('/', function (req, res, next) {
   dbRef.orderByChild('email').equalTo(req.session.user).once('value', snapshot => {
     snapshot.forEach(function (child) {
       var result = child.val();
-      console.log("User ID: " + result.id)
       var resultDbRef = admin.database().ref('users').child(result.id).child('tickets');
-      console.log("Tikets: " + resultDbRef);
       resultDbRef.orderByChild('ticket').once("value", function (snapshot) {
         res.render('index', {
           title: 'Home',
