@@ -67,7 +67,7 @@ router.get('/', function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/login');
   }
-  dbRef.orderByChild('email').equalTo(firebase.auth().currentUser.email).once('value', snapshot => {
+  dbRef.orderByChild('email').equalTo(req.session.user).once('value', snapshot => {
     snapshot.forEach(function (child) {
       var result = child.val();
       console.log("User ID: " + result.id)
@@ -76,7 +76,7 @@ router.get('/', function (req, res, next) {
       resultDbRef.orderByChild('ticket').once("value", function (snapshot) {
         res.render('index', {
           title: 'Home',
-          name: firebase.auth().currentUser.email,
+          name: req.session.user,
           result: JSON.stringify(snapshot.val())
         });
       })

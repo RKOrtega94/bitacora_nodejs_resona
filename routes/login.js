@@ -26,12 +26,8 @@ router.post('/', function (req, res, next) {
             mensaje: errorMessage
         })
     })
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-        if (firebase.auth().currentUser) {
-            req.session.user = firebaseUser.email;
-            res.redirect('/');
-        }
-    })
+    req.session.user = username;
+    res.redirect('/');
 });
 
 module.exports = router;
