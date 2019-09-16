@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 //Firebase
-var admin = require('firebase-admin');
 var firebase = require('firebase')
+var admin = require('firebase-admin')
+
 //DB reference
 const dbRef = admin.database().ref('users');
 
@@ -29,12 +30,12 @@ function addNewUser(firstname, lastname, dni, email) {
             var errorCode = error.code;
             var errorMessage = error.message;
             if (errorCode == 'auth/weak-password') {
-                alert('The password is too weak.');
+                console.log('The password is too weak.');
             } else {
-                alert(errorMessage);
+                console.log(errorMessage);
             }
         }).then(
-            firebase.database().ref().update(updates)
+            admin.database().ref().update(updates)
         );
 }
 
