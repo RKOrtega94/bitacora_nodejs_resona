@@ -3,13 +3,14 @@ var router = express.Router();
 
 //Firebase
 var admin = require('firebase-admin');
+var firebase = require('firebase')
 //DB reference
 const dbRef = admin.database().ref('users');
 
 //Add user
 function addNewUser(firstname, lastname, dni, email) {
     //Get a key for new post
-    var newUserKey = firebase.database().ref().child('users').push().key;
+    var newUserKey = admin.database().ref().child('users').push().key;
 
     var postData = {
         id: newUserKey,
