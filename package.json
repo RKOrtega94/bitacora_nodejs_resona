@@ -20,6 +20,7 @@
     "jade-bootstrap": "^1.0.14",
     "morgan": "~1.9.1",
     "next-update": "^3.6.0",
+    "pg": "^7.12.1",
     "tunnel-agent": "^0.6.0"
   },
   "devDependencies": {

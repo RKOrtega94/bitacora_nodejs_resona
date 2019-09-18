@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
     }
 });
 
-router.post('/login', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var username = req.body.txtUsername;
     var password = req.body.txtPassword;
     firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
@@ -30,7 +30,6 @@ router.post('/login', function (req, res, next) {
     })
     req.session.user = username;
     res.redirect('/');
-    next();
 });
 
 module.exports = router;

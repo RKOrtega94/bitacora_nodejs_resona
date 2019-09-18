@@ -55,15 +55,4 @@ router.get('/', function (req, res, next) {
     })
 })
 
-//Post user data
-router.post('/', function (req, res, next) {
-    addNewUser(
-        req.body.txtFirstname,
-        req.body.txtLastname,
-        req.body.txtDni,
-        req.body.txtEmail
-    )
-    res.redirect('/admin/users');
-})
-
 module.exports = router;

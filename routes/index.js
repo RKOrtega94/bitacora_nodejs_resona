@@ -9,6 +9,7 @@ const dbRef = admin.database().ref('users');
 
 //Add Ticket
 function addNewTicket(anillamador, dni, pir, ticket, time, userKey) {
+
   var date = new Date;
   var day = '' + date.getDate();
   var month = '' + date.getMonth();
@@ -84,6 +85,7 @@ router.get('/', function (req, res, next) {
 
 //Post ticket
 router.post('/', function (req, res, next) {
+  console.log(firebase.auth().currentUser.email)
   addNewTicket(
     req.body.txtAnillamador,
     req.body.txtDni,
