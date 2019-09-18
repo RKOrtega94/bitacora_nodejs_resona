@@ -19,6 +19,10 @@
     "jade": "~1.11.0",
     "jade-bootstrap": "^1.0.14",
     "morgan": "~1.9.1",
-    "next-update": "^3.6.0"
+    "next-update": "^3.6.0",
+    "tunnel-agent": "^0.6.0"
+  },
+  "devDependencies": {
+    "clean-css": "^4.2.1"
   }
 }
