@@ -1,8 +1,32 @@
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+//PostgreSQL
+const { Client } = require('pg')
+
+const client = new Client({
+  user: "gvpysackootcsq",
+  password: "8ca27046e8bd7e432a8e4df2adb3593cfefa23cf326f4a3deec2b8f9e90b7ec4",
+  database: "d23dk14kpbefp3",
+  port: 5432,
+  host: "ec2-174-129-27-3.compute-1.amazonaws.com",
+  ssl: true
+})
+
+client.connect()
+
+client.query('SELECT NOW() as now', (err, res) => {
+  if (err) {
+    console.log(err.stack)
+  } else {
+    console.log(res.rows[0])
+  }
+  client.end()
+})
 
 //FireBase SDK
 var admin = require("firebase-admin");
