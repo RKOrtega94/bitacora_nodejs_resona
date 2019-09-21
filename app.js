@@ -7,7 +7,8 @@ var session = require('express-session')
 var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var multer = require('multer')
-var flash = require('conn')
+var flash = require('connect-flash')
+
 var createError = require('http-errors')
 
 
