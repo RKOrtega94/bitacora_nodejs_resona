@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
+var client = require('pg')
+
+
 
 /* GET login page */
 router.get('/', function (req, res, next) {

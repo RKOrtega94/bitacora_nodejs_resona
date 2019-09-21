@@ -1,9 +1,16 @@
+var express = require('express')
+var path = require('path')
+var logger = require('morgan')
+var cookieParser = require('cookie-parser')
+var bodyParser = require('body-parser')
+var session = require('express-session')
+var passport = require('passport')
+var LocalStrategy = require('passport-local')
+var multer = require('multer')
+var flash = require('conn')
+var createError = require('http-errors')
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+
 
 //PostgreSQL
 const { Client } = require('pg')
@@ -17,15 +24,17 @@ const client = new Client({
   ssl: true
 })
 
+const text = 'SELECT user_firstname, user_lastname, user_status FROM public."285c2535fec8eec0857488861b8a462f57b3879c" where user_email = $1 and user_password = $2'
+const values = ['rkortega1994@gmail.com', '123456789']
+
 client.connect()
 
-client.query('SELECT NOW() as now', (err, res) => {
+client.query(text, values, (err, res) => {
   if (err) {
     console.log(err.stack)
   } else {
     console.log(res.rows[0])
   }
-  client.end()
 })
 
 //FireBase SDK
@@ -54,9 +63,6 @@ var firebaseConfig = {
 
 // Initialize Firebase app
 firebase.initializeApp(firebaseConfig);
-
-//Session
-const session = require('express-session');
 
 //Routers
 var loginRouter = require('./routes/login');
