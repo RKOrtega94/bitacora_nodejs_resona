@@ -18,11 +18,11 @@ block content
             form.user(action='/' method='POST' style='width: 100%')
               .row(style='width: 100%')
                 .col
-                  input#txtAnillamador.form-control(type='tel' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true', pattern='[0-9]+', title='Only numbers')
+                  input#txtAnillamador.form-control(type='tel' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true' pattern='[0-9]+' title='Only numbers')
                 .col
                   input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Personal Identification' name='txtDni' required='true')
                 .col
-                  select.form-control(name='txtPir', required='true')
+                  select.form-control(name='txtPir' required='true')
                     option(selected='') Select one..
                     option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
                     option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
@@ -33,9 +33,9 @@ block content
                     option(value='SOPORTE / COMERCIAL') SOPORTE / COMERCIAL
                     option(value='SOPORTE / TÉCNICO') SOPORTE / TÉCNICO
                 .col
-                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true', pattern='[0-9]+', title='Only numbers')
+                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
                 .col
-                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Time mm:ss' name='txtTmo' required='true', pattern='[0-9]{2}:[0-9]{2}', title='Invalid format')
+                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Time mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
               .row.text-center(style='width: 100%')
                 .col
                   br
@@ -91,21 +91,24 @@ block content
         a.scroll-to-top.rounded(href='#page-top')
           i.fas.fa-angle-up
         include helpers/logout
+  // The core Firebase JS SDK is always required and must be listed first
+  script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
+  // Add Firebase products that you want to use
+  script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
   script.
-    var testObject = !{result};
-    var table = document.getElementById("dataTable");
-    for (i in testObject){
-      var row = table.insertRow(1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
-      var cell6 = row.insertCell(5)
-      cell1.innerHTML = testObject[i].anillamador
-      cell2.innerHTML = testObject[i].dni
-      cell3.innerHTML = testObject[i].pir
-      cell4.innerHTML = testObject[i].ticket
-      cell5.innerHTML = testObject[i].time
-      cell6.innerHTML = testObject[i].date
-    }
+    var user = "!{result}";
+    console.log("Reference: "+user);
+    var firebaseConfig = {
+    apiKey: "AIzaSyBe7C2-8lUMP1KWPJ_-lkvKzu0ytl5fAME",
+    authDomain: "resonatel.firebaseapp.com",
+    databaseURL: "https://resonatel.firebaseio.com",
+    projectId: "resonatel",
+    storageBucket: "resonatel.appspot.com",
+    messagingSenderId: "710009860039",
+    appId: "1:710009860039:web:54d43ee0d8b8a4733ab3e2"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var query = firebase.database().ref(user)
+    console.log("database:" + query)
+    query.once('value', function(snapshot){console.log(JSON.stringify(snapshot.val()))})

@@ -117,98 +117,90 @@ function createTicket(req) {
 
 // route for user signup
 app.route('/signup')
-    .get(sessionChecker, (req, res) => {
-        res.sendFile(__dirname + '/public/signup.html');
+  .get(sessionChecker, (req, res) => {
+    res.sendFile(__dirname + '/public/signup.html');
+  })
+  .post((req, res) => {
+    User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
     })
-    .post((req, res) => {
-        User.create({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        })
-            .then(user => {
-                req.session.user = user.dataValues;
-                res.redirect('/dashboard');
-            })
-            .catch(error => {
-                res.redirect('/signup');
-            });
-    });
+      .then(user => {
+        req.session.user = user.dataValues;
+        res.redirect('/dashboard');
+      })
+      .catch(error => {
+        res.redirect('/signup');
+      });
+  });
 
 
 // route for user Login
 app.route('/login')
-    .get(sessionChecker, (req, res) => {
-        res.render('login', {
-            title: 'Login'
-        });
-    })
-    .post((req, res) => {
-        var username = req.body.txtUsername,
-            password = req.body.txtPassword;
+  .get(sessionChecker, (req, res) => {
+    res.render('login', {
+      title: 'Login'
+    });
+  })
+  .post((req, res) => {
+    var username = req.body.txtUsername,
+      password = req.body.txtPassword;
 
-        User.findOne({ where: { username: username } }).then(function (user) {
-            if (!user) {
-                res.render('login', {
-                    title: 'Login',
-                    message: 'Username or password wrong!'
-                });
-            } else if (!user.validPassword(password)) {
-                res.render('login', {
-                    title: 'Login',
-                    message: 'Username or password wrong!'
-                });
-            } else {
-                user.validPassword(password)
-                req.session.user = user.dataValues;
-                res.redirect('/');
-            }
-        })
+    User.findOne({ where: { username: username } }).then(function (user) {
+      if (!user) {
+        res.render('login', {
+          title: 'Login',
+          message: 'Username or password wrong!'
+        });
+      } else if (!user.validPassword(password)) {
+        res.render('login', {
+          title: 'Login',
+          message: 'Username or password wrong!'
+        });
+      } else {
+        user.validPassword(password)
+        req.session.user = user.dataValues;
+        res.redirect('/');
+      }
     })
+  })
 
 
 // route for user's dashboard
 app.get('/', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        var ref = firebase.database().ref('tickets').child(req.session.user.username)
-        console.log("Ref: " + ref)
-        ref.orderByChild('ticket').once('value', snapshot => {
-            snapshot.forEach(function (childSnapshot) {
-                var result = childSnapshot.val()
-                var resultRef = ref.child(result.ticket)
-                resultRef.orderByChild('ticket').once('value', snapshot => {
-                    res.render('index', {
-                        title: 'Home',
-                        name: req.session.user.username,
-                        result: JSON.stringify(snapshot.val())
-                    });
-                })
-            });
-        })
-    } else {
-        res.redirect('/login');
-    }
+  if (req.session.user && req.cookies.user_sid) {
+    var ref = admin.database().ref('tickets').child(req.session.user.username)
+    console.log("Ref: " + ref)
+    res.render('index', {
+      title: 'Home',
+      name: req.session.user.username,
+      result: req.session.user.username
+    });
+  } else {
+    res.redirect('/login');
+  }
 })
 
 // route for user's post dashboard
 app.post('/', (req, res) => {
-    createTicket(req)
-    res.redirect('/')
+  createTicket(req)
+  res.redirect('/')
 })
 
 // route for user logout
 app.get('/logout', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.clearCookie('user_sid');
-        res.redirect('/');
-    } else {
-        res.redirect('/login');
-    }
+  if (req.session.user && req.cookies.user_sid) {
+    res.clearCookie('user_sid');
+    res.redirect('/');
+  } else {
+    res.redirect('/login');
+  }
 })
 
 
 // route for handling 404 requests(unavailable routes)
 app.use(function (req, res, next) {
-    res.status(404).redirect('/404')
+  res.status(404).redirect('/404')
 })
 module.exports = app;
