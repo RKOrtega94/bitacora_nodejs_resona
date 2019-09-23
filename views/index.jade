@@ -121,7 +121,6 @@ block content
     query.once('value', snapshot => {
     snapshot.forEach(childSnapshot => {
     result = childSnapshot.val()
-    var table = $('dataTable').DataTable();
     addRow(result)
     })
     })
