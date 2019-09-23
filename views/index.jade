@@ -109,6 +109,24 @@ block content
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    var query = firebase.database().ref(user)
+    var query = firebase.database().ref("tickets/"+user)
     console.log("database:" + query)
-    query.once('value', function(snapshot){console.log(JSON.stringify(snapshot.val()))})
+    query.once('value', snapshot => {
+      snapshot.forEach(childSnapshot => {
+        var table = document.getElementById("dataTable");
+        var childData = childSnapshot.val(); console.log(childData)
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        cell1.innerHTML = childData.anillamador
+        cell2.innerHTML = childData.dni
+        cell3.innerHTML = childData.pir
+        cell4.innerHTML = childData.ticket
+        cell5.innerHTML = childData.tmo
+        cell6.innerHTML = childData.date
+      })
+    })
