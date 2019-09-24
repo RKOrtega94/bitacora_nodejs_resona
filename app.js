@@ -74,11 +74,7 @@ var sessionChecker = (req, res, next) => {
 function createTicket(req) {
   var date = new Date;
   var day = '' + date.getDate();
-  var month = '' + date.getMonth();
-  var hour = '' + date.getHours();
-  var minutes = '' + date.getMinutes();
-  var seconds = '' + date.getSeconds();
-
+  var month = '' + (date.getMonth()+1)
 
   if (day.length <= 1) {
     day = '0' + day;
@@ -88,19 +84,7 @@ function createTicket(req) {
     month = '0' + month;
   }
 
-  if (hour.length <= 1) {
-    hour = '0' + hour;
-  }
-
-  if (minutes.length <= 1) {
-    minutes = '0' + minutes;
-  }
-
-  if (seconds.length <= 1) {
-    seconds = '0' + seconds;
-  }
-
-  var currentDate = day + '/' + month + '/' + date.getFullYear() + ' ' + hour + ':' + minutes + ':' + seconds;
+  var currentDate = day + '/' + month + '/' + date.getFullYear();
   var ref = admin.database()
     .ref('tickets')
     .child(req.session.user.username)

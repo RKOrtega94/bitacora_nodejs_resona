@@ -21,6 +21,11 @@ var User = sequelize.define(
     password: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    role: {
+        type: Sequelize.ENUM,
+        values: ['user', 'supervisor', 'admin', 'disabled'],
+        allowNull: true
     }
 }, {
     hooks: {
