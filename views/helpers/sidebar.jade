@@ -12,13 +12,17 @@ ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordio
     // Nav Item - Dashboard
     li.nav-item
         a.nav-link(href='/')
-            i.fas.fa-fw.fa-tachometer-alt
-            span Dashboard
+            i.fas.fa-fw.fa-edit
+            span Panel
     // Divider
-        hr.sidebar-divider
+    hr.sidebar-divider
     // Heading
     .sidebar-heading
         | Interface
+    li.nav-item
+        a.nav-link(href='/bitacora')
+            i.fas.fa-fw.fa-file-alt
+            span Bitácora
     // Nav Item - Pages Collapse Menu
         li.nav-item
         a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='true' aria-controls='collapseTwo')
@@ -74,6 +78,6 @@ ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordio
     // Divider
         hr.sidebar-divider.d-none.d-md-block
     // Sidebar Toggler (Sidebar)
-        .text-center.d-none.d-md-inline
+    .text-center.d-none.d-md-inline
         button#sidebarToggle.rounded-circle.border-0
 // End of Sidebar

@@ -74,7 +74,7 @@ var sessionChecker = (req, res, next) => {
 function createTicket(req) {
   var date = new Date;
   var day = '' + date.getDate();
-  var month = '' + (date.getMonth()+1)
+  var month = '' + (date.getMonth() + 1)
 
   if (day.length <= 1) {
     day = '0' + day;
@@ -154,8 +154,6 @@ app.route('/login')
 // route for user's dashboard
 app.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
-    var ref = admin.database().ref('tickets').child(req.session.user.username)
-    console.log("Ref: " + ref)
     res.render('index', {
       title: 'Home',
       name: req.session.user.username,
@@ -180,6 +178,24 @@ app.get('/logout', (req, res) => {
   } else {
     res.redirect('/login');
   }
+})
+
+app.get('/bitacora', (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.render('user-bitacora', {
+      title: 'Bitácora',
+      name: req.session.user.username,
+      result: req.session.user.username
+    });
+  } else {
+    res.redirect('/login');
+  }
+})
+
+app.get('/404', (req, res) => {
+  res.render('404', {
+    title: 'Page not found'
+  })
 })
 
 
