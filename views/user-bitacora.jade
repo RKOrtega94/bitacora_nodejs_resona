@@ -20,6 +20,7 @@ block content
                 table#dataTable.table.table-bordered(width='100%' cellspacing='0')
                   thead
                     tr
+                      th Fecha
                       th Anillamador
                       th Identification
                       th PIR
@@ -27,6 +28,7 @@ block content
                       th Time
                   tfoot
                     tr
+                      th Fecha
                       th Anillamador
                       th Identification
                       th PIR
@@ -76,6 +78,7 @@ block content
     function addRow(data){
       var table = $('#dataTable').DataTable();
       table.row.add([
+        data.date,
         data.anillamador,
         data.dni,
         data.pir,
