@@ -14,6 +14,7 @@ block content
           // Page Heading
           .d-sm-flex.align-items-center.justify-content-between.mb-4
             h1.h3.mb-0.text-gray-800 Panel de registro
+            h6#promedioTmo.mb-0.text-success
           .row(style='width: 100%')
             form.user(action='/' method='POST' style='width: 100%')
               .row(style='width: 100%')
@@ -23,12 +24,12 @@ block content
                   input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Identificación del cliente' name='txtDni' required='true')
                 .col
                   select.form-control(name='txtPir' required='true')
-                    option(selected='') Requerimiento...
+                    option(selected='', value='') Requerimiento...
                     option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
                     option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
                     option(value='CONSULTA / TÉCNICO') CONSULTA / TÉCNICO
-                    option(value='PETICIÓN / COMERCIAL') CONSULTA / COMERCIAL
-                    option(value='PETICIÓN / FACTURACIÓN') CONSULTA / FACTURACIÓN
+                    option(value='PETICIÓN / COMERCIAL') PETICIÓN / COMERCIAL
+                    option(value='PETICIÓN / FACTURACIÓN') PETICIÓN / FACTURACIÓN
                     option(value='RECLAMO / FACTURACIÓN') RECLAMO / FACTURACIÓN
                     option(value='SOPORTE / COMERCIAL') SOPORTE / COMERCIAL
                     option(value='SOPORTE / TÉCNICO') SOPORTE / TÉCNICO
@@ -104,8 +105,22 @@ block content
     firebase.initializeApp(firebaseConfig);
     // Get reference
     var query = firebase.database().ref("tickets/"+user)
+    var count = 0
+    var minutes = 0
+    var seconds = 0
+    var duration = 0
+    var tmo = 0
     function addRow(data){
       var table = $('#dataTable').DataTable();
+      minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
+      seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
+      duration = (seconds*1000) + (minutes*60000)
+      count++
+      tmo = duration/count
+      var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
+      var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
+      var promedioTmo = 'Promedio TMO: ' + mm + ':' + ss
+      document.getElementById("promedioTmo").innerHTML = promedioTmo
       table.row.add([
         data.anillamador,
         data.dni,
