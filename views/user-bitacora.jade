@@ -12,7 +12,7 @@ block content
                 // Begin Page Content
                 .container-fluid
                     .d-sm-flex.align-items-center.justify-content-between.mb-4
-                        h6#promedioTmo.mb-0.text-success
+                        h6#promedioTmo.mb-0.text-info
                     // DataTales Example
                     .card.shadow.mb-4
                         .card-header.py-3
@@ -90,8 +90,6 @@ block content
             month = '0' + month;
             }
             today = month + '/' + date.getFullYear()
-            console.log(today)
-            console.log('data:' + data.date.substr(3, 7))
             if(data.tmo != '00:00' && today == data.date.substr(3, 7)){
                 minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
                 seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
