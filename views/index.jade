@@ -24,7 +24,7 @@ block content
                   input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Identificación del cliente' name='txtDni' required='true')
                 .col
                   select.form-control(name='txtPir' required='true')
-                    option(selected='', value='') Requerimiento...
+                    option(selected='' value='') Requerimiento...
                     option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
                     option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
                     option(value='CONSULTA / TÉCNICO') CONSULTA / TÉCNICO
@@ -112,14 +112,16 @@ block content
     var tmo = 0
     function addRow(data){
       var table = $('#dataTable').DataTable();
-      minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
-      seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
-      duration = (seconds*1000) + (minutes*60000)
-      count++
-      tmo = duration/count
-      var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
-      var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
-      var promedioTmo = 'Promedio TMO: ' + mm + ':' + ss
+      if(data.tmo != '00:00'){
+        minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
+        seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
+        duration = (seconds*1000) + (minutes*60000)
+        count++
+        tmo = duration/count
+        var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
+        var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
+        var promedioTmo = 'Promedio TMO: ' + mm + ':' + ss
+      }
       document.getElementById("promedioTmo").innerHTML = promedioTmo
       table.row.add([
         data.anillamador,

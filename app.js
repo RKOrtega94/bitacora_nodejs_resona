@@ -99,6 +99,11 @@ function createTicket(req) {
     })
 }
 
+function listUsers(){
+  var user = User.findAll({where: role='Users'})
+  console.log(user)
+}
+
 // route for user signup
 app.route('/signup')
   .get(sessionChecker, (req, res) => {
@@ -154,11 +159,37 @@ app.route('/login')
 // route for user's dashboard
 app.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
-    res.render('index', {
-      title: 'Home',
-      name: req.session.user.username,
-      result: req.session.user.username
-    });
+    console.log(req.session.user.role)
+    switch (req.session.user.role) {
+      case 'user':
+        res.render('index', {
+          title: 'Home',
+          name: req.session.user.username,
+          result: req.session.user.username
+        });
+        break
+      case 'supervisor':
+        res.render('index', {
+          title: 'Home',
+          name: req.session.user.username,
+          result: req.session.user.username
+        });
+        break
+      case 'admin':
+        res.render('index', {
+          title: 'Home',
+          name: req.session.user.username,
+          result: req.session.user.username
+        });
+        break
+      case 'disabled':
+        res.redirect('/login');
+        break
+      default:
+        res.redirect('/login');
+        break
+    }
+
   } else {
     res.redirect('/login');
   }

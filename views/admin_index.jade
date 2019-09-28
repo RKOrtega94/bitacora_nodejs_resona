@@ -9,35 +9,7 @@ block content
             // Main Content
             #content
                 include helpers/topbar
-                // Begin Page Content
-                .container-fluid
-                    .d-sm-flex.align-items-center.justify-content-between.mb-4
-                        h6#promedioTmo.mb-0.text-success
-                    // DataTales Example
-                    .card.shadow.mb-4
-                        .card-header.py-3
-                            h6.m-0.font-weight-bold.text-primary Registro general
-                        .card-body
-                            .table-responsive
-                                table#dataTable.table.table-bordered(width='100%' cellspacing='0')
-                                    thead
-                                        tr
-                                            th Fecha
-                                            th Anillamador
-                                            th Identification
-                                            th PIR
-                                            th Ticket
-                                            th Time
-                                    tfoot
-                                        tr
-                                            th Fecha
-                                            th Anillamador
-                                            th Identification
-                                            th PIR
-                                            th Ticket
-                                            th Time
-                                    tbody
-                // End of Main Content
+                
                 // Footer
                 br
                 footer.sticky-footer.bg-white
@@ -84,27 +56,16 @@ block content
         var tmo = 0
         function addRow(data){
             var table = $('#dataTable').DataTable();
-            var date = new Date;
-            var month = '' + (date.getMonth()+1)
-            if (month.length <= 1) {
-            month = '0' + month;
-            }
-            today = month + '/' + date.getFullYear()
-            console.log(today)
-            console.log('data:' + data.date.substr(3, 7))
-            if(data.tmo != '00:00' && today == data.date.substr(3, 7)){
-                minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
-                seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
-                duration = (seconds*1000) + (minutes*60000)
-                count++
-                tmo = duration/count
-                var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
-                var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
-                var promedioTmo = 'Promedio TMO mensual: ' + mm + ':' + ss
-            }
+            minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
+            seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
+            duration = (seconds*1000) + (minutes*60000)
+            count++
+            tmo = duration/count
+            var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
+            var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
+            var promedioTmo = 'Promedio TMO: ' + mm + ':' + ss
             document.getElementById("promedioTmo").innerHTML = promedioTmo
             table.row.add([
-                data.date,
                 data.anillamador,
                 data.dni,
                 data.pir,
@@ -116,6 +77,18 @@ block content
         query.once('value', snapshot => {
         snapshot.forEach(childSnapshot => {
         result = childSnapshot.val()
+        var date = new Date;
+        var day = '' + date.getDate();
+        var month = '' + (date.getMonth()+1)
+        if (day.length <= 1) {
+        day = '0' + day;
+        }
+        if (month.length <= 1) {
+        month = '0' + month;
+        }
+        today = day + '/' + month + '/' + date.getFullYear()
+        if(result.date == today){
             addRow(result)
+        }
         })
         })
