@@ -158,7 +158,7 @@ app.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     switch (req.session.user.role) {
       case 'user':
-        res.render('index', {
+        res.render('user-index', {
           title: 'Home',
           name: req.session.user.username,
           result: req.session.user.username
@@ -173,13 +173,10 @@ app.get('/', (req, res) => {
         break
       case 'admin':
         User.findAll({
-          where: {
-            role: 'user'
-          },
           raw: true
         }).then(users => {
           var result = users
-          res.render('admin_index', {
+          res.render('admin-index', {
             title: 'Home',
             name: req.session.user.username,
             result: JSON.stringify(result),
@@ -217,11 +214,21 @@ app.get('/logout', (req, res) => {
 
 app.get('/bitacora', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
-    res.render('user-bitacora', {
-      title: 'Bitácora',
-      name: req.session.user.username,
-      result: req.session.user.username
-    });
+    switch (req.session.user.role) {
+      case 'user':
+        res.render('user-bitacora', {
+          title: 'Bitácora',
+          name: req.session.user.username,
+          result: req.session.user.username
+        });
+        break
+      case 'admin':
+        res.render('admin-bitacora', {
+          title: 'Bitácora',
+          name: req.session.user.username
+        });
+        break
+    }
   } else {
     res.redirect('/login');
   }

@@ -26,11 +26,13 @@ block content
                       th Usuario
                       th Email
                       th Rol
+                      th Opciones
                   tfoot
                     tr
                       th Usuario
                       th Email
                       th Rol
+                      th Opciones
                   tbody
         // End of Main Content
         // Footer
@@ -57,14 +59,16 @@ block content
   script(src='/javascripts/demo/datatables-demo.js')
   script.
     var user = !{result}
-    console.log(user)
     var result = user
     function addRow(data) {
       var table = $('#dataTable').DataTable();
-      console.log(data.username)
-      table.row.add([data.username,data.email,data.role]).draw(true)
+      table.row.add([
+        data.username,
+        data.email,
+        data.role,
+        "<a href=\"/user/edit/"+data.id+"\">Editar</a>"
+        ]).draw(true)
     };
     result.forEach(user => {
-      console.log(user)
       addRow(user)
     });
