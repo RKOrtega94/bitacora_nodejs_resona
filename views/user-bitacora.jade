@@ -95,7 +95,7 @@ block content
             month = '0' + month;
             }
             today = month + '/' + date.getFullYear()
-            if(data.tmo != '00:00' && today == data.date.substr(3, 7)){
+            if(today == data.date.substr(3, 7)){
                 minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
                 seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
                 duration = (seconds*1000) + (minutes*60000)
