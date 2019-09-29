@@ -115,10 +115,14 @@ block content
                 data.tmo
             ]).draw(true);
         }
+        document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
         // Query database
         query.once('value', snapshot => {
         snapshot.forEach(childSnapshot => {
         result = childSnapshot.val()
             addRow(result)
+            setTimeout(function(){
+                document.getElementById("loading").remove()
+            }, 500);
         })
         })

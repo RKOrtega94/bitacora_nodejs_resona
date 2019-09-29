@@ -11,8 +11,7 @@ block content
                 include helpers/topbar
                 // Begin Page Content
                 .container-fluid
-                    .d-sm-flex.align-items-center.justify-content-between.mb-4
-                        h6#promedioTmo.mb-0.text-info
+                    #loading.container.text-center
                     // DataTales Example
                     .card.shadow.mb-4
                         .card-header.py-3
@@ -81,8 +80,7 @@ block content
             table = $('#dataTable').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
-                    'excelHtml5',
-                    'pdfHtml5'
+                    'excelHtml5'
                 ]
             } );
         } );
@@ -113,6 +111,7 @@ block content
             ]).draw(true);
         }
         // Query database
+        document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
         query.once('value', snapshot => {
         snapshot.forEach(childSnapshot => {
         var userResult = childSnapshot.key
@@ -122,6 +121,9 @@ block content
                 var ticket = ticketSnapshot.key
                 var data = ticketSnapshot.val()
                 addRow(user, ticket, data)
+                setTimeout(function(){
+                document.getElementById("loading").remove()
+                }, 500);
             })
         })
         })
