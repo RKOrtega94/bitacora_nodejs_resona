@@ -165,7 +165,7 @@ app.get('/', (req, res) => {
         });
         break
       case 'supervisor':
-        res.render('index', {
+        res.render('supervisor-index', {
           title: 'Home',
           name: req.session.user.username,
           result: req.session.user.username
