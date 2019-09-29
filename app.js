@@ -9,6 +9,8 @@ var createError = require('http-errors')
 var User = require('./model/user')
 var morgan = require('morgan')
 
+// create a sequelize instance with our local postgres database information.
+
 //FireBase SDK
 var admin = require("firebase-admin")
 
@@ -99,11 +101,6 @@ function createTicket(req) {
     })
 }
 
-function listUsers(){
-  var user = User.findAll({where: role='Users'})
-  console.log(user)
-}
-
 // route for user signup
 app.route('/signup')
   .get(sessionChecker, (req, res) => {
@@ -159,7 +156,6 @@ app.route('/login')
 // route for user's dashboard
 app.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
-    console.log(req.session.user.role)
     switch (req.session.user.role) {
       case 'user':
         res.render('index', {
@@ -176,11 +172,19 @@ app.get('/', (req, res) => {
         });
         break
       case 'admin':
-        res.render('index', {
-          title: 'Home',
-          name: req.session.user.username,
-          result: req.session.user.username
-        });
+        User.findAll({
+          where: {
+            role: 'user'
+          },
+          raw: true
+        }).then(users => {
+          var result = users
+          res.render('admin_index', {
+            title: 'Home',
+            name: req.session.user.username,
+            result: JSON.stringify(result),
+          })
+        })
         break
       case 'disabled':
         res.redirect('/login');
