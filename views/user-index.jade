@@ -123,9 +123,12 @@ block content
       duration = (seconds*1000) + (minutes*60000)
       count++
       tmo = duration/count
+      console.log(tmo)
       if(tmo >= (451*1000) && tmo <= (495*1000)){
         document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-success strong\">TMO: 100%</p>"
       } else if(tmo >= (406*1000) && tmo <= (450*1000)){
+        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 80%</p>"
+      } else if (tmo >= (496*1000) && tmo <= (540*1000)){
         document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 80%</p>"
       } else if(tmo >= (586*1000)){
         document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 0%</p>"

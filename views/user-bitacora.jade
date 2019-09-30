@@ -107,6 +107,8 @@ block content
                     document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-success\">TMO: 100%</p>"
                 } else if(tmo >= (406*1000) && tmo <= (450*1000)){
                     document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning\">TMO: 80%</p>"
+                } else if (tmo >= (496*1000) && tmo <= (540*1000)){
+                    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 80%</p>"
                 } else if(tmo >= (586*1000)){
                     document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger\">TMO: 0%</p>"
                 } else if(tmo >= 0 && tmo <= (360*1000)){
