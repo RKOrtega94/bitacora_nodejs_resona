@@ -103,6 +103,9 @@ block content
                 duration = (seconds*1000) + (minutes*60000)
                 count++
                 tmo = duration/count
+                var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
+                var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
+                var promedioTmo = 'Promedio TMO mensual: ' + mm + ':' + ss
                 if(tmo >= (451*1000) && tmo <= (495*1000)){
                     document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-success\">TMO: 100%</p>"
                 } else if(tmo >= (406*1000) && tmo <= (450*1000)){
@@ -118,9 +121,6 @@ block content
                 } else if(tmo >= (541*1000) && tmo <= (585*1000)){
                     document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-secondary\">TMO: 60%</p>"
                 }
-                var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
-                var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
-                var promedioTmo = 'Promedio TMO mensual: ' + mm + ':' + ss
             }
             document.getElementById("promedioTmo").innerHTML = promedioTmo
             table.row.add([
