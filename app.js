@@ -8,6 +8,7 @@ const errorHandler = require('errorhandler')
 var createError = require('http-errors')
 var User = require('./model/user')
 var morgan = require('morgan')
+const crypto = require('crypto')
 
 // create a sequelize instance with our local postgres database information.
 

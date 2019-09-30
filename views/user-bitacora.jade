@@ -11,8 +11,10 @@ block content
                 include helpers/topbar
                 // Begin Page Content
                 .container-fluid
+                    #loading.container.text-center
                     .d-sm-flex.align-items-center.justify-content-between.mb-4
                         h6#promedioTmo.mb-0.text-info
+                        h6#cumplimientoTmo
                     // DataTales Example
                     .card.shadow.mb-4
                         .card-header.py-3
@@ -101,6 +103,19 @@ block content
                 duration = (seconds*1000) + (minutes*60000)
                 count++
                 tmo = duration/count
+                if(tmo >= (451*1000) && tmo <= (495*1000)){
+                    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-success\">TMO: 100%</p>"
+                } else if(tmo >= (406*1000) && tmo <= (450*1000)){
+                    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning\">TMO: 80%</p>"
+                } else if(tmo >= (586*1000)){
+                    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger\">TMO: 0%</p>"
+                } else if(tmo >= 0 && tmo <= (360*1000)){
+                    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger\">TMO: 0%</p>"
+                } else if(tmo >= (361*1000) && tmo <= (405*1000)){
+                    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-secondary\">TMO: 60%</p>"
+                } else if(tmo >= (541*1000) && tmo <= (585*1000)){
+                    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-secondary\">TMO: 60%</p>"
+                }
                 var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
                 var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
                 var promedioTmo = 'Promedio TMO mensual: ' + mm + ':' + ss
