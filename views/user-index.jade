@@ -126,9 +126,7 @@ block content
       var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
       var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
       var promedioTmo = 'Promedio TMO: ' + mm + ':' + ss
-      var val2 = '0.'+ss
-      var porcentaje = parseInt(mm)*60 + parseFloat(val2)*60
-      console.log(porcentaje)
+      var porcentaje = parseInt(mm)*60 + parseFloat('0.'+ss)*60
       if(porcentaje >= (451) && porcentaje <= (495)){
         document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-success strong\">TMO: 100%</p>"
       } else if(porcentaje >= (406) && porcentaje <= (450)){
