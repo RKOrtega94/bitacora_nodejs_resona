@@ -87,7 +87,17 @@ function createTicket(req) {
     month = '0' + month;
   }
 
-  var currentDate = day + '/' + month + '/' + date.getFullYear();
+  var currentDate = day + '/' + month + '/' + date.getFullYear()
+  var hour = ''+date.getHours()
+  var minutes = ''+date.getMinutes()
+  if (hour.length <= 1) {
+    hour = '0' + hour
+  }
+  if(minutes.length <= 1){
+    minutes = '0' + minutes
+  }
+  console.log(hour + ':' + minutes)
+  var currentHour = hour + ':' + minutes
   var ref = admin.database()
     .ref('tickets')
     .child(req.session.user.username)
@@ -98,7 +108,8 @@ function createTicket(req) {
       pir: req.body.txtPir,
       ticket: req.body.txtTicket,
       tmo: req.body.txtTmo,
-      date: currentDate
+      date: currentDate,
+      hour: currentHour
     })
 }
 
@@ -230,6 +241,18 @@ app.get('/bitacora', (req, res) => {
         });
         break
     }
+  } else {
+    res.redirect('/login');
+  }
+})
+
+app.get('/results', (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.render('user-results', {
+      title: 'Bitácora',
+      name: req.session.user.username,
+      result: req.session.user.username
+    })
   } else {
     res.redirect('/login');
   }

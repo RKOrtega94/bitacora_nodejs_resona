@@ -29,6 +29,7 @@ block content
                                             th Identification
                                             th PIR
                                             th Fecha
+                                            th Hora
                                             th Tiempo
                                     tfoot
                                         tr
@@ -38,6 +39,7 @@ block content
                                             th Identification
                                             th PIR
                                             th Fecha
+                                            th Hora
                                             th Tiempo
                                     tbody
                 // End of Main Content
@@ -50,7 +52,7 @@ block content
                     br
                     .container.my-auto
                         .copyright.text-center.my-auto
-                            span Developed by RKOrtega
+                            span Developed by Robinson Ortega
                 // End of Footer
                 // End of Content Wrapper
                 // End of Page Wrapper
@@ -102,15 +104,30 @@ block content
         var query = firebase.database().ref("tickets")
         function addRow(user, ticket, data){
             table = $('#dataTable').DataTable();
-            table.row.add([
+            if(data.hour){
+                table.row.add([
                 user,
                 ticket,
                 data.anillamador,
                 data.dni,
                 data.pir,
                 data.date,
+                data.hour,
                 '0:'+data.tmo
             ]).draw(true);
+            } else {
+                table.row.add([
+                user,
+                ticket,
+                data.anillamador,
+                data.dni,
+                data.pir,
+                data.date,
+                'Sin Hora',
+                '0:'+data.tmo
+            ]).draw(true);
+            }
+            
             setTimeout(function(){
                 document.getElementById("loading").remove()
             }, 500);
