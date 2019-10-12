@@ -31,20 +31,20 @@ var User = sequelize.define(
     hooks: {
         beforeCreate: (user) => {
             const salt = bcrypt.genSaltSync();
-            user.password = bcrypt.hashSync(user.password, salt);
+            user.password = bcrypt.hashSync(user.password, salt)
         }
     }
 });
 
 User.prototype.validPassword = function (password) {
     var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(this.password, salt);
+    var hash = bcrypt.hashSync(this.password, salt)
     return bcrypt.compareSync(password, hash)
 }
 
 sequelize.sync()
     .then(() => console.log('users table has been successfully created, if one doesn\'t exist'))
-    .catch(error => console.log('This error occured', error));
+    .catch(error => console.log('This error occured', error))
 
 // export User model for use in other files.
-module.exports = User;
+module.exports = User

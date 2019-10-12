@@ -18,13 +18,16 @@ block content
             form(action="/users", method="post", style='width: 100%')
               .row
                 .col
-                  input#txtUser.form-control(type='text', name='txtUsuario', placeholder='Nombre de usuario', required='true')
+                  p.text-center=msg
+              .row
+                .col
+                  input#txtUser.form-control(type='text', name='txtUsername', placeholder='Nombre de usuario', required='true')
                 .col
                   input#txtDni.form-control(type='text', name='txtDni', placeholder='Cédula / pasaporte', required='true')
                 .col
                   input#txtEmail.form-control(type='text', name='txtEmail', placeholder='Correo electrónico', required='true')
                 .col
-                  select.form-control(name='txtPir' required='true')
+                  select.form-control(name='txtRole' required='true')
                     option(selected='' value='') Perfil...
                     option(value='user') Usuario
                     option(value='supervisor') Supervisor
@@ -47,12 +50,16 @@ block content
                       th(width='100px') Usuario
                       th Email
                       th(width='100px') Rol
+                      th Fecha de creación
+                      th Fecha de modificación
                       th(width='100px') Opciones
                   tfoot
                     tr
                       th Usuario
                       th Email
                       th Rol
+                      th Fecha de creación
+                      th Fecha de modificación
                       th Opciones
                   tbody
         // End of Main Content
@@ -87,6 +94,8 @@ block content
         data.username,
         data.email,
         data.role,
+        data.createdAt,
+        data.updatedAt,
         "<a href=\"/user/edit/"+data.id+"\">Editar</a> / <a href=\"/user/delete/"+data.id+"\">Eliminar</a>"
         ]).draw(true)
     };

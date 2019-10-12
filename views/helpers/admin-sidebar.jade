@@ -1,0 +1,36 @@
+// Sidebar
+ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordion
+    // Sidebar - Brand
+    a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='/')
+        .sidebar-brand-icon.rotate-n-15
+            i.fas.fa-user-circle
+        .sidebar-brand-text.mx-3
+            | RESONA
+            sup RT
+    // Divider
+    hr.sidebar-divider.my-0
+    // Nav Item - Dashboard
+    li.nav-item
+        a.nav-link(href='/')
+            i.fas.fa-fw.fa-edit
+            span Panel
+    //Divider
+    hr.sidebar-divider
+    //Heading
+    .sidebar-heading
+        | Reportes
+    li.nav-item
+        a.nav-link(href='/bitacora')
+            i.fas.fa-fw.fa-file-alt
+            span Bitácora
+    // Divider
+    hr.sidebar-divider
+    li.nav-item
+        a.nav-link.collapsed(href='#', data-toggle='collapse', data-target='#collapseMaintenance', aria-expanded='true' aria-controls='collapseMaintenance')
+            i.fas.fa-fw.fa-cogs
+            span Mantenimiento
+        #collapseMaintenance.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar')
+            .bg-white.py-2.collapse-inner.rounded
+                h6.collapse-header Opciones de mantenimiento
+                a.collapse-item(href='/users') Usuarios
+                a.collapse-item(href='/indicators') Indicadores

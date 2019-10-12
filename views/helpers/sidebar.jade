@@ -12,18 +12,28 @@ ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordio
     // Nav Item - Dashboard
     li.nav-item
         a.nav-link(href='/')
-            i.fas.fa-fw.fa-edit
-            span Panel
+            i.fas.fa-fw.fa-home
+            span Inicio
+        a.nav-link(href='/bitacora')
+            i.fas.fa-fw.fa-file-alt
+            span Bitácora
     // Divider
     hr.sidebar-divider
     // Heading
     .sidebar-heading
         | Reportes
     li.nav-item
-        a.nav-link(href='/bitacora')
-            i.fas.fa-fw.fa-file-alt
-            span Bitácora
+        a.nav-link(href="/bitacora/general")
+            i.fas.fa-fw.fa-chart-area
+            span Bitácora mensual
+    hr.sidebar-divider
+    .sidebar-heading
+        | Indicadores
     li.nav-item
         a.nav-link(href='/results')
             i.fas.fa-fw.fa-chart-area
-            span Indicadores
+            span Indicadores del mes
+    li.nav-item
+        a.nav-link(href='/top')
+            i.fas.fa-fw.fa-list
+            span Top de asesores

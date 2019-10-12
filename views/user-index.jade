@@ -10,62 +10,31 @@ block content
       #content
         include helpers/topbar
         // Begin Page Content
-        .container-fluid
+        .container-fluid.bg-white
           // Page Heading
           .d-sm-flex.align-items-center.justify-content-between.mb-4
-            h1.h3.mb-0.text-gray-800 Panel de registro
-            h6#cumplimientoTmo
-            h6#promedioTmo.mb-0.text-success
-          .row(style='width: 100%')
-            form.user(action='/' method='POST' style='width: 100%')
-              .row(style='width: 100%')
-                .col
-                  input#txtAnillamador.form-control(type='tel' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true' pattern='[0-9]+' title='Only numbers')
-                .col
-                  input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Identificación del cliente' name='txtDni' required='true')
-                .col
-                  select.form-control(name='txtPir' required='true')
-                    option(selected='' value='') Requerimiento...
-                    option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
-                    option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
-                    option(value='CONSULTA / TÉCNICO') CONSULTA / TÉCNICO
-                    option(value='PETICIÓN / COMERCIAL') PETICIÓN / COMERCIAL
-                    option(value='PETICIÓN / FACTURACIÓN') PETICIÓN / FACTURACIÓN
-                    option(value='RECLAMO / FACTURACIÓN') RECLAMO / FACTURACIÓN
-                    option(value='SOPORTE / COMERCIAL') SOPORTE / COMERCIAL
-                    option(value='SOPORTE / TÉCNICO') SOPORTE / TÉCNICO
-                .col
-                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
-                .col
-                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Tiempo de llamada mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
-              .row.text-center(style='width: 100%')
-                .col
-                  br
-                  button.btn.btn-outline-success.align-content-center(type='submit') Guardar
-          // /.container-fluid
-          br
-          // DataTales Example
-          .card.shadow.mb-4
-            .card-header.py-3
-              h6.m-0.font-weight-bold.text-primary Registros del día
-            .card-body
-              .table-responsive
-                table#dataTable.table.table-bordered(width='100%' cellspacing='0')
-                  thead
-                    tr
-                      th(width='150px') Anillamador
-                      th(width='150px') Identificación
-                      th PIR
-                      th(width='150px') Ticket
-                      th(width='150px') Tiempo
-                  tfoot
-                    tr
-                      th Anillamador
-                      th Identificación
-                      th PIR
-                      th Ticket
-                      th Tiempo
-                  tbody
+            h1.mb-0.text-gray-800 Bienvenido !{name}!
+          hr.divider
+          h4.mb-0.text-info Actualizaciones!
+          .row
+            .col
+              br
+              p.text-primary.font-weight-bold Bitácora: 
+                span.font-weight-normal.text-secondary Registro de llamadas diarias.
+              p.text-primary.font-weight-bold Bitácora mensual: 
+                span.font-weight-normal.text-secondary Registro de todas las llamadas y cálculo del TMO mensual.
+              p.text-primary.font-weight-bold Indicadores del mes (En desarrollo): 
+                span.font-weight-normal.text-secondary Promedio del cumplimiento de los indicadores del mes en curso.
+              p.text-primary.font-weight-bold Top de asesores (En desarrollo): 
+                span.font-weight-normal.text-secondary Los 10 asesores con mejor cumplimiento en el mes.
+            .col-lg-6.d-none.d-lg-block.bg-index-image
+          .row
+            .col
+            .col
+          .row
+            .col
+              p.text-secondary
+                | Esta página está enfocada al seguimiento de la gestión de cada uno de los asesores, para de este modo poder medir los resultados de forma personal y llegar a cumplir nuestros objetivos.
         // End of Main Content
         // Footer
         br
@@ -86,87 +55,3 @@ block content
         include helpers/logout
   //JQuery
   script(src='/vendor/jquery/jquery.min.js')
-  // Data table Scripts
-  script(src='/vendor/datatables/jquery.dataTables.min.js')
-  script(src='/javascripts/demo/datatables-demo.js')
-  // The core Firebase JS SDK is always required and must be listed first
-  script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
-  // Add Firebase products that you want to use
-  script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
-  script.
-    //Define variables
-    var user = "!{result}";
-    var result = [];
-    //Firebase Config
-    var firebaseConfig = {
-    apiKey: "AIzaSyBe7C2-8lUMP1KWPJ_-lkvKzu0ytl5fAME",
-    authDomain: "resonatel.firebaseapp.com",
-    databaseURL: "https://resonatel.firebaseio.com",
-    projectId: "resonatel",
-    storageBucket: "resonatel.appspot.com",
-    messagingSenderId: "710009860039",
-    appId: "1:710009860039:web:54d43ee0d8b8a4733ab3e2"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    // Get reference
-    var query = firebase.database().ref("tickets/"+user)
-    var count = 0
-    var minutes = 0
-    var seconds = 0
-    var duration = 0
-    var tmo = 0
-    function addRow(data){
-      var table = $('#dataTable').DataTable();
-      minutes = minutes + parseInt(data.tmo.substr(0, 2), 10)
-      seconds = seconds + parseInt(data.tmo.substr(3, 4), 10)
-      duration = (seconds*1000) + (minutes*60000)
-      count++
-      tmo = duration/count
-      var mm = parseInt((tmo/(1000*60))) < 10 ? '0' + parseInt((tmo/(1000*60))) : parseInt((tmo/(1000*60)))
-      var ss = parseInt((tmo/1000)%60) < 10 ? '0' + parseInt((tmo/1000)%60) : parseInt((tmo/1000)%60)
-      var promedioTmo = 'Promedio TMO: ' + mm + ':' + ss
-      var porcentaje = parseInt(mm)*60 + parseFloat('0.'+ss)*60
-      if(porcentaje >= (451) && porcentaje <= (495)){
-        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-success strong\">TMO: 100%</p>"
-      } else if(porcentaje >= (406) && porcentaje <= (450)){
-        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 80%</p>"
-      } else if (porcentaje >= (496) && porcentaje <= (540)){
-        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 80%</p>"
-      } else if(porcentaje >= (586)){
-        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 0%</p>"
-      } else if(porcentaje >= 0 && porcentaje <= (360)){
-        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 0%</p>"
-      } else if(porcentaje >= (361) && porcentaje <= (405)){
-        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-secondary strong\">TMO: 60%</p>"
-      } else if(porcentaje >= (541) && porcentaje <= (585)){
-        document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-secondary strong\">TMO: 60%</p>"
-      }
-      document.getElementById("promedioTmo").innerHTML = promedioTmo
-      table.row.add([
-        data.anillamador,
-        data.dni,
-        data.pir,
-        data.ticket,
-        data.tmo
-      ]).draw(true);
-    }
-    // Query database
-    query.once('value', snapshot => {
-    snapshot.forEach(childSnapshot => {
-    result = childSnapshot.val()
-    var date = new Date;
-    var day = '' + date.getDate();
-    var month = '' + (date.getMonth()+1)
-    if (day.length <= 1) {
-    day = '0' + day;
-    }
-    if (month.length <= 1) {
-    month = '0' + month;
-    }
-    today = day + '/' + month + '/' + date.getFullYear()
-    if(result.date == today){
-      addRow(result)
-    }
-    })
-    })

@@ -7,10 +7,24 @@ const cors = require('cors')
 const errorHandler = require('errorhandler')
 var createError = require('http-errors')
 var User = require('./model/user')
+var IndicatorForUser = require('./model/indicatorsforuser')
+var Indicator = require('./model/indicador')
 var morgan = require('morgan')
 const crypto = require('crypto')
+const Sequelize = require('sequelize');
 
 // create a sequelize instance with our local postgres database information.
+var sequelize = new Sequelize('postgres://lvozwwbiihhhqp:eba0866a9c3682a970309066ec1fb9ef10b0138492efc73a4e56841d279e3239@ec2-107-20-167-241.compute-1.amazonaws.com:5432/d26go21gq41h86?ssl=true')
+
+// create a sequelize instance with our local postgres database information.
+const dbSequelize = Sequelize;
+const dbsequelize = sequelize;
+
+//Relations
+User.hasMany(IndicatorForUser)
+IndicatorForUser.belongsTo(User)
+Indicator.hasMany(IndicatorForUser)
+IndicatorForUser.belongsTo(Indicator)
 
 //FireBase SDK
 var admin = require("firebase-admin")
@@ -88,15 +102,14 @@ function createTicket(req) {
   }
 
   var currentDate = day + '/' + month + '/' + date.getFullYear()
-  var hour = ''+date.getHours()
-  var minutes = ''+date.getMinutes()
+  var hour = '' + date.getHours()
+  var minutes = '' + date.getMinutes()
   if (hour.length <= 1) {
     hour = '0' + hour
   }
-  if(minutes.length <= 1){
+  if (minutes.length <= 1) {
     minutes = '0' + minutes
   }
-  console.log(hour + ':' + minutes)
   var currentHour = hour + ':' + minutes
   var ref = admin.database()
     .ref('tickets')
@@ -164,6 +177,52 @@ app.route('/login')
     })
   })
 
+app.route('/users')
+  .get((req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+      switch (req.session.user.role) {
+        case 'admin':
+          User.findAll({
+            raw: true
+          }).then(users => {
+            var result = users
+            res.render('admin-users', {
+              title: 'Home',
+              name: req.session.user.username,
+              result: JSON.stringify(result),
+            })
+          })
+          break
+        default:
+          res.redirect('/')
+          break
+      }
+    } else {
+      res.redirect('/login')
+    }
+  })
+  .post((req, res) => {
+    User.create({
+      username: req.body.txtUsername,
+      email: req.body.txtEmail,
+      password: req.body.txtDni,
+      role: req.body.txtRole
+    }).then(User => {
+      res.redirect('/users')
+    }).catch(err => {
+      User.findAll({
+        raw: true
+      }).then(users => {
+        var result = users
+        res.render('admin-users', {
+          title: 'Home',
+          name: req.session.user.username,
+          result: JSON.stringify(result),
+          msg: err
+        })
+      })
+    })
+  })
 
 // route for user's dashboard
 app.get('/', (req, res) => {
@@ -208,12 +267,6 @@ app.get('/', (req, res) => {
   }
 })
 
-// route for user's post dashboard
-app.post('/', (req, res) => {
-  createTicket(req)
-  res.redirect('/')
-})
-
 // route for user logout
 app.get('/logout', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
@@ -224,11 +277,39 @@ app.get('/logout', (req, res) => {
   }
 })
 
-app.get('/bitacora', (req, res) => {
+
+app.route('/bitacora')
+  .get((req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+      switch (req.session.user.role) {
+        case 'user':
+          res.render('user-bitacora', {
+            title: 'Bitácora',
+            name: req.session.user.username,
+            result: req.session.user.username
+          });
+          break
+        case 'admin':
+          res.render('admin-bitacora', {
+            title: 'Bitácora',
+            name: req.session.user.username
+          });
+          break
+      }
+    } else {
+      res.redirect('/login');
+    }
+  })
+  .post((req, res) => {
+    createTicket(req)
+    res.redirect('/bitacora')
+  })
+
+app.get('/bitacora/general', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     switch (req.session.user.role) {
       case 'user':
-        res.render('user-bitacora', {
+        res.render('user-bitacora-general', {
           title: 'Bitácora',
           name: req.session.user.username,
           result: req.session.user.username
