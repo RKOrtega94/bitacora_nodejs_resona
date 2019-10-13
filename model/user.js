@@ -32,14 +32,16 @@ var User = sequelize.define(
         beforeCreate: (user) => {
             const salt = bcrypt.genSaltSync();
             user.password = bcrypt.hashSync(user.password, salt)
+        },
+        beforeUpdate: (user) => {
+            const salt = bcrypt.genSaltSync();
+            user.password = bcrypt.hashSync(user.password, salt)
         }
     }
 });
 
 User.prototype.validPassword = function (password) {
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(this.password, salt)
-    return bcrypt.compareSync(password, hash)
+    return bcrypt.compareSync(password, this.password)
 }
 
 sequelize.sync()

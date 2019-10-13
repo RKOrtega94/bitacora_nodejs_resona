@@ -49,10 +49,10 @@ block content
                     tr
                       th(width='100px') Usuario
                       th Email
-                      th(width='100px') Rol
+                      th(width='70px') Rol
                       th Fecha de creación
                       th Fecha de modificación
-                      th(width='100px') Opciones
+                      th(width='150px') Opciones
                   tfoot
                     tr
                       th Usuario
@@ -96,7 +96,7 @@ block content
         data.role,
         data.createdAt,
         data.updatedAt,
-        "<a href=\"/user/edit/"+data.id+"\">Editar</a> / <a href=\"/user/delete/"+data.id+"\">Eliminar</a>"
+        "<a href=\"/user/edit/"+data.username+"\">Editar</a> / <a href=\"/user/delete/"+data.id+"\">Eliminar</a>"
         ]).draw(true)
     };
     result.forEach(user => {

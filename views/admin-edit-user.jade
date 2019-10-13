@@ -1,0 +1,94 @@
+extends layout
+
+block content
+  // Page Wrapper
+  #wrapper
+    include helpers/admin-sidebar
+    // Content Wrapper
+    #content-wrapper.d-flex.flex-column
+      // Main Content
+      #content
+        include helpers/topbar
+        // Begin Page Content
+        .container-fluid
+          // Page Heading
+          .d-sm-flex.align-items-center.justify-content-between.mb-4
+            h1.h3.mb-0.text-gray-800 Usuario
+          .row(style='width: 100%')
+            form#editUserForm(method="POST" style='width: 100%' onsubmit='')
+              .row
+                .col
+                  p.text-center.text-warning=msg
+              .row
+                .col
+                  input#txtUser.form-control(type='text' name='txtUsername' placeholder='Nombre de usuario' required='true')
+                .col
+                  input#txtEmail.form-control(type='text' name='txtEmail' placeholder='Correo electrónico' required='true')
+                .col
+                  select#txtRole.form-control(name='txtRole' required='true')
+                    option(selected='' value='') Perfil...
+                    option(value='user') Usuario
+                    option(value='supervisor') Supervisor
+                    option(value='admin') Administrador
+                    option(value='disabled') Deshabilitado
+              .row.text-center(style='width: 100%')
+                .col#changePasswordInput
+                  br
+                  #changePassword
+              .row.text-center(style='width: 100%')
+                .col
+                  br
+                  button.btn.btn-outline-success.align-content-center(type='submit') Guardar
+        // End of Main Content
+        // Footer
+        br
+        footer.sticky-footer.bg-white
+          .container.my-auto
+            .copyright.text-center.my-auto
+              span Copyright © RESONATELECOM S.A. 2019
+          br
+          .container.my-auto
+            .copyright.text-center.my-auto
+              span Developed by Robinson Ortega
+        // End of Footer
+        // End of Content Wrapper
+        // End of Page Wrapper
+        // Scroll to Top Button
+        a.scroll-to-top.rounded(href='#page-top')
+          i.fas.fa-angle-up
+        include helpers/logout
+  //JQuery
+  script(src='/vendor/jquery/jquery.min.js')
+  // Data table Scripts
+  script(src='/vendor/datatables/jquery.dataTables.min.js')
+  script(src='/javascripts/demo/datatables-demo.js')
+  script.
+    var user = !{result}
+    document.getElementById("txtUser").setAttribute('value', user.username)
+    document.getElementById("txtEmail").setAttribute('value', user.email)
+    var index = 0;
+    document.getElementById('editUserForm').action = '/user/edit/'+user.username
+    switch (user.role){
+      case 'user':
+        index = 1
+        break
+      case 'supervisor':
+        index = 2
+        break
+      case 'admin':
+        index = 3
+        break
+      case 'disabled':
+        index = 4
+        break
+      default:
+        index = 0
+        break
+    }
+    document.getElementById("txtRole").selectedIndex = index
+    function changePassword(){
+      document.getElementById("changePassword").innerHTML = "<input id=\"txtPassword\" type=\"password\" name=\"txtPassword\" placeholder=\"Nueva contraseña\" required=\"true\" class=\"form-control\">"
+    }
+    $(document).ready(function() {
+      document.getElementById("changePassword").innerHTML = "<a id=\"myLink\" title=\"Click to do something\" href=\"#\" onclick=\"changePassword();return false;\">Cambiar contraseña</a>" 
+    })
