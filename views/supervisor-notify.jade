@@ -1,0 +1,86 @@
+extends layout
+
+block content
+  // Page Wrapper
+  #wrapper
+    include helpers/supervisor-sidebar
+    // Content Wrapper
+    #content-wrapper.d-flex.flex-column
+      // Main Content
+      #content
+        include helpers/topbar
+        // Begin Page Content
+        .container-fluid
+          // Page Heading
+          .d-sm-flex.align-items-center.justify-content-between.mb-4
+            h1.h3.mb-0.text-gray-800 Registro de incidencias
+            h6#cumplimientoTmo
+            h6#promedioTmo.mb-0.text-success
+          .row(style='width: 100%')
+            form.user(action='/info' method='POST' style='width: 100%' onsubmit='cls()')
+              .row(style='width: 100%')
+                .col
+                  input#txtTitle.form-control(type='text' placeholder='Título del aviso' name='txtTitle' required='true')
+                .col
+                  select#txtTYPE.form-control(name='txtType' required='true')
+                    option(selected='' value='') Tipo...
+                    option(value='info').text-info Información
+                    option(value='warning').text-warning Alerta
+                    option(value='error').text-danger Crítico
+              .row(style='width: 100%')
+                .col
+                  br
+                  textarea#txtMessage.form-control(name="txtMessage" required='true' placeholder='Descripción del aviso')
+              .row.text-center(style='width: 100%')
+                .col
+                  br
+                  button.btn.btn-outline-success.align-content-center(type='submit') Guardar
+          // /.container-fluid
+          br
+          // DataTales Example
+          .card.shadow.mb-4
+            .card-header.py-3
+              h6.m-0.font-weight-bold.text-primary Notificaciones enviadas
+            .card-body
+              .table-responsive
+                table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                  thead
+                    tr
+                      th(width='50') Título
+                      th Descripción
+                      th(width='50') Tipo
+                      th(width='50') Estado
+                      th Opciones
+                  tfoot
+                    tr
+                      th Título
+                      th Descripción
+                      th Tipo
+                      th Estado
+                      th Opciones
+                  tbody
+        // End of Main Content
+        // Footer
+        br
+        footer.sticky-footer.bg-white
+          .container.my-auto
+            .copyright.text-center.my-auto
+              span Copyright © RESONATELECOM S.A. 2019
+          br
+          .container.my-auto
+            .copyright.text-center.my-auto
+              span Developed by Robinson Ortega
+        // End of Footer
+        // End of Content Wrapper
+        // End of Page Wrapper
+        // Scroll to Top Button
+        a.scroll-to-top.rounded(href='#page-top')
+          i.fas.fa-angle-up
+        include helpers/logout
+  //JQuery
+  script(src='/vendor/jquery/jquery.min.js')
+  // Data table Scripts
+  script(src='/vendor/datatables/jquery.dataTables.min.js')
+  script(src='/javascripts/demo/datatables-demo.js')
+  include helpers/firebase-supervisor-notify
+  include helpers/notify

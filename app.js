@@ -333,43 +333,79 @@ app.route('/user/edit/*')
       res.redirect('/login')
     }
   })
-
-app.post('/user/edit/*', (req, res) => {
-  var user = req.body.txtUsername
-  console.log(user)
-  User.findOne({
-    where: {
-      username: user
-    }
-  }).then(User => {
-    User.update({
-      username: req.body.txtUser,
-      email: req.body.txtEmail,
-      password: req.body.txtPassword,
-      role: req.body.txtRole
-    }, {
+  .post((req, res) => {
+    var user = req.body.txtUsername
+    console.log(user)
+    User.findOne({
       where: {
-        id: User.id
+        username: user
       }
-    }).then(() => {
-      res.redirect('/users')
-    }).catch(error => {
-      var userUrl = req.url
-      var user = userUrl.substring(11, userUrl.length)
-      User.findOne({
+    }).then(User => {
+      User.update({
+        username: req.body.txtUser,
+        email: req.body.txtEmail,
+        password: req.body.txtPassword,
+        role: req.body.txtRole
+      }, {
         where: {
-          username: user
+          id: User.id
         }
-      }).then(User => {
-        res.render('admin-edit-user', {
-          title: 'Usuarios',
-          name: req.session.user.username,
-          msg: error
-        });
+      }).then(() => {
+        res.redirect('/users')
+      }).catch(error => {
+        var userUrl = req.url
+        var user = userUrl.substring(11, userUrl.length)
+        User.findOne({
+          where: {
+            username: user
+          }
+        }).then(User => {
+          res.render('admin-edit-user', {
+            title: 'Usuarios',
+            name: req.session.user.username,
+            msg: error
+          });
+        })
       })
     })
   })
-})
+
+app.route('/info')
+  .get((req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+      switch (req.session.user.role) {
+        case 'admin':
+          res.render('supervisor-notify', {
+            title: 'Notificaciones',
+            name: req.session.user.username
+          })
+          break
+        case 'supervisor':
+          res.render('supervisor-notify', {
+            title: 'Notificaciones',
+            name: req.session.user.username
+          })
+          break
+      }
+    } else {
+      res.redirect('/login')
+    }
+  })
+  .post((req, res) => {
+    let db = admin.firestore()
+    let doc = db.collection('notify').doc()
+    let setDoc = doc.set({
+      'title': req.body.txtTitle,
+      'message': req.body.txtMessage,
+      'type': req.body.txtType,
+      'status': 'A'
+    })
+    if (setDoc){
+      res.redirect('/info')
+    } else {
+      res.redirect('/')
+    }
+  })
 
 app.get('/bitacora/general', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {

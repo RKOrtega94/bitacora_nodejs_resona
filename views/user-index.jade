@@ -27,31 +27,15 @@ block content
                 span.font-weight-normal.text-secondary Promedio del cumplimiento de los indicadores del mes en curso.
               p.text-primary.font-weight-bold Top de asesores (En desarrollo): 
                 span.font-weight-normal.text-secondary Los 10 asesores con mejor cumplimiento en el mes.
+              p.text-primary.font-weight-bold Actualizar un registro 
+                span.font-weight-normal.text-secondary Para actualuzar un registro errado, basta con colocar el mismo número de ticket y volver a guardar, los datos modificados se actualizarán en la base de datos.
             .col-lg-6.d-none.d-lg-block.bg-index-image
           .row
             .col
-            .col
-          .row
-            .col
               p.text-secondary
-                | Esta página está enfocada al seguimiento de la gestión de cada uno de los asesores, para de este modo poder medir los resultados de forma personal y llegar a cumplir nuestros objetivos.
+                | Este sistema está enfocada al seguimiento de la gestión de cada uno de los asesores, para de este modo poder medir los resultados de forma personal y llegar a cumplir nuestros objetivos.
         // End of Main Content
-        // Footer
-        br
-        footer.sticky-footer.bg-white
-          .container.my-auto
-            .copyright.text-center.my-auto
-              span Copyright © RESONATELECOM S.A. 2019
-          br
-          .container.my-auto
-            .copyright.text-center.my-auto
-              span Developed by Robinson Ortega
-        // End of Footer
-        // End of Content Wrapper
-        // End of Page Wrapper
-        // Scroll to Top Button
-        a.scroll-to-top.rounded(href='#page-top')
-          i.fas.fa-angle-up
+        include helpers/footer
         include helpers/logout
   //JQuery
   script(src='/vendor/jquery/jquery.min.js')
