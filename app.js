@@ -295,6 +295,12 @@ app.route('/bitacora')
             name: req.session.user.username
           });
           break
+        case 'supervisor':
+          res.render('supervisor-bitacora', {
+            title: 'Bitácora',
+            name: req.session.user.username
+          });
+          break
         default:
           res.redirect('/')
       }
@@ -400,7 +406,7 @@ app.route('/info')
       'type': req.body.txtType,
       'status': 'A'
     })
-    if (setDoc){
+    if (setDoc) {
       res.redirect('/info')
     } else {
       res.redirect('/')

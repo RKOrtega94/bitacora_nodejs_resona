@@ -15,12 +15,12 @@ html(lang='en')
                 .col-lg-6
                   .p-5
                     .text-center
-                      h1.h4.text-gray-900.mb-4 Welcome Back!
+                      h1.h4.text-gray-900.mb-4 Bienvenido
                     form.user(action='/login', method='POST')
                       .form-group
-                        input#txtUsername.form-control.form-control-user(type='text', aria-describedby='emailHelp', placeholder='Enter Email Address...', name='txtUsername')
+                        input#txtUsername.form-control.form-control-user(type='text', aria-describedby='emailHelp', placeholder='Usuario...', name='txtUsername')
                       .form-group
-                        input#txtPassword.form-control.form-control-user(type='password', placeholder='Password', name='txtPassword')
+                        input#txtPassword.form-control.form-control-user(type='password', placeholder='Contraseña...', name='txtPassword')
                       button.btn.btn-primary.btn-user.btn-block(type='subbmit')
                         | Login
                     hr
