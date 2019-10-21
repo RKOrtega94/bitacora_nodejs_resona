@@ -3,7 +3,7 @@ extends layout
 block content
   // Page Wrapper
   #wrapper
-    include helpers/supervisor-sidebar
+    include helpers/admin-sidebar
     // Content Wrapper
     #content-wrapper.d-flex.flex-column
       // Main Content
@@ -82,5 +82,11 @@ block content
   // Data table Scripts
   script(src='/vendor/datatables/jquery.dataTables.min.js')
   script(src='/javascripts/demo/datatables-demo.js')
-  include helpers/firebase-supervisor-notify
+  // The core Firebase JS SDK is always required and must be listed first
+  script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
+  // Add Firebase products that you want to use
+  script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
+  script(src='https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js')
+  script(src='/javascripts/firebase.conf.js')
+  script(src='/javascripts/user/supervisor-info.js')
   include helpers/notify

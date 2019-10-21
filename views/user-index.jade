@@ -15,21 +15,24 @@ block content
           .d-sm-flex.align-items-center.justify-content-between.mb-4
             h1.mb-0.text-gray-800 Bienvenido !{name}!
           hr.divider
-          h4.mb-0.text-info Actualizaciones!
           .row
-            .col
-              br
-              p.text-primary.font-weight-bold Bitácora: 
-                span.font-weight-normal.text-secondary Registro de llamadas diarias.
-              p.text-primary.font-weight-bold Bitácora mensual: 
-                span.font-weight-normal.text-secondary Registro de todas las llamadas y cálculo del TMO mensual.
-              p.text-primary.font-weight-bold Indicadores del mes (En desarrollo): 
-                span.font-weight-normal.text-secondary Promedio del cumplimiento de los indicadores del mes en curso.
-              p.text-primary.font-weight-bold Top de asesores (En desarrollo): 
-                span.font-weight-normal.text-secondary Los 10 asesores con mejor cumplimiento en el mes.
-              p.text-primary.font-weight-bold Actualizar un registro 
-                span.font-weight-normal.text-secondary Para actualuzar un registro errado, basta con colocar el mismo número de ticket y volver a guardar, los datos modificados se actualizarán en la base de datos.
-            .col-lg-6.d-none.d-lg-block.bg-index-image
+            .col.col-md-8
+              .card.shadow.mb-4
+                .card-header.py-3
+                  h6.m-0.font-weight-bold.text-primary
+                    | Información inicial
+                .card-body
+                  .table-responsive
+                    table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                      thead
+                        tr
+                          th(width='50') Tipo
+                          th Descripción
+                      tfoot
+                        tr
+                          th(width='50') Tipo
+                          th Descripción
+            .col.col-md-4.d-none.d-lg-block.bg-index-image
           .row
             .col
               p.text-secondary
@@ -39,3 +42,14 @@ block content
         include helpers/logout
   //JQuery
   script(src='/vendor/jquery/jquery.min.js')
+  // Data table Scripts
+  script(src='/vendor/datatables/jquery.dataTables.min.js')
+  script(src='/javascripts/demo/datatables-demo.js')
+  // The core Firebase JS SDK is always required and must be listed first
+  script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
+  // Add Firebase products that you want to use
+  script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
+  script(src='https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js')
+  script(src='/javascripts/firebase.conf.js')
+  script(src='/javascripts/vanilla-notify.js')
+  script(src='/javascripts/user/user-notify-datatable.js')

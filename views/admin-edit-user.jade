@@ -64,6 +64,7 @@ block content
   script(src='/javascripts/demo/datatables-demo.js')
   script.
     var user = !{result}
+    console.log(user)
     document.getElementById("txtUser").setAttribute('value', user.username)
     document.getElementById("txtEmail").setAttribute('value', user.email)
     var index = 0;

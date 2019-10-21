@@ -96,7 +96,7 @@ block content
         data.role,
         data.createdAt,
         data.updatedAt,
-        "<a href=\"/user/edit/"+data.username+"\">Editar</a> / <a href=\"/user/delete/"+data.id+"\">Eliminar</a>"
+        "<a href=\"/user/edit/"+data.id+"\">Editar</a> / <a href=\"/user/delete/"+data.id+"\">Eliminar</a>"
         ]).draw(true)
     };
     result.forEach(user => {
