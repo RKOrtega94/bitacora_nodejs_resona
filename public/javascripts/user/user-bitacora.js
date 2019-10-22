@@ -26,21 +26,48 @@ function addRow(data) {
   var mm = parseInt((tmo / (1000 * 60))) < 10 ? '0' + parseInt((tmo / (1000 * 60))) : parseInt((tmo / (1000 * 60)))
   var ss = parseInt((tmo / 1000) % 60) < 10 ? '0' + parseInt((tmo / 1000) % 60) : parseInt((tmo / 1000) % 60)
   var promedioTmo = 'Promedio TMO: ' + mm + ':' + ss
-  var porcentaje = parseInt(mm) * 60 + parseFloat('0.' + ss) * 60
-  if (porcentaje >= (451) && porcentaje <= (495)) {
+  if ((tmo / 1000) < (269)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 0%</p>"
+  } else if ((tmo / 1000) >= (270) && (tmo / 1000) <= (299)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 10%</p>"
+  } else if ((tmo / 1000) >= (300) && (tmo / 1000) <= (329)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 20%</p>"
+  } else if ((tmo / 1000) >= (330) && (tmo / 1000) <= (359)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 30%</p>"
+  } else if ((tmo / 1000) >= (360) && (tmo / 1000) <= (389)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 40%</p>"
+  } else if ((tmo / 1000) >= (390) && (tmo / 1000) <= (419)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 50%</p>"
+  } else if ((tmo / 1000) >= (420) && (tmo / 1000) <= (449)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 60%</p>"
+  } else if ((tmo / 1000) >= (450) && (tmo / 1000) <= (479)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 70%</p>"
+  } else if ((tmo / 1000) >= (480) && (tmo / 1000) <= (509)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 80%</p>"
+  } else if ((tmo / 1000) >= (510) && (tmo / 1000) <= (539)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 90%</p>"
+  } else if ((tmo / 1000) >= (540) && (tmo / 1000) <= (569)) {
     document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-success strong\">TMO: 100%</p>"
-  } else if (porcentaje >= (406) && porcentaje <= (450)) {
-    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 80%</p>"
-  } else if (porcentaje >= (496) && porcentaje <= (540)) {
-    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 80%</p>"
-  } else if (porcentaje >= (586)) {
+  } else if ((tmo / 1000) >= (570) && (tmo / 1000) <= (599)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-warning strong\">TMO: 90%</p>"
+  } else if ((tmo / 1000) >= (600) && (tmo / 1000) <= (629)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 80%</p>"
+  } else if ((tmo / 1000) >= (630) && (tmo / 1000) <= (659)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 70%</p>"
+  } else if ((tmo / 1000) >= (660) && (tmo / 1000) <= (689)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 60%</p>"
+  } else if ((tmo / 1000) >= (690) && (tmo / 1000) <= (719)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 50%</p>"
+  } else if ((tmo / 1000) >= (720) && (tmo / 1000) <= (749)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 40%</p>"
+  } else if ((tmo / 1000) >= (750) && (tmo / 1000) <= (779)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 30%</p>"
+  } else if ((tmo / 1000) >= (780) && (tmo / 1000) <= (809)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 20%</p>"
+  } else if ((tmo / 1000) >= (810) && (tmo / 1000) <= (839)) {
+    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 10%</p>"
+  } else if ((tmo / 1000) >= (840)) {
     document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 0%</p>"
-  } else if (porcentaje >= 0 && porcentaje <= (360)) {
-    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-danger strong\">TMO: 0%</p>"
-  } else if (porcentaje >= (361) && porcentaje <= (405)) {
-    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-secondary strong\">TMO: 60%</p>"
-  } else if (porcentaje >= (541) && porcentaje <= (585)) {
-    document.getElementById("cumplimientoTmo").innerHTML = "<p class=\"text-secondary strong\">TMO: 60%</p>"
   }
   document.getElementById("promedioTmo").innerHTML = promedioTmo
   table.row.add([
