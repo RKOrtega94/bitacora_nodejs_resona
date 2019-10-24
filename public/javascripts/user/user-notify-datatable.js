@@ -5,20 +5,20 @@ function addRow(type, data) {
     switch (type) {
         case 'info':
             table.row.add([
-                "<p class=\"text-info\">Información</p>",
-                "<p class=\"text-info\">" + data.message + " </p>"
+                "<p class=\"text-info font-weight-bold\">Información</p>",
+                "<p class=\"text-info font-weight-bold\">" + data.message + " </p>"
             ]).draw(true)
             break
         case 'warning':
             table.row.add([
-                "<p class=\"text-warning\">Aviso</p>",
-                "<p class=\"text-warning\">" + data.message + " </p>"
+                "<p class=\"text-warning font-weight-bold\">Aviso</p>",
+                "<p class=\"text-warning font-weight-bold\">" + data.message + " </p>"
             ]).draw(true)
             break
         case 'error':
             table.row.add([
-                "<p class=\"text-danger\">Crítico</p>",
-                "<p class=\"text-danger\">" + data.message + " </p>"
+                "<p class=\"text-danger font-weight-bold\">Alerta</p>",
+                "<p class=\"text-danger font-weight-bold\">" + data.message + " </p>"
             ]).draw(true)
             break
     }

@@ -29,12 +29,21 @@ ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordio
             span Bitácora
     // Divider
     hr.sidebar-divider
+    //Heading
+    .sidebar-heading
+        i.fas.fa-fw.fa-cogs
+        span  Mantenimiento
     li.nav-item
-        a.nav-link.collapsed(href='#', data-toggle='collapse', data-target='#collapseMaintenance', aria-expanded='true' aria-controls='collapseMaintenance')
-            i.fas.fa-fw.fa-cogs
-            span Mantenimiento
-        #collapseMaintenance.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar')
+        a.nav-link(href='/users')
+            i.fas.fa-fw.fa-users
+            span Usuarios
+    li.nav-item
+        a.nav-link.collapsed(href='#', data-toggle='collapse', data-target='#collapseCalidad', aria-expanded='true' aria-controls='collapseCalidad')
+            i.fas.fa-fw.fa-eye
+            span Calidad
+        #collapseCalidad.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar')
             .bg-white.py-2.collapse-inner.rounded
                 h6.collapse-header Opciones de mantenimiento
-                a.collapse-item(href='/users') Usuarios
-                a.collapse-item(href='/indicators') Indicadores
+                a.collapse-item(href='/monitoring/category') Categoría
+                a.collapse-item(href='/') Items
+                a.collapse-item(href='/') Errores
