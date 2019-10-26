@@ -23,6 +23,10 @@ var Error_item = sequelize.define(
         type: Sequelize.BOOLEAN,
         allowNUll: false
     },
+    peso: {
+        type: Sequelize.INTEGER,
+        allowNUll: false
+    },
     status: {
         type: Sequelize.ENUM,
         values: ['enabled', 'disabled']

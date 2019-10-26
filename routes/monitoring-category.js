@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
           raw: true
         }).then(category => {
           var result = category
-          res.render('admin-category-monitoring', {
+          res.render('admin/category-monitoring', {
             title: 'Categoría de monitoreos',
             name: req.session.user.username,
             result: JSON.stringify(result)
@@ -29,7 +29,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   monitoringCategory.create({
-    category: req.body.txtCategory
+    category: req.body.txtCategory,
+    status: 'enabled'
   }).then(result => {
     res.redirect('/monitoring/category')
   }).catch(err => {
@@ -37,7 +38,7 @@ router.post('/', (req, res) => {
       raw: true
     }).then(category => {
       var result = category
-      res.render('admin-category-monitoring', {
+      res.render('admin/category-monitoring', {
         title: 'Categoría de monitoreos',
         name: req.session.user.username,
         result: JSON.stringify(result),

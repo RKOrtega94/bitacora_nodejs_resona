@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
             id: user
           }
         }).then(User => {
-          res.render('admin-edit-user', {
+          res.render('admin/edit-user', {
             title: 'Bitácora',
             name: req.session.user.username,
             result: JSON.stringify(User)

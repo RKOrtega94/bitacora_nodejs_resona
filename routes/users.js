@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
           raw: true
         }).then(users => {
           var result = users
-          res.render('admin-users', {
+          res.render('admin/users', {
             title: 'Home',
             name: req.session.user.username,
             result: JSON.stringify(result),
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
       raw: true
     }).then(users => {
       var result = users
-      res.render('admin-users', {
+      res.render('admin/users', {
         title: 'Home',
         name: req.session.user.username,
         result: JSON.stringify(result),

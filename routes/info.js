@@ -10,13 +10,13 @@ router.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     switch (req.session.user.role) {
       case 'admin':
-        res.render('admin-notify', {
+        res.render('admin/notify', {
           title: 'Notificaciones',
           name: req.session.user.username
         })
         break
       case 'supervisor':
-        res.render('supervisor-notify', {
+        res.render('supervisor/notify', {
           title: 'Notificaciones',
           name: req.session.user.username
         })
