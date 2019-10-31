@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
           }).then(category => {
             res.render('admin/category-items', {
               title: 'Items',
-              user: req.session.user.username,
+              name: req.session.user.username,
               result: JSON.stringify(result),
               category: JSON.stringify(category)
             })

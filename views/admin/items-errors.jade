@@ -15,13 +15,27 @@ block content
           .d-sm-flex.align-items-center.justify-content-between.mb-4
             h1.h3.mb-0.text-gray-800 Categorías
           .row(style='width: 100%')
-            form(action="/monitoring/category/item" method="post" style='width: 100%')
+            form(action="/monitoring/category/item/errors" method="post" style='width: 100%')
               .row
                 .col
-                  select#txtCategory.form-control(name="txtCategory" required='true')
-                    option(selected='' value='') Categoría...
+                  select#txtItem.form-control(name="txtItem" required='true')
+                    option(selected='' value='') Item...
                 .col
-                  input#txtItem.form-control(type='text' name='txtItem' placeholder='Item' required='true')
+                  input#txtError.form-control(type='text' name='txtError' placeholder='Error' required='true')
+                .col
+                  input#txtPeso.form-control(type='text' name='txtPeso' placeholder='Peso' required='true')
+              br
+              .row
+                .col.text-center
+                  .custom-control.custom-checkbox.custom-control-inline
+                    input#txtEcac.custom-control-input(type='checkbox' name='txtEcac')
+                    label.custom-control-label(for='txtEcac') ECAC
+                  .custom-control.custom-checkbox.custom-control-inline
+                    input#txtEcan.custom-control-input(type='checkbox' name='txtEcan')
+                    label.custom-control-label(for='txtEcan') ECAN
+                  .custom-control.custom-checkbox.custom-control-inline
+                    input#txtEcuf.custom-control-input(type='checkbox' name='txtEcuf')
+                    label.custom-control-label(for='txtEcuf') ECUF
               .row.text-center(style='width: 100%')
                 .col
                   br
@@ -37,8 +51,9 @@ block content
                   thead
                     tr
                       th(width='5px') ID
-                      th Categoría
                       th Item
+                      th Error
+                      th Afectación
                       th Estado
                       th Registro
                       th Modificación
@@ -46,8 +61,9 @@ block content
                   tfoot
                     tr
                       th(width='5px') ID
-                      th Categoría
                       th Item
+                      th Error
+                      th Afectación
                       th Estado
                       th Registro
                       th Modificación
@@ -77,6 +93,6 @@ block content
   script(src='/vendor/datatables/jquery.dataTables.min.js')
   script(src='/javascripts/demo/datatables-demo.js')
   script.
-    var item = !{result}
-    var category = !{category}
-  script(src='/javascripts/monitoring/category_item.js')
+    var errors = !{result}
+    var items = !{items}
+  script(src='/javascripts/monitoring/item_errors.js')

@@ -2,12 +2,6 @@ var selectCategory = document.getElementById('txtCategory')
 var result = item
 var cat = category
 
-class ItemCategory{
-  constructor(id, item){
-
-  }
-}
-
 function addOption(cat) {
   var option = document.createElement("option")
   option.text = cat.category
@@ -15,7 +9,6 @@ function addOption(cat) {
   selectCategory.add(option)
 }
 function addRow(data) {
-  console.log(data)
   var table = $('#dataTable').DataTable();
   table.row.add([
     data.id,

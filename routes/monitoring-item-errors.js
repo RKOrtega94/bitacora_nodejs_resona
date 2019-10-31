@@ -2,30 +2,30 @@ const express = require('express')
 const router = express.Router()
 
 // Model Monitoring Category
+var errorItem = require('../model/error_item')
 var itemCategory = require('../model/item_category')
-var Category = require('../model/category_monitoring')
 
 router.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     switch (req.session.user.role) {
       case 'admin':
-        itemCategory.findAll({
+        errorItem.findAll({
           raw: true,
           include: [{
-            model: Category
+            model: itemCategory
           }]
         }).then(result => {
-          Category.findAll({
+          itemCategory.findAll({
             raw: true,
             where: {
               status: 'enabled'
             }
           }).then(category => {
-            res.render('admin/category-items', {
+            res.render('admin/items-errors', {
               title: 'Items',
-              user: req.session.user.username,
+              name: req.session.user.username,
               result: JSON.stringify(result),
-              category: JSON.stringify(category)
+              items: JSON.stringify(category)
             })
           })
         })
@@ -39,12 +39,17 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  itemCategory.create({
-    item: req.body.txtItem,
-    CategoryId: req.body.txtCategory
+  errorItem.create({
+    error: req.body.txtError,
+    ItemCategoryId: req.body.txtItem,
+    peso: req.body.txtPeso,
+    ecac: req.body.txtEcac,
+    ecan: req.body.txtEcan,
+    ecuf: req.body.txtEcuf,
+    status: 'enabled'
   }).then(result => {
     if (result) {
-      res.redirect('/monitoring/category/items')
+      res.redirect('/monitoring/category/item/errors')
     }
   }).catch(err => {
     res.redirect('/404')
