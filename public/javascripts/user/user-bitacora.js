@@ -10,7 +10,19 @@ function cls() {
 //Define variables
 var result = [];
 // Get reference
-var query = firebase.database().ref("tickets/" + user)
+var date = new Date()
+var day = '' + date.getDate();
+var month = '' + (date.getMonth() + 1)
+
+if (day.length <= 1) {
+  day = '0' + day;
+}
+
+if (month.length <= 1) {
+  month = '0' + month;
+}
+var refToday = date.getFullYear() + '/' + month + '/' + day
+var query = firebase.database().ref("tickets").child(date.getFullYear()).child(month).child(day).child(user)
 var count = 0
 var minutes = 0
 var seconds = 0

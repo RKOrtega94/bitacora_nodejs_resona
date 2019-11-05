@@ -30,6 +30,9 @@ function createTicket(req) {
   var currentHour = hour + ':' + minutes
   var ref = admin.database()
     .ref('tickets')
+    .child(date.getFullYear())
+    .child(month)
+    .child(day)
     .child(req.session.user.username)
     .child(req.body.txtTicket)
     .set({

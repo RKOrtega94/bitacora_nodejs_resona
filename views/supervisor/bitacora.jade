@@ -15,8 +15,25 @@ block content
                     .d-sm-flex.align-items-center.justify-content-between.mb-4
                         h6#promedioTmo.mb-0.text-info
                     .row
-                        .col(data-provide="datepicker")
-                            input#txtDate(type="text" name="txtDate")
+                        .col
+                            label(for="txtUser") Usuario
+                            select#txtUser.form-control(name="txtUser")
+                                option(value="0") Todos
+                        .col
+                            label(for="txtStartDate") Desde
+                            input#txtStartDate.form-control(type="text" name="txtStartDate" required)
+                        .col
+                            label(for="txtEndDate") Hasta
+                            input#txtEndDate.form-control(type="text" name="txtEndDate" required)
+                    .row.text-center(style='width: 100%')
+                        .col
+                            br
+                            button#btnSearch.btn.btn-outline-success.align-content-center(onclick='search()') Buscar
+                    .row
+                        .col
+                            span.text-info.strong
+                                | El tiempo de respuesta dependerá de la cantidad de datos a consultarse.
+                    br
                     // DataTales Example
                     .card.shadow.mb-4
                         .card-header.py-3
@@ -65,6 +82,7 @@ block content
                 include ../helpers/logout
     //JQuery
     script(src='/vendor/jquery/jquery.min.js')
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
     // Data table Scripts
     script(src='/vendor/datatables/jquery.dataTables.min.js')
     script(src='/javascripts/demo/datatables-demo.js')
@@ -79,97 +97,5 @@ block content
     script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
     // Add Firebase products that you want to use
     script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
-    script.
-        $(function() {
-            $('#txtDate').datepicker()
-        })
-        var table;
-        $(document).ready(function() {
-            table = $('#dataTable').DataTable();
-            table.destroy();
-            table = $('#dataTable').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'excelHtml5'
-                ]
-            } );
-        } );
-        //Firebase Config
-        var firebaseConfig = {
-        apiKey: "AIzaSyBe7C2-8lUMP1KWPJ_-lkvKzu0ytl5fAME",
-        authDomain: "resonatel.firebaseapp.com",
-        databaseURL: "https://resonatel.firebaseio.com",
-        projectId: "resonatel",
-        storageBucket: "resonatel.appspot.com",
-        messagingSenderId: "710009860039",
-        appId: "1:710009860039:web:54d43ee0d8b8a4733ab3e2"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        // Get reference
-        var query = firebase.database().ref("tickets")
-        function addRow(user, ticket, data){
-            table = $('#dataTable').DataTable();
-            if(data.hour){
-                table.row.add([
-                user,
-                ticket,
-                data.anillamador,
-                data.dni,
-                data.pir,
-                data.date,
-                data.hour,
-                '0:'+data.tmo
-            ]).draw(true);
-            } else {
-                table.row.add([
-                user,
-                ticket,
-                data.anillamador,
-                data.dni,
-                data.pir,
-                data.date,
-                'Sin Hora',
-                '0:'+data.tmo
-            ]).draw(true);
-            }
-
-            setTimeout(function(){
-                document.getElementById("loading").remove()
-            }, 500);
-        }
-
-        function removeData(user, ticket){
-            var deleteData = firebase.database().ref("tickets").child(user).child(ticket)
-            deleteData.remove()
-        }
-        // Query database
-        document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
-        query.once('value', snapshot => {
-        snapshot.forEach(childSnapshot => {
-        var userResult = childSnapshot.key
-            var userRef = firebase.database().ref('tickets/'+userResult)
-            childSnapshot.forEach(ticketSnapshot => {
-                var date = new Date()
-                var month = ''+(date.getMonth() + 1)
-                var year = date.getFullYear()
-                if(month.length == 1){
-                    month = '0' + month
-                }
-                var consult = month+'/'+year
-                var user = userResult
-                var ticket = ticketSnapshot.key
-                var data = ticketSnapshot.val()
-                //var year = data.date.substring(6, 10)
-                //var mes = data.date.substring(3, 5)
-                //var dia = data.date.substring(0, 2)
-                //console.log(year + '/' + mes + '/' + dia)
-                //var newData = query.child(year).child(mes).child(dia).child(user).child(ticket).set(data)
-                //if(consult == data.date.substring(3, 10)){
-                //addRow(user, ticket, data)
-                //} else {
-                //removeData(user, ticket)
-                //}
-            })
-        })
-        })
+    script(src='/javascripts/firebase.conf.js')
+    script(src='/javascripts/user/supervisor-bitacora.js')
