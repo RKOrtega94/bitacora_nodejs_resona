@@ -14,7 +14,10 @@ $(function () {
     var from = $("#txtStartDate")
         .datepicker({
             dateFormat: "yy-mm-dd",
-            changeMonth: true
+            changeMonth: true,
+            changeYear: true,
+            minDate: '2019-10-01',
+            maxDate: 0
         })
         .on("change", function () {
             to.datepicker("option", "minDate", getDate(this));
@@ -22,6 +25,7 @@ $(function () {
         to = $("#txtEndDate").datepicker({
             dateFormat: "yy-mm-dd",
             changeMonth: true,
+            changeYear: true,
             maxDate: 0
         })
             .on("change", function () {
@@ -53,7 +57,8 @@ function addRow(user, ticket, data) {
             data.date,
             data.hour,
             '0:' + data.tmo
-        ]).draw(true);
+        ])
+            .draw(true);
     } else {
         table.row.add([
             user,
@@ -64,7 +69,8 @@ function addRow(user, ticket, data) {
             data.date,
             'Sin Hora',
             '0:' + data.tmo
-        ]).draw(true);
+        ])
+            .draw(true);
     }
 
     setTimeout(function () {
@@ -78,6 +84,7 @@ function removeData(user, ticket) {
 }
 
 function search() {
+    table.clear()
     var userId = document.getElementById('txtUser')
     var fromDate = document.getElementById('txtStartDate')
     var toDate = document.getElementById('txtEndDate')
@@ -90,11 +97,41 @@ function search() {
         if (userId.value == 0) {
             var fromYear = fromDate.value.substring(0, 4)
             var toYear = toDate.value.substring(0, 4)
-            var fromMonth = fromDate.value.substring(5, 7)
-            var toMonth = toDate.value.substring(5, 7)
-            console.log(fromDate.value.substring(5, 7))
+            var fromMonth = parseInt(fromDate.value.substring(5, 7))
+            var toMonth = parseInt(toDate.value.substring(5, 7))
+            var fromDay = parseInt(fromDate.value.substring(8, 10))
+            var toDay = parseInt(toDate.value.substring(8, 10))
         }
-        var query = firebase.database().ref("tickets")
+        var months = toMonth - fromMonth
+        var fromMonths = ''
+        var days = toDay - fromDay
+        var fromDays = ''
+        for (var m = 0; m <= months; m++) {
+            fromMonths = '' + fromMonth
+            if (fromMonths.length <= 1) {
+                fromMonths = '0' + fromMonth
+            }
+
+            for (var d = 0; d <= days; d++) {
+                fromDays = '' + fromDay
+                if (fromDays.length <= 1) {
+                    fromDays = '0' + fromDays
+                }
+                var query = firebase.database().ref('tickets').child(toYear).child(fromMonths).child(fromDays)
+                query.once('value', snapshot => {
+                    snapshot.forEach(childSnapshot => {
+                        var userResult = childSnapshot.key
+                        childSnapshot.forEach(ticketSapshot => {
+                            var data = ticketSapshot.val()
+                            var ticket = ticketSapshot.key
+                            addRow(userResult, ticket, data)
+                        })
+                    })
+                })
+                fromDay++
+            }
+            //fromMonth++
+        }
         // Query database
         //document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
         //query.once('value', snapshot => {
