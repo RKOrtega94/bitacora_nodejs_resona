@@ -132,36 +132,5 @@ function search() {
             }
             //fromMonth++
         }
-        // Query database
-        //document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
-        //query.once('value', snapshot => {
-        //    snapshot.forEach(childSnapshot => {
-        //        var userResult = childSnapshot.key
-        //        var userRef = firebase.database().ref('tickets/' + userResult)
-        //        childSnapshot.forEach(ticketSnapshot => {
-        //            var date = new Date()
-        //            var month = '' + (date.getMonth() + 1)
-        //            var year = date.getFullYear()
-        //            if (month.length == 1) {
-        //                month = '0' + month
-        //            }
-        //            var data = ticketSnapshot.val()
-        //            var ticket = ticketSnapshot.key
-        //            var user = userResult
-        //            if (data.date) {
-        //                var consult = month + '/' + year
-        //                var year = data.date.substring(6, 10)
-        //                var mes = data.date.substring(3, 5)
-        //                var dia = data.date.substring(0, 2)
-        //                var newData = query.child(year).child(mes).child(dia).child(user).child(ticket).set(data)
-        //                if (consult == data.date.substring(3, 10)) {
-        //                    addRow(user, ticket, data)
-        //                } else {
-        //                    removeData(user, ticket)
-        //                }
-        //            }
-        //        })
-        //    })
-        //})
     }
 }
