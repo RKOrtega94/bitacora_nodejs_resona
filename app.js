@@ -86,7 +86,7 @@ app.use((req, res, next) => {
   next()
 })
 
-// Import modules
+// Routers
 var index = require('./routes/index')
 var user = require('./routes/users')
 var edituser = require('./routes/edit-user')
@@ -98,6 +98,7 @@ var notFound = require('./routes/404')
 var monitoringCategory = require('./routes/monitoring-category')
 var monitoringCategoryItems = require('./routes/monitoring-category-items')
 var monitoringItemsErrors = require('./routes/monitoring-item-errors')
+var indicator = require('./routes/indicator')
 
 // Route modules
 app.use('/', index)
@@ -111,6 +112,7 @@ app.use('/404', notFound)
 app.use('/monitoring/category', monitoringCategory)
 app.use('/monitoring/category/item', monitoringCategoryItems)
 app.use('/monitoring/category/item/errors', monitoringItemsErrors)
+app.use('/indicator', indicator)
 
 // middleware function to check for logged-in users
 var sessionChecker = (req, res, next) => {
