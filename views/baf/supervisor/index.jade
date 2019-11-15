@@ -1,14 +1,14 @@
-extends ../layout
+extends ../../layout
 
 block content
     // Page Wrapper
     #wrapper
-        include ../helpers/supervisor-sidebar
+        include ../../helpers/supervisor-sidebar
         // Content Wrapper
         #content-wrapper.d-flex.flex-column
             // Main Content
             #content
-                include ../helpers/topbar
+                include ../../helpers/topbar
                 // Begin Page Content
                 .container-fluid.bg-white
                     // Page Heading
@@ -25,8 +25,8 @@ block content
                                 | Este sistema está enfocada al seguimiento de la gestión de cada uno de los asesores, para de este modo poder medir los resultados de forma personal y llegar a cumplir nuestros objetivos.
                         .col-lg-6.d-none.d-lg-block.bg-index-image
             // End of Main Content
-            include ../helpers/footer
-            include ../helpers/logout
+            include ../../helpers/footer
+            include ../../helpers/logout
     //JQuery
     script(src='/vendor/jquery/jquery.min.js')
     // Data table Scripts

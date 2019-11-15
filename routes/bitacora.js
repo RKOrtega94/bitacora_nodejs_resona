@@ -51,7 +51,7 @@ router.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     switch (req.session.user.role) {
       case 'user':
-        res.render('user/bitacora', {
+        res.render('baf/user/bitacora', {
           title: 'Bitácora',
           name: req.session.user.username,
           result: req.session.user.username
@@ -64,7 +64,7 @@ router.get('/', (req, res) => {
         });
         break
       case 'supervisor':
-        res.render('supervisor/bitacora', {
+        res.render('baf/supervisor/bitacora', {
           title: 'Bitácora',
           name: req.session.user.username
         });

@@ -8,14 +8,25 @@ router.get('/', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     switch (req.session.user.role) {
       case 'user':
-        res.render('user/index', {
-          title: 'Home',
-          name: req.session.user.username,
-          result: req.session.user.username
-        });
+        switch (req.session.user.group) {
+          case 'baf':
+            res.render('baf/user/index', {
+              title: 'Home',
+              name: req.session.user.username,
+              result: req.session.user.username
+            })
+            break
+          case 'pw':
+            res.render('pw/user/index', {
+              title: 'Home',
+              name: req.session.user.username,
+              result: req.session.user.username
+            })
+            break
+        }
         break
       case 'supervisor':
-        res.render('supervisor/index', {
+        res.render('baf/supervisor/index', {
           title: 'Home',
           name: req.session.user.username,
           result: req.session.user.username

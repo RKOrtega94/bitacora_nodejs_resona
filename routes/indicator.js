@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
             title: 'Indicator',
             name: req.session.user.username,
             result: req.session.user.username,
-            users = JSON.stringify(result)
+            users: JSON.stringify(result)
           })
         })
         break
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
             title: 'Indicator',
             name: req.session.user.username,
             result: req.session.user.username,
-            users = JSON.stringify(result)
+            users: JSON.stringify(result)
           })
         })
         break

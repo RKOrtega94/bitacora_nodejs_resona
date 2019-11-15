@@ -157,7 +157,7 @@ app.get('/bitacora/general', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     switch (req.session.user.role) {
       case 'user':
-        res.render('user-bitacora-general', {
+        res.render('baf/user/bitacora-general', {
           title: 'Bitácora',
           name: req.session.user.username,
           result: req.session.user.username
@@ -165,7 +165,7 @@ app.get('/bitacora/general', (req, res) => {
         break
       case 'admin':
         res.render('admin-bitacora', {
-          title: 'Bitácora',
+          title: 'Bitácora mensual',
           name: req.session.user.username
         });
         break

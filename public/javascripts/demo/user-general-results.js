@@ -1,5 +1,7 @@
 // Get reference
-var query = firebase.database().ref("tickets/" + user)
+var date = new Date()
+
+var query = firebase.database().ref().child("tickets").child(date.getFullYear()).child(date.getMonth() + 1)
 var count = 0
 var minutes = 0
 var seconds = 0
@@ -76,14 +78,23 @@ function addRow(data) {
     data.tmo
   ]).draw(true);
 }
+
 document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
 // Query database
 query.once('value', snapshot => {
   snapshot.forEach(childSnapshot => {
-    result = childSnapshot.val()
-    addRow(result)
-    setTimeout(function () {
-      document.getElementById("loading").remove()
-    }, 500);
+    childSnapshot.forEach(userSnapshot => {
+      if (userSnapshot.key == user) {
+        userSnapshot.forEach(ticketSnapshot => {
+          var result = ticketSnapshot.val()
+          addRow(result)
+          setTimeout(function () {
+            if (document.getElementById("loading")) {
+              document.getElementById("loading").remove()
+            }
+          }, 500);
+        })
+      }
+    })
   })
 })

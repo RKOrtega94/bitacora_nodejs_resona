@@ -6,13 +6,13 @@ function addRow(id, data) {
     data.message,
     data.type,
     data.status,
-    "<a id=\"myLink\" title=\"Click to do something\" href=\"javascript:void(0);\" onclick=\"deleteNotify('" + id + "'); return false;\">Eliminar</a>"
+    "<a id=\"myLink\" title=\"Eliminar\" href=\"javascript:void(0);\" onclick=\"deleteNotify('" + id + "'); return false;\">Eliminar</a>"
   ]).draw(true);
 }
 // Query database
 function queryNotify() {
   var notification = firebase.firestore()
-  notification.collection('notify').get().then((querySnapshot) => {
+  notification.collection('baf').doc('notify').collection('notify').get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       addRow(doc.id, doc.data())
     })
@@ -22,7 +22,7 @@ function queryNotify() {
 function deleteNotify(docId) {
   var table = $('#dataTable').DataTable();
   table.clear().draw()
-  db.collection('notify').doc(docId).delete().then(function () {
+  db.collection('baf').doc('notify').collection('notify').doc(docId).delete().then(function () {
     queryNotify()
     vNotify.success({
       text: 'Notificación eliminada',

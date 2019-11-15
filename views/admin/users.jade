@@ -50,6 +50,7 @@ block content
                       th(width='100px') Usuario
                       th Email
                       th(width='70px') Rol
+                      th Grupo
                       th Fecha de creación
                       th Fecha de modificación
                       th(width='150px') Opciones
@@ -58,6 +59,7 @@ block content
                       th Usuario
                       th Email
                       th Rol
+                      th Grupo
                       th Fecha de creación
                       th Fecha de modificación
                       th Opciones
@@ -94,6 +96,7 @@ block content
         data.username,
         data.email,
         data.role,
+        data.group,
         data.createdAt,
         data.updatedAt,
         "<a href=\"/user/edit/"+data.id+"\">Editar</a> / <a href=\"/user/delete/"+data.id+"\">Eliminar</a>"

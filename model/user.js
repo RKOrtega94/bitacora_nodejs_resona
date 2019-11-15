@@ -25,7 +25,12 @@ var User = sequelize.define(
     role: {
         type: Sequelize.ENUM,
         values: ['user', 'supervisor', 'admin', 'disabled'],
-        allowNull: true
+        allowNull: false
+    },
+    group: {
+        type: Sequelize.ENUM,
+        values: ['baf', 'pw', 'chat', 'es', 'admin'],
+        allowNull: false
     }
 }, {
     hooks: {

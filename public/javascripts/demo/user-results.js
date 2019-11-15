@@ -2,7 +2,9 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 // Get reference
-var query = firebase.database().ref("tickets/" + user)
+var date = new Date()
+
+var query = firebase.database().ref().child("tickets").child(date.getFullYear()).child(date.getMonth() + 1)
 var count = 0
 var minutes = 0
 var seconds = 0
@@ -157,7 +159,13 @@ function addRow(data) {
 // Query database
 query.once('value', snapshot => {
   snapshot.forEach(childSnapshot => {
-    result = childSnapshot.val()
-    addRow(result)
+    childSnapshot.forEach(userSnapshot => {
+      if (userSnapshot.key == user) {
+        userSnapshot.forEach(ticketSnapshot => {
+          var result = ticketSnapshot.val()
+          addRow(result)
+        })
+      }
+    })
   })
 })

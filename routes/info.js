@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         })
         break
       case 'supervisor':
-        res.render('supervisor/notify', {
+        res.render('baf/supervisor/notify', {
           title: 'Notificaciones',
           name: req.session.user.username
         })
@@ -30,22 +30,26 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  let db = admin.firestore()
-  let doc = db.collection('notify').doc()
-  let setDoc = doc.set({
-    'title': req.body.txtTitle,
-    'message': req.body.txtMessage,
-    'type': req.body.txtType,
-    'status': 'A'
-  })
-  if (setDoc) {
-    res.redirect('/info')
-  } else {
-    res.render('supervisor-notify', {
-      title: 'Notificaciones',
-      name: req.session.user.username,
-      msg: 'Ha ocurrido un error'
-    })
+  switch (req.session.user.group) {
+    case 'baf':
+      let db = admin.firestore()
+      let doc = db.collection('baf').doc('notify').collection('notify').doc()
+      let setDoc = doc.set({
+        'title': req.body.txtTitle,
+        'message': req.body.txtMessage,
+        'type': req.body.txtType,
+        'status': 'A'
+      })
+      if (setDoc) {
+        res.redirect('/info')
+      } else {
+        res.render('supervisor-notify', {
+          title: 'Notificaciones',
+          name: req.session.user.username,
+          msg: 'Ha ocurrido un error'
+        })
+      }
+      break
   }
 })
 

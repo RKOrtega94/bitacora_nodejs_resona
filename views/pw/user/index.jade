@@ -1,0 +1,55 @@
+extends ../../layout
+
+block content
+  // Page Wrapper
+  #wrapper
+    include ../../helpers/sidebar
+    // Content Wrapper
+    #content-wrapper.d-flex.flex-column
+      // Main Content
+      #content
+        include ../../helpers/topbar
+        // Begin Page Content
+        .container-fluid.bg-white
+          // Page Heading
+          .d-sm-flex.align-items-center.justify-content-between.mb-4
+            h1.mb-0.text-gray-800 Bienvenido !{name}!
+          hr.divider
+          .row
+            .col.col-md-8
+              .card.shadow.mb-4
+                .card-header.py-3
+                  h6.m-0.font-weight-bold.text-primary
+                    | Información inicial
+                .card-body
+                  .table-responsive
+                    table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                      thead
+                        tr
+                          th(width='50') Tipo
+                          th Descripción
+                      tfoot
+                        tr
+                          th(width='50') Tipo
+                          th Descripción
+            .col.col-md-4.d-none.d-lg-block.bg-index-image
+          .row
+            .col
+              p.text-secondary
+                | Este sistema está enfocada al seguimiento de la gestión de cada uno de los asesores, para de este modo poder medir los resultados de forma personal y llegar a cumplir nuestros objetivos.
+        // End of Main Content
+        include ../../helpers/footer
+        include ../../helpers/logout
+  //JQuery
+  script(src='/vendor/jquery/jquery.min.js')
+  // Data table Scripts
+  script(src='/vendor/datatables/jquery.dataTables.min.js')
+  script(src='/javascripts/demo/datatables-demo.js')
+  // The core Firebase JS SDK is always required and must be listed first
+  script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
+  // Add Firebase products that you want to use
+  script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
+  script(src='https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js')
+  script(src='/javascripts/firebase.conf.js')
+  script(src='/javascripts/vanilla-notify.js')
+  script(src='/javascripts/user/user-notify-datatable.js')
