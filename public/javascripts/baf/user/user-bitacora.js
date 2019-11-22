@@ -22,7 +22,7 @@ if (month.length <= 1) {
   month = '0' + month;
 }
 var refToday = date.getFullYear() + '/' + month + '/' + day
-var query = firebase.database().ref("tickets").child(date.getFullYear()).child(month).child(day).child(user)
+var query = firebase.database().ref("tickets").child('baf').child(date.getFullYear()).child(month).child(day).child(user)
 var count = 0
 var minutes = 0
 var seconds = 0
