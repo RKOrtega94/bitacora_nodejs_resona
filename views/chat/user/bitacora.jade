@@ -20,7 +20,7 @@ block content
             form.user(action='/bitacora' method='POST' style='width: 100%' onsubmit='cls()')
               .row(style='width: 100%')
                 .col
-                  input#txtAnillamador.form-control(type='tel' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true' pattern='[0-9]+' title='Only numbers')
+                  input#txtIp.form-control(type='text' placeholder='IP' name='txtIp' required='true' title='Ingrese una dirección IP')
                 .col
                   input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Identificación del cliente' name='txtDni' required='true')
                 .col
@@ -37,7 +37,11 @@ block content
                 .col
                   input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
                 .col
-                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Tiempo de llamada mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
+                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Duración del chat mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
+              .row.text-center(style='width: 100%')
+                .col
+                  br
+                  textarea#txtComentario.form-control(type='text' aria-describedby='emailHelp' placeholder='Comentario' name='txtComentario' required='true' title='Invalid format')
               .row.text-center(style='width: 100%')
                 .col
                   br
@@ -81,5 +85,4 @@ block content
   script(src='https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js')
   script(src='/javascripts/firebase.conf.js')
   script(src='/javascripts/user/user-bitacora.js')
-  script(src='/javascripts/vanilla-notify.js')
-  script(src='/javascripts/notify.js')
+  include ../../helpers/notify

@@ -23,6 +23,13 @@ router.get('/', (req, res) => {
               result: req.session.user.username
             })
             break
+          case 'chat':
+            res.render('chat/user/index', {
+              title: 'Home',
+              name: req.session.user.username,
+              result: req.session.user.username
+            })
+            break
         }
         break
       case 'supervisor':

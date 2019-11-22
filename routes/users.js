@@ -34,7 +34,8 @@ router.post('/', (req, res) => {
     username: req.body.txtUsername,
     email: req.body.txtEmail,
     password: req.body.txtDni,
-    role: req.body.txtRole
+    role: req.body.txtRole,
+    group: req.body.txtGroup
   }).then(User => {
     res.redirect('/users')
   }).catch(err => {

@@ -125,10 +125,12 @@ function search() {
                             var data = ticketSapshot.val()
                             var ticket = ticketSapshot.key
                             addRow(userResult, ticket, data)
+                            var create = firebase.database().ref('tickets').child('baf').child(toYear).child(fromMonths).child(fromDays).child(userResult).child(ticket).set(data)
                         })
                     })
                 })
                 fromDay++
+                var create = firebase.database().ref('tickets').child('baf').child(toYear).child(fromMonths).child(fromDays).set()
             }
             //fromMonth++
         }

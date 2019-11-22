@@ -15,17 +15,17 @@ block content
           .d-sm-flex.align-items-center.justify-content-between.mb-4
             h1.h3.mb-0.text-gray-800 Usuarios
           .row(style='width: 100%')
-            form(action="/users", method="post", style='width: 100%')
+            form(action="/users" method="post" style='width: 100%')
               .row
                 .col
                   p.text-center=msg
               .row
                 .col
-                  input#txtUser.form-control(type='text', name='txtUsername', placeholder='Nombre de usuario', required='true')
+                  input#txtUser.form-control(type='text' name='txtUsername' placeholder='Nombre de usuario' required='true')
                 .col
-                  input#txtDni.form-control(type='text', name='txtDni', placeholder='Cédula / pasaporte', required='true')
+                  input#txtDni.form-control(type='text' name='txtDni' placeholder='Cédula / pasaporte' required='true')
                 .col
-                  input#txtEmail.form-control(type='text', name='txtEmail', placeholder='Correo electrónico', required='true')
+                  input#txtEmail.form-control(type='text' name='txtEmail' placeholder='Correo electrónico' required='true')
                 .col
                   select.form-control(name='txtRole' required='true')
                     option(selected='' value='') Perfil...
@@ -33,6 +33,12 @@ block content
                     option(value='supervisor') Supervisor
                     option(value='admin') Administrador
                     option(value='disabled') Deshabilitado
+                .col
+                  select#txtGroup.form-control(name='txtGroup' required='true')
+                    option(value='baf') Banda Ancha Fija (BAF)
+                    option(value='chat') Chat Soporte
+                    option(value='pw') Página Web
+                    option(value='admin') Administradores
               .row.text-center(style='width: 100%')
                 .col
                   br
