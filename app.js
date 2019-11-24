@@ -99,6 +99,7 @@ var monitoringCategory = require('./routes/monitoring-category')
 var monitoringCategoryItems = require('./routes/monitoring-category-items')
 var monitoringItemsErrors = require('./routes/monitoring-item-errors')
 var indicator = require('./routes/indicator')
+var bitacoraMensual = require('./routes/bitacora-mensual')
 
 // Route modules
 app.use('/', index)
@@ -113,6 +114,7 @@ app.use('/monitoring/category', monitoringCategory)
 app.use('/monitoring/category/item', monitoringCategoryItems)
 app.use('/monitoring/category/item/errors', monitoringItemsErrors)
 app.use('/indicator', indicator)
+app.use('/bitacora/general', bitacoraMensual)
 
 // middleware function to check for logged-in users
 var sessionChecker = (req, res, next) => {
@@ -152,28 +154,6 @@ app.route('/login')
       }
     })
   })
-
-app.get('/bitacora/general', (req, res) => {
-  if (req.session.user && req.cookies.user_sid) {
-    switch (req.session.user.role) {
-      case 'user':
-        res.render('baf/user/bitacora-general', {
-          title: 'Bitácora',
-          name: req.session.user.username,
-          result: req.session.user.username
-        });
-        break
-      case 'admin':
-        res.render('admin-bitacora', {
-          title: 'Bitácora mensual',
-          name: req.session.user.username
-        });
-        break
-    }
-  } else {
-    res.redirect('/login');
-  }
-})
 
 // route for handling 404 requests(unavailable routes)
 app.use(function (req, res, next) {

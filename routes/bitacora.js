@@ -71,18 +71,22 @@ function createTicket(req) {
     case 'chat':
       var ref = admin.database()
         .ref('tickets')
-        .child('pw')
+        .child('chat')
         .child(date.getFullYear())
         .child(month)
         .child(day)
         .child(req.session.user.username)
         .child(req.body.txtTicket)
         .set({
-          anillamador: req.body.txtIp,
+          ip: req.body.txtIp,
           dni: req.body.txtDni,
+          servicio: req.body.txtServ,
           pir: req.body.txtPir,
+          req: req.body.txtReq,
           ticket: req.body.txtTicket,
+          vt: req.body.txtVt,
           tmo: req.body.txtTmo,
+          coment: req.body.txtComentario,
           date: currentDate,
           hour: currentHour
         })

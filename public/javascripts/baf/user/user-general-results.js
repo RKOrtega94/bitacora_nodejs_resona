@@ -1,7 +1,7 @@
 // Get reference
 var date = new Date()
 
-var query = firebase.database().ref().child("tickets").child(date.getFullYear()).child(date.getMonth() + 1)
+var query = firebase.database().ref().child("tickets").child('baf').child(date.getFullYear()).child(date.getMonth() + 1)
 var count = 0
 var minutes = 0
 var seconds = 0
