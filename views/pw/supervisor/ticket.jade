@@ -13,24 +13,19 @@ block content
         .container-fluid
           // Page Heading
           .d-sm-flex.align-items-center.justify-content-between.mb-4
-            h1.h3.mb-0.text-gray-800 Registro de incidencias
+            h1.h3.mb-0.text-gray-800 Panel de registro de tickets
             h6#cumplimientoTmo
             h6#promedioTmo.mb-0.text-success
           .row(style='width: 100%')
-            form.user(action='/info' method='POST' style='width: 100%' onsubmit='cls()')
+            form.user(action='/ticket' method='POST' style='width: 100%' onsubmit='cls()')
               .row(style='width: 100%')
                 .col
-                  input#txtTitle.form-control(type='text' placeholder='Título del aviso' name='txtTitle' required='true')
+                  select#txtAsesor.form-control.selectpicker(name='txtAsesor' required='true')
+                    option(selected='' value='') Asesor...
                 .col
-                  select#txtTYPE.form-control(name='txtType' required='true')
-                    option(selected='' value='') Tipo...
-                    option(value='info').text-info Información
-                    option(value='warning').text-warning Alerta
-                    option(value='error').text-danger Crítico
-              .row(style='width: 100%')
+                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
                 .col
-                  br
-                  textarea#txtMessage.form-control(name="txtMessage" required='true' placeholder='Descripción del aviso')
+                  input#txtDni.form-control(type='text' placeholder='Identificación del cliente' name='txtDni' required='true')
               .row.text-center(style='width: 100%')
                 .col
                   br
@@ -40,24 +35,24 @@ block content
           // DataTales Example
           .card.shadow.mb-4
             .card-header.py-3
-              h6.m-0.font-weight-bold.text-primary Notificaciones enviadas
+              h6.m-0.font-weight-bold.text-primary Registros del día
             .card-body
               .table-responsive
                 table#dataTable.table.table-bordered(width='100%' cellspacing='0')
                   thead
                     tr
-                      th(width='50') Título
-                      th Descripción
-                      th(width='50') Tipo
-                      th(width='50') Estado
-                      th(width='50') Opciones
+                      th Ticket
+                      th Asesor
+                      th CI cliente
+                      th Fecha
+                      th Hora
                   tfoot
                     tr
-                      th Título
-                      th Descripción
-                      th Tipo
-                      th Estado
-                      th Opciones
+                      th Ticket
+                      th Asesor
+                      th CI cliente
+                      th Fecha
+                      th Hora
                   tbody
         // End of Main Content
         include ../../helpers/footer
@@ -66,13 +61,24 @@ block content
   script(src='/vendor/jquery/jquery.min.js')
   // Data table Scripts
   script(src='/vendor/datatables/jquery.dataTables.min.js')
+  script(src='https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js')
+  script(src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')
+  script(src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js')
+  script(src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js')
   script(src='/javascripts/demo/datatables-demo.js')
   // The core Firebase JS SDK is always required and must be listed first
   script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
   // Add Firebase products that you want to use
   script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
   script(src='https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js')
+  script(src='https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js')
   script(src='/javascripts/firebase.conf.js')
-  script(src='/javascripts/user/supervisor-info.js')
   script(src='/javascripts/vanilla-notify.js')
-  script(src='/javascripts/user/user-notify-datatable.js')
+  script(src='/javascripts/notify.js')
+  script.
+    var user = !{result}
+    var result = user
+  script(src='/javascripts/pw/supervisor/tickets.js')

@@ -16,7 +16,7 @@ $(function () {
             dateFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true,
-            minDate: '2019-10-01',
+            minDate: '2019-11-23',
             maxDate: 0
         })
         .on("change", function () {
@@ -47,39 +47,23 @@ $(function () {
 
 function addRow(user, ticket, data) {
     table = $('#dataTable').DataTable();
-    if (data.hour) {
-        table.row.add([
-            user,
-            ticket,
-            data.anillamador,
-            data.dni,
-            data.pir,
-            data.date,
-            data.hour,
-            '0:' + data.tmo
-        ])
-            .draw(true);
-    } else {
-        table.row.add([
-            user,
-            ticket,
-            data.anillamador,
-            data.dni,
-            data.pir,
-            data.date,
-            'Sin Hora',
-            '0:' + data.tmo
-        ])
-            .draw(true);
-    }
-
-    setTimeout(function () {
-        document.getElementById("loading").remove()
-    }, 500);
+    table.row.add([
+        data.date,
+        data.hour,
+        ticket,
+        user,
+        data.ip,
+        data.dni,
+        data.req,
+        data.pir,
+        '0:' + data.tmo,
+        data.coment,
+        data.vt
+    ])
+        .draw(true);
 }
 
 function search() {
-    table.clear()
     var userId = document.getElementById('txtUser')
     var fromDate = document.getElementById('txtStartDate')
     var toDate = document.getElementById('txtEndDate')
@@ -113,6 +97,7 @@ function search() {
                     fromDays = '0' + fromDays
                 }
                 var query = firebase.database().ref('tickets').child('chat').child(toYear).child(fromMonths).child(fromDays)
+                table.clear()
                 query.once('value', snapshot => {
                     snapshot.forEach(childSnapshot => {
                         var userResult = childSnapshot.key

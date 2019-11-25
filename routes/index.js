@@ -49,26 +49,12 @@ router.get('/', (req, res) => {
             })
             break
           case 'pw':
-            User.findAll({
-              raw: true,
-              where: {
-                group: 'pw'
-              }
-            }).then(result => {
-              res.render('pw/supervisor/index', {
-                title: 'Home',
-                name: req.session.user.username,
-                result: JSON.stringify(result)
-              })
+            res.render('pw/supervisor/index', {
+              title: 'Home',
+              name: req.session.user.username
             })
             break
         }
-        res.render('baf/supervisor/index', {
-          title: 'Home',
-          name: req.session.user.username,
-          result: req.session.user.username
-        });
-        break
       case 'admin':
         User.findAll({
           raw: true
@@ -85,7 +71,7 @@ router.get('/', (req, res) => {
         res.redirect('/login');
         break
       default:
-        res.redirect('/login');
+        res.redirect('/404');
         break
     }
 
