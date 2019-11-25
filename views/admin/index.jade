@@ -13,65 +13,8 @@ block content
         .container-fluid
           // Page Heading
           .d-sm-flex.align-items-center.justify-content-between.mb-4
-            h1.h3.mb-0.text-gray-800 Usuarios
-          .row(style='width: 100%')
-            form(action="/users", method="post", style='width: 100%')
-              .row
-                .col
-                  input#txtUser.form-control(type='text', name='txtUsuario', placeholder='Nombre de usuario', required='true')
-                .col
-                  input#txtDni.form-control(type='text', name='txtDni', placeholder='Cédula / pasaporte', required='true')
-                .col
-                  input#txtEmail.form-control(type='text', name='txtEmail', placeholder='Correo electrónico', required='true')
-                .col
-                  select.form-control(name='txtPir' required='true')
-                    option(selected='' value='') Perfil...
-                    option(value='user') Usuario
-                    option(value='supervisor') Supervisor
-                    option(value='admin') Administrador
-                    option(value='disabled') Deshabilitado
-              .row.text-center(style='width: 100%')
-                .col
-                  br
-                  button.btn.btn-outline-success.align-content-center(type='submit') Guardar
-          br
-          // DataTales Example
-          .card.shadow.mb-4
-            .card-header.py-3
-              h6.m-0.font-weight-bold.text-primary Resgistro de usuarios
-            .card-body
-              .table-responsive
-                table#dataTable.table.table-bordered(width='100%' cellspacing='0')
-                  thead
-                    tr
-                      th(width='100px') Usuario
-                      th Email
-                      th(width='100px') Rol
-                      th(width='100px') Opciones
-                  tfoot
-                    tr
-                      th Usuario
-                      th Email
-                      th Rol
-                      th Opciones
-                  tbody
-        // End of Main Content
-        // Footer
-        br
-        footer.sticky-footer.bg-white
-          .container.my-auto
-            .copyright.text-center.my-auto
-              span Copyright © RESONATELECOM S.A. 2019
-          br
-          .container.my-auto
-            .copyright.text-center.my-auto
-              span Developed by Robinson Ortega
-        // End of Footer
-        // End of Content Wrapper
-        // End of Page Wrapper
-        // Scroll to Top Button
-        a.scroll-to-top.rounded(href='#page-top')
-          i.fas.fa-angle-up
+            h1.h3.mb-0.text-gray-800 Home PAGE
+        include ../helpers/footer
         include ../helpers/logout
   //JQuery
   script(src='/vendor/jquery/jquery.min.js')

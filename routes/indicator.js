@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
           raw: true
         }).then(users => {
           var result = users
-          res.render('supervisor/indicators', {
+          res.render('baf/supervisor/indicators', {
             title: 'Indicator',
             name: req.session.user.username,
             result: req.session.user.username,

@@ -33,6 +33,36 @@ router.get('/', (req, res) => {
         }
         break
       case 'supervisor':
+        switch (req.session.user.group) {
+          case 'baf':
+            res.render('baf/supervisor/index', {
+              title: 'Home',
+              name: req.session.user.username,
+              result: req.session.user.username
+            })
+            break
+          case 'chat':
+            res.render('chat/supervisor/index', {
+              title: 'Home',
+              name: req.session.user.username,
+              result: req.session.user.username
+            })
+            break
+          case 'pw':
+            User.findAll({
+              raw: true,
+              where: {
+                group: 'pw'
+              }
+            }).then(result => {
+              res.render('pw/supervisor/index', {
+                title: 'Home',
+                name: req.session.user.username,
+                result: JSON.stringify(result)
+              })
+            })
+            break
+        }
         res.render('baf/supervisor/index', {
           title: 'Home',
           name: req.session.user.username,

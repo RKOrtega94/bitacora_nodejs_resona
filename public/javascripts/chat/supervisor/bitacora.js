@@ -112,7 +112,7 @@ function search() {
                 if (fromDays.length <= 1) {
                     fromDays = '0' + fromDays
                 }
-                var query = firebase.database().ref('tickets').child(toYear).child(fromMonths).child(fromDays)
+                var query = firebase.database().ref('tickets').child('chat').child(toYear).child(fromMonths).child(fromDays)
                 query.once('value', snapshot => {
                     snapshot.forEach(childSnapshot => {
                         var userResult = childSnapshot.key
@@ -120,12 +120,10 @@ function search() {
                             var data = ticketSapshot.val()
                             var ticket = ticketSapshot.key
                             addRow(userResult, ticket, data)
-                            var create = firebase.database().ref('tickets').child('baf').child(toYear).child(fromMonths).child(fromDays).child(userResult).child(ticket).set(data)
                         })
                     })
                 })
                 fromDay++
-                var create = firebase.database().ref('tickets').child('baf').child(toYear).child(fromMonths).child(fromDays).set()
             }
             //fromMonth++
         }

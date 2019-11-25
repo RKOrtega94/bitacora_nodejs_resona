@@ -30,7 +30,7 @@ function createTicket(req) {
   var currentHour = hour + ':' + minutes
   switch (req.session.user.group) {
     case 'baf':
-        var ref = admin.database()
+      var ref = admin.database()
         .ref('tickets')
         .child('baf')
         .child(date.getFullYear())
@@ -108,13 +108,30 @@ router.get('/', (req, res) => {
         })
         break
       case 'supervisor':
-        res.render('baf/supervisor/bitacora', {
-          title: 'Bitácora',
-          name: req.session.user.username
-        })
-        break
+        switch (req.session.user.group) {
+          case 'baf':
+            res.render('baf/supervisor/bitacora', {
+              title: 'Bitácora',
+              name: req.session.user.username
+            })
+            break
+          case 'chat':
+            res.render('chat/supervisor/bitacora', {
+              title: 'Bitácora',
+              name: req.session.user.username
+            })
+            break
+          case 'pw':
+            res.render('pw/supervisor/bitacora', {
+              title: 'Bitácora',
+              name: req.session.user.username
+            })
+            break
+          default:
+            res.redirect('/')
+            break
+        }
       case 'user':
-        console.log(req.session.user.group)
         switch (req.session.user.group) {
           case 'baf':
             res.render('baf/user/bitacora', {

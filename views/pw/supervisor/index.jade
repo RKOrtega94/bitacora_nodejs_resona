@@ -1,0 +1,81 @@
+extends ../../layout
+
+block content
+  // Page Wrapper
+  #wrapper
+    include ../../helpers/sidebar
+    // Content Wrapper
+    #content-wrapper.d-flex.flex-column
+      // Main Content
+      #content
+        include ../../helpers/topbar
+        // Begin Page Content
+        .container-fluid
+          // Page Heading
+          .d-sm-flex.align-items-center.justify-content-between.mb-4
+            h1.h3.mb-0.text-gray-800 Panel de registro
+            h6#cumplimientoTmo
+            h6#promedioTmo.mb-0.text-success
+          .row(style='width: 100%')
+            form.user(action='/bitacora' method='POST' style='width: 100%' onsubmit='cls()')
+              .row(style='width: 100%')
+                .col
+                  select#txtPir.form-control(name='txtPir' required='true')
+                    option(selected='' value='') Asesor...
+                    option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
+                    option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
+                    option(value='CONSULTA / TÉCNICO') CONSULTA / TÉCNICO
+                    option(value='PETICIÓN / COMERCIAL') PETICIÓN / COMERCIAL
+                    option(value='PETICIÓN / FACTURACIÓN') PETICIÓN / FACTURACIÓN
+                    option(value='RECLAMO / FACTURACIÓN') RECLAMO / FACTURACIÓN
+                    option(value='SOPORTE / COMERCIAL') SOPORTE / COMERCIAL
+                    option(value='SOPORTE / TÉCNICO') SOPORTE / TÉCNICO
+                .col
+                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
+                .col
+                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Tiempo de llamada mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
+              .row.text-center(style='width: 100%')
+                .col
+                  br
+                  button.btn.btn-outline-success.align-content-center(type='submit') Guardar
+          // /.container-fluid
+          br
+          // DataTales Example
+          .card.shadow.mb-4
+            .card-header.py-3
+              h6.m-0.font-weight-bold.text-primary Registros del día
+            .card-body
+              .table-responsive
+                table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                  thead
+                    tr
+                      th(width='150px') Anillamador
+                      th(width='150px') Identificación
+                      th PIR
+                      th(width='150px') Ticket
+                      th(width='150px') Tiempo
+                  tfoot
+                    tr
+                      th Anillamador
+                      th Identificación
+                      th PIR
+                      th Ticket
+                      th Tiempo
+                  tbody
+        // End of Main Content
+        include ../../helpers/footer
+        include ../../helpers/logout
+  //JQuery
+  script(src='/vendor/jquery/jquery.min.js')
+  // Data table Scripts
+  script(src='/vendor/datatables/jquery.dataTables.min.js')
+  script(src='/javascripts/demo/datatables-demo.js')
+  // The core Firebase JS SDK is always required and must be listed first
+  script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
+  // Add Firebase products that you want to use
+  script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
+  script(src='https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js')
+  script(src='/javascripts/firebase.conf.js')
+  script(src='/javascripts/user/user-bitacora.js')
+  script(src='/javascripts/vanilla-notify.js')
+  script(src='/javascripts/notify.js')

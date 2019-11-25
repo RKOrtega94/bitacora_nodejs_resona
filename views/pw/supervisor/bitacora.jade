@@ -1,0 +1,91 @@
+extends ../../layout
+
+block content
+    // Page Wrapper
+    #wrapper
+        include ../../helpers/supervisor-sidebar
+        // Content Wrapper
+        #content-wrapper.d-flex.flex-column
+            // Main Content
+            #content
+                include ../../helpers/topbar
+                // Begin Page Content
+                .container-fluid
+                    #loading.container.text-center
+                    .d-sm-flex.align-items-center.justify-content-between.mb-4
+                        h6#promedioTmo.mb-0.text-info
+                    .row
+                        .col
+                            label(for="txtUser") Usuario
+                            select#txtUser.form-control(name="txtUser")
+                                option(value="0") Todos
+                        .col
+                            label(for="txtStartDate") Desde
+                            input#txtStartDate.form-control(type="text" name="txtStartDate" required)
+                        .col
+                            label(for="txtEndDate") Hasta
+                            input#txtEndDate.form-control(type="text" name="txtEndDate" required)
+                    .row.text-center(style='width: 100%')
+                        .col
+                            br
+                            button#btnSearch.btn.btn-outline-success.align-content-center(onclick='search()') Buscar
+                    .row
+                        .col
+                            span.text-info.strong
+                                | El tiempo de respuesta dependerá de la cantidad de datos a consultarse.
+                            br
+                            span.text-warning.strong
+                                | De momento solo se puede consultar dentro del mismo mes.
+                    br
+                    // DataTales Example
+                    .card.shadow.mb-4
+                        .card-header.py-3
+                            h6.m-0.font-weight-bold.text-primary Registro general
+                        .card-body
+                            .table-responsive
+                                table#dataTable.table.table-bordered.disabled(width='100%' cellspacing='0')
+                                    thead
+                                        tr
+                                            th Usuario
+                                            th Ticket
+                                            th Anillamador
+                                            th Identification
+                                            th PIR
+                                            th Fecha
+                                            th Hora
+                                            th Tiempo
+                                    tfoot
+                                        tr
+                                            th Usuario
+                                            th Ticket
+                                            th Anillamador
+                                            th Identification
+                                            th PIR
+                                            th Fecha
+                                            th Hora
+                                            th Tiempo
+                                    tbody
+                // End of Main Content
+                include ../../helpers/footer
+                include ../../helpers/logout
+    //JQuery
+    script(src='/vendor/jquery/jquery.min.js')
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+    // Data table Scripts
+    script(src='/vendor/datatables/jquery.dataTables.min.js')
+    script(src='/javascripts/demo/datatables-demo.js')
+    script(src='https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')
+    script(src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js')
+    // The core Firebase JS SDK is always required and must be listed first
+    script(src='https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js')
+    // Add Firebase products that you want to use
+    script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
+    script(src='/javascripts/firebase.conf.js')
+    script(src='/javascripts/baf/supervisor/bitacora.js')
+    script(src='/javascripts/vanilla-notify.js')
+    script(src='/javascripts/user/user-notify-datatable.js')
