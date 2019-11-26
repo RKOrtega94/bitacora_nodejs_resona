@@ -11,9 +11,10 @@ router.get('/', (req, res) => {
         var userUrl = req.originalUrl
         console.log(userUrl)
         var user = userUrl.substring(11, userUrl.length)
+        console.log(user)
         User.findOne({
           where: {
-            id: user
+            username: user
           }
         }).then(User => {
           res.render('admin/edit-user', {
@@ -32,8 +33,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  var user = req.body.txtUsername
-  console.log(user)
+  var userUrl = req.originalUrl
+  console.log(userUrl)
+  var user = userUrl.substring(11, userUrl.length)
   User.findOne({
     where: {
       username: user

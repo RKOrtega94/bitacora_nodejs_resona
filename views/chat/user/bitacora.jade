@@ -14,19 +14,18 @@ block content
           // Page Heading
           .d-sm-flex.align-items-center.justify-content-between.mb-4
             h1.h3.mb-0.text-gray-800 Panel de registro
-            h6#cumplimientoTmo
-            h6#promedioTmo.mb-0.text-success
+            span.text-info Los campos marcados de rojo son obligatorios.
           .row(style='width: 100%')
             form.user(action='/bitacora' method='POST' style='width: 100%' onsubmit='cls()')
               .row(style='width: 100%')
                 .col
-                  input#txtIp.form-control(type='text' placeholder='IP' name='txtIp' required='true' title='Ingrese una dirección IP')
+                  input#txtIp.form-control.border-bottom-danger(type='text' placeholder='IP' name='txtIp' required='true' title='Ingrese una dirección IP')
                 .col
-                  input#txtDni.form-control(type='text' placeholder='Identificación del cliente' name='txtDni' pattern='[0-9]+' title='Only numbers' required='true')
+                  input#txtDni.form-control.border-bottom-danger(type='text' placeholder='Identificación del cliente' name='txtDni' pattern='[0-9]+' title='Only numbers' required='true')
                 .col
-                  input#txtServ.form-control(type='text' aria-describedby='emailHelp' placeholder='Nuéro de servicio' name='txtServ' required='true')
+                  input#txtServ.form-control.border-bottom-danger(type='text' placeholder='Nuéro de servicio' name='txtServ' required='true')
                 .col
-                  select#txtReq.form-control(name='txtReq' required='true')
+                  select#txtReq.form-control.border-bottom-danger(name='txtReq' required='true')
                     option(selected='' value='') Tipo de requerimiento...
                     option(value='DTH') DTH
                     option(value='INTERNET') INTERNET
@@ -36,7 +35,7 @@ block content
               .row
                 .col
                   br
-                  select#txtPir.form-control(name='txtPir' required='true')
+                  select#txtPir.form-control.border-bottom-danger(name='txtPir' required='true')
                     option(selected='' value='') Requerimiento...
                     option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
                     option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
@@ -49,13 +48,13 @@ block content
                     option(value='VENTA') VENTA
                 .col
                   br
-                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
+                  input#txtTicket.form-control.border-bottom-danger(type='text' placeholder='Ticket Omnicanal' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
                 .col
                   br
-                  input#txtVt.form-control(type='text' aria-describedby='emailHelp' placeholder='Número de VT' name='txtVt' pattern='[0-9]+' title='Only numbers')
+                  input#txtVt.form-control(type='text' placeholder='Código de VT' name='txtVt' pattern='[0-9]+' title='Only numbers')
                 .col
                   br
-                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Duración del chat mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
+                  input#txtTmo.form-control.border-bottom-danger(type='text' placeholder='Duración del chat mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
               .row.text-center(style='width: 100%')
                 .col
                   br
