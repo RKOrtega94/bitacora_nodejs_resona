@@ -14,27 +14,33 @@ ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordio
         a.nav-link(href='/')
             i.fas.fa-fw.fa-home
             span Inicio
-    // Divider
-    hr.sidebar-divider
     .sidebar-heading
-        | Tickets
+        | Bitacora
     li.nav-item
-        a.nav-link(href='/ticket')
+        a.nav-link(href='/bitacora')
+            i.fas.fa-fw.fa-inbox
+            span Recibidos
+    li.nav-item
+        a.nav-link(href='/bitacora/atendido')
             i.fas.fa-fw.fa-check
-            span Envío de tickets
+            span Atendidos
     // Divider
     hr.sidebar-divider
+    // Heading
     .sidebar-heading
         | Reportes
     li.nav-item
-        a.nav-link(href='/bitacora')
-            i.fas.fa-fw.fa-edit
+        a.nav-link(href="/bitacora/general")
+            i.fas.fa-fw.fa-chart-area
             span Bitácora mensual
-    // Divider
     hr.sidebar-divider
-    .sidebar-heading
-        | Informe inicial
-    li.nav-item
-        a.nav-link(href='/info')
-            i.fas.fa-fw.fa-info
-            span Informacion inicial
+    //.sidebar-heading
+    //    | Indicadores
+    //li.nav-item
+    //    a.nav-link(href='/results')
+    //        i.fas.fa-fw.fa-chart-area
+    //        span Indicadores del mes
+    //li.nav-item
+    //    a.nav-link(href='/top')
+    //        i.fas.fa-fw.fa-list
+    //        span Top de asesores

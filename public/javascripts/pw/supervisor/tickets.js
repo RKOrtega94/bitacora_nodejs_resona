@@ -1,20 +1,6 @@
 var selectUser = document.getElementById('txtAsesor')
 var table;
 
-$(document).ready(function () {
-  $('.selectpicker').select2();
-  table = $('#dataTable').DataTable();
-  table.destroy();
-  table = $('#dataTable').DataTable({
-    dom: 'Bfrtip',
-    buttons: [
-      'excelHtml5'
-    ]
-  })
-})
-
-
-
 function addOption(item) {
   var option = document.createElement('option')
   option.text = item.username
@@ -43,8 +29,8 @@ function addRow(asesor, ticket, data) {
     ticket,
     asesor,
     data.dni,
-    data.date,
-    data.hour
+    data.hour,
+    data.status=='P'?'Pendiente':'Atendido'
   ])
     .draw(true)
 }

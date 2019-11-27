@@ -21,7 +21,7 @@ function addTicket(req, res) {
         month = '0' + month;
     }
 
-    var currentDate = day + '/' + month + '/' + date.getFullYear()
+    var currentDate = date.getFullYear() + '-' + month + '-' + day
     var hour = '' + date.getHours()
     var minutes = '' + date.getMinutes()
     if (hour.length <= 1) {
@@ -43,7 +43,8 @@ function addTicket(req, res) {
             ticket: req.body.txtTicket,
             dni: req.body.txtDni,
             date: currentDate,
-            hour: currentHour
+            hour: currentHour,
+            status: 'P'
         })
     console.log('ref:' + ref)
     res.redirect('/ticket')

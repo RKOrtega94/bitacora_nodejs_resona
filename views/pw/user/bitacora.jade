@@ -3,7 +3,7 @@ extends ../../layout
 block content
   // Page Wrapper
   #wrapper
-    include ../../helpers/sidebar
+    include ../../helpers/sidebar-pw
     // Content Wrapper
     #content-wrapper.d-flex.flex-column
       // Main Content
@@ -11,30 +11,25 @@ block content
         include ../../helpers/topbar
         // Begin Page Content
         .container-fluid
-          // Page Heading
-          .d-sm-flex.align-items-center.justify-content-between.mb-4
-            h1.h3.mb-0.text-gray-800 Panel de registro
           // DataTales Example
           .card.shadow.mb-4
             .card-header.py-3
-              h6.m-0.font-weight-bold.text-primary Tickets recibidos
+              h6.m-0.font-weight-bold.text-primary Tickets recibidos en estado pendiente
             .card-body
               .table-responsive
                 table#dataTable.table.table-bordered(width='100%' cellspacing='0')
                   thead
                     tr
-                      th(width='150px') Anillamador
-                      th(width='150px') Identificación
-                      th PIR
-                      th(width='150px') Ticket
-                      th(width='150px') Tiempo
+                      th Ticket BPM
+                      th Identificación
+                      th Hora
+                      th Estado
                   tfoot
                     tr
-                      th Anillamador
+                      th Ticket BPM
                       th Identificación
-                      th PIR
-                      th Ticket
-                      th Tiempo
+                      th Hora
+                      th Estado
                   tbody
         // End of Main Content
         include ../../helpers/footer
@@ -50,6 +45,6 @@ block content
   script(src='https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js')
   script(src='https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js')
   script(src='/javascripts/firebase.conf.js')
-  script(src='/javascripts/user/user-bitacora.js')
+  script(src='/javascripts/pw/user/bitacora.js')
   script(src='/javascripts/vanilla-notify.js')
   script(src='/javascripts/notify.js')

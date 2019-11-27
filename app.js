@@ -101,6 +101,7 @@ var monitoringItemsErrors = require('./routes/monitoring-item-errors')
 var indicator = require('./routes/indicator')
 var bitacoraMensual = require('./routes/bitacora-mensual')
 var ticket = require('./routes/ticket')
+var ticketin = require('./routes/ticketin')
 
 // Route modules
 app.use('/', index)
@@ -117,6 +118,7 @@ app.use('/monitoring/category/item/errors', monitoringItemsErrors)
 app.use('/indicator', indicator)
 app.use('/bitacora/general', bitacoraMensual)
 app.use('/ticket', ticket)
+app.use('/ticket/*', ticketin)
 
 // middleware function to check for logged-in users
 var sessionChecker = (req, res, next) => {
