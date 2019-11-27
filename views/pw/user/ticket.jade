@@ -28,8 +28,8 @@ block content
                   input#txtIn.form-control(type='text' placeholder='Fecha y hora de ingreso' name='txtIn' required='true' disabled)
               .row
                 .col
-                  label(for="txtReq") 
-                  select#txtReq.form-control(name='txtReq' required='true')
+                  label(for="txtServ") 
+                  select#txtServ.form-control(name='txtServ' required='true')
                     option(value='') Tipo de servicio...
                     option(value='DTH') DTH
                     option(value='IF') Internet fijo
@@ -39,12 +39,12 @@ block content
                   label(for="txtType") 
                   select#txtType.form-control(name='txtType' required='true')
                     option(value='') Tipo de requerimiento...
-                    option(value='c') Consulta
-                    option(value='s') Soporte
-                    option(value='v') Venta
+                    option(value='C') Consulta
+                    option(value='S') Soporte
+                    option(value='V') Venta
                 .col
                   label(for="txtContact") 
-                  input#txtContacto.form-control(type='text' placeholder='Número de contacto' name='txtContacto' required='true')
+                  input#txtContact.form-control(type='text' placeholder='Número de contacto' name='txtContact' required='true')
               .row
                 .col
                   label(for="txtInteraction") 
@@ -53,7 +53,7 @@ block content
                     option(value='X') No contesta
                 .col
                   label(for='txtProcess') 
-                  select#txtProcess.form-control(name='txtProcess' required='true')
+                  select#txtProcess.form-control(name='txtProcess' required='true' onchange='processChange()')
                     option(value='C') Cerrado
                     option(value='X') Pausado
                 .col
@@ -72,8 +72,8 @@ block content
                 .col
               .row
                 .col
-                  label(for='txtComentario')
-                  textarea#txtComentario.form-control(type='text' aria-describedby='emailHelp' placeholder='Observación' name='txtComentario' title='Invalid format')
+                  label(for='txtComent')
+                  textarea#txtComent.form-control(type='text' aria-describedby='emailHelp' placeholder='Observación' name='txtComent' title='Invalid format')
               .row.text-center(style='width: 100%')
                 .col
                   br
@@ -104,6 +104,7 @@ block content
         include ../../helpers/logout
   //JQuery
   script(src='/vendor/jquery/jquery.min.js')
+  script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
   script(src='/javascripts/sb-admin-2.min.js')
   script(src='/vendor/datatables/jquery.dataTables.min.js')
   script(src='/javascripts/demo/datatables-demo.js')

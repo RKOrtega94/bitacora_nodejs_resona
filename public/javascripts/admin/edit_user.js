@@ -19,7 +19,6 @@ switch (user.role) {
         index = 0
         break
 }
-console.log(user.group)
 document.getElementById("txtRole").selectedIndex = index
 function changePassword() {
     document.getElementById("changePassword").innerHTML = "<input id=\"txtPassword\" type=\"password\" name=\"txtPassword\" placeholder=\"Nueva contraseña\" required=\"true\" class=\"form-control\">"

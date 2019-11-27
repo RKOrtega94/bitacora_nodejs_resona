@@ -16,8 +16,98 @@ function addRequest(req, res, ticket) {
     if (month.length <= 1) {
         month = '0' + month;
     }
-    var query = admin.database().ref('tickets').child('pw').child(date.getFullYear()).child(month).child(day).child(req.session.user.username).child(ticket)
-    console.log('ref:' + query)
+
+    var hour = '' + date.getHours()
+    var minutes = '' + date.getMinutes()
+    if (hour.length <= 1) {
+        hour = '0' + hour
+    }
+    if (minutes.length <= 1) {
+        minutes = '0' + minutes
+    }
+
+    var currentHour = hour + ':' + minutes
+    var currentDate = date.getFullYear() + '-' + month + '-' + day
+    var update = admin.database()
+        .ref('tickets')
+        .child('pw')
+        .child(date.getFullYear())
+        .child(month)
+        .child(day)
+        .child(req.session.user.username)
+        .child(ticket)
+        .update({
+            serv: req.body.txtServ,
+            type: req.body.txtType,
+            contact: req.body.txtContact
+        })
+    var interaction = admin.database()
+        .ref('tickets')
+        .child('pw')
+        .child(date.getFullYear())
+        .child(month)
+        .child(day)
+        .child(req.session.user.username)
+        .child(ticket)
+        .push({
+            interaction: req.body.txtInteraction,
+            process: req.body.txtProcess,
+            date: currentDate,
+            hour: currentHour,
+            coment: req.body.txtComent
+        })
+    if (req.body.txtProcess == 'C') {
+        update = admin.database()
+            .ref('tickets')
+            .child('pw')
+            .child(date.getFullYear())
+            .child(month)
+            .child(day)
+            .child(req.session.user.username)
+            .child(ticket)
+            .update({
+                status: 'A'
+            })
+    } else {
+        update = admin.database()
+            .ref('tickets')
+            .child('pw')
+            .child(date.getFullYear())
+            .child(month)
+            .child(day)
+            .child(req.session.user.username)
+            .child(ticket)
+            .update({
+                status: 'X'
+            })
+        if (req.body.txtDate) {
+            if (req.body.txtDate != currentDate) {
+                var fecha = req.body.txtDate
+                var anio = fecha.substring(0, 4)
+                var mes = fecha.substring(5, 7)
+                var dia = fecha.substring(8, 10)
+                var query = admin.database()
+                    .ref('tickets')
+                    .child('pw')
+                    .child(date.getFullYear())
+                    .child(month)
+                    .child(day)
+                    .child(req.session.user.username)
+                    .child(ticket)
+                query.once('value', snapshot => {
+                    var paused = admin.database()
+                        .ref('tickets')
+                        .child('pw')
+                        .child(anio)
+                        .child(mes)
+                        .child(dia)
+                        .child(req.session.user.username)
+                        .child(ticket)
+                        .set(snapshot.val())
+                })
+            }
+        }
+    }
     res.redirect(req.originalUrl)
 }
 
