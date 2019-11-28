@@ -54,7 +54,9 @@ function addRequest(req, res, ticket) {
             process: req.body.txtProcess,
             date: currentDate,
             hour: currentHour,
-            coment: req.body.txtComent
+            coment: req.body.txtComent,
+            solution: req.body.txtSolution ? req.body.txtSolution : 'S',
+            numRequest: req.body.txtNumReq ? req.body.txtNumReq : 'N/A'
         })
     if (req.body.txtProcess == 'C') {
         update = admin.database()
@@ -66,7 +68,9 @@ function addRequest(req, res, ticket) {
             .child(req.session.user.username)
             .child(ticket)
             .update({
-                status: 'A'
+                status: 'A',
+                endAt: currentHour,
+                endDate: currentDate
             })
     } else {
         update = admin.database()
@@ -78,7 +82,9 @@ function addRequest(req, res, ticket) {
             .child(req.session.user.username)
             .child(ticket)
             .update({
-                status: 'X'
+                status: 'X',
+                endAt: currentHour,
+                endDate: currentDate
             })
         if (req.body.txtDate) {
             if (req.body.txtDate != currentDate) {
@@ -104,11 +110,33 @@ function addRequest(req, res, ticket) {
                         .child(req.session.user.username)
                         .child(ticket)
                         .set(snapshot.val())
+                    paused = admin.database()
+                        .ref('tickets')
+                        .child('pw')
+                        .child(anio)
+                        .child(mes)
+                        .child(dia)
+                        .child(req.session.user.username)
+                        .child(ticket)
+                        .update({
+                            status: 'X'
+                        })
                 })
+                update = admin.database()
+                    .ref('tickets')
+                    .child('pw')
+                    .child(date.getFullYear())
+                    .child(month)
+                    .child(day)
+                    .child(req.session.user.username)
+                    .child(ticket)
+                    .update({
+                        status: 'A'
+                    })
             }
         }
     }
-    res.redirect(req.originalUrl)
+    res.redirect('/bitacora')
 }
 
 router.get('/', (req, res) => {

@@ -1,5 +1,15 @@
 var table = $('#dataTable').DataTable()
 
+$(function () {
+    var datePicker = $('#txtDate')
+        .datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            minDate: 0,
+        })
+})
+
 var user = document.getElementById('userLoged').textContent
 var date = new Date()
 var day = '' + date.getDate();
@@ -41,6 +51,10 @@ function addRow(key, data) {
         case 'ticket':
             break
         case 'type':
+            break
+        case 'endAt':
+            break
+        case 'endDate':
             break
         default:
             table.row.add([
@@ -106,17 +120,31 @@ function processChange() {
 
     if (process == 'C') {
         document.getElementById('txtDate').disabled = true
+        document.getElementById('txtSolution').disabled = false
     } else {
+        document.getElementById('txtSolution').disabled = true
         document.getElementById('txtDate').disabled = false
     }
 }
 
-$(function () {
-    var datePicker = $('#txtDate')
-        .datepicker({
-            dateFormat: "yy-mm-dd",
-            changeMonth: true,
-            changeYear: true,
-            minDate: 0,
-        })
-})
+function solutionChange() {
+    var solution = document.getElementById('txtSolution').value
+    switch (solution) {
+        case 'S':
+            document.getElementById('txtNumReq').disabled = true
+            document.getElementById('txtNumReq').placeholder = 'N/A'
+            break
+        case 'E':
+            document.getElementById('txtNumReq').disabled = false
+            document.getElementById('txtNumReq').placeholder = 'Código de Omnicanal'
+            break
+        case 'V':
+            document.getElementById('txtNumReq').disabled = false
+            document.getElementById('txtNumReq').placeholder = 'Código de VT'
+            break
+        default:
+            document.getElementById('txtNumReq').disabled = true
+            document.getElementById('txtNumReq').placeholder = 'N/A'
+            break
+    }
+}

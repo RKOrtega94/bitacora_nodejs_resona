@@ -30,6 +30,7 @@ function addRow(asesor, ticket, data) {
     asesor,
     data.dni,
     data.hour,
+    data.endAt ? data.endAt : '',
     data.status == 'P' ? 'Pendiente' : data.status == 'X' ? 'Pausado' : 'Atendido'
   ])
     .draw(true)

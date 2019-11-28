@@ -102,6 +102,7 @@ var indicator = require('./routes/indicator')
 var bitacoraMensual = require('./routes/bitacora-mensual')
 var ticket = require('./routes/ticket')
 var ticketin = require('./routes/ticketin')
+var bitacorapw = require('./routes/ticketin-atendido')
 
 // Route modules
 app.use('/', index)
@@ -119,6 +120,7 @@ app.use('/indicator', indicator)
 app.use('/bitacora/general', bitacoraMensual)
 app.use('/ticket', ticket)
 app.use('/ticket/*', ticketin)
+app.use('/bitacora/atendido', bitacorapw)
 
 // middleware function to check for logged-in users
 var sessionChecker = (req, res, next) => {

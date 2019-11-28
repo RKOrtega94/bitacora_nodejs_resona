@@ -56,7 +56,8 @@ router.get('/', (req, res) => {
             User.findAll({
                 raw: true,
                 where: {
-                    group: 'pw'
+                    group: 'pw',
+                    role: 'user'
                 }
             }).then(user => {
                 res.render('pw/supervisor/ticket', {

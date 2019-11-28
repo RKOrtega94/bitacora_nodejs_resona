@@ -62,7 +62,7 @@ block content
               .row
                 .col
                   label(for='txtSolution')
-                  select#txtSolution.form-control(name='txtSolution' required='true')
+                  select#txtSolution.form-control(name='txtSolution' required='true' onchange='solutionChange()')
                     option(value='S') Solucionado
                     option(value='E') Escalado
                     option(value='V') Visita Técnica

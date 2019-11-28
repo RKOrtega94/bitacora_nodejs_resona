@@ -7,8 +7,8 @@ $(document).ready(function () {
         buttons: [
             'excelHtml5'
         ]
-    });
-});
+    })
+})
 
 $(function () {
     var from = $("#txtStartDate")
@@ -43,7 +43,7 @@ $(function () {
 
         return date;
     }
-});
+})
 
 function addRow(user, ticket, data) {
     table = $('#dataTable').DataTable();
@@ -89,6 +89,7 @@ function search() {
         fromDate.classList.add('border-danger')
         toDate.classList.add('border-danger')
     } else {
+        document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
         if (userId.value == 0) {
             var fromYear = fromDate.value.substring(0, 4)
             var toYear = toDate.value.substring(0, 4)
@@ -112,7 +113,7 @@ function search() {
                 if (fromDays.length <= 1) {
                     fromDays = '0' + fromDays
                 }
-                var query = firebase.database().ref('tickets').child(toYear).child(fromMonths).child(fromDays)
+                var query = firebase.database().ref('tickets').child('baf').child(toYear).child(fromMonths).child(fromDays)
                 query.once('value', snapshot => {
                     snapshot.forEach(childSnapshot => {
                         var userResult = childSnapshot.key
@@ -120,12 +121,15 @@ function search() {
                             var data = ticketSapshot.val()
                             var ticket = ticketSapshot.key
                             addRow(userResult, ticket, data)
-                            var create = firebase.database().ref('tickets').child('baf').child(toYear).child(fromMonths).child(fromDays).child(userResult).child(ticket).set(data)
+                            setTimeout(function () {
+                                if (document.getElementById("loading")) {
+                                    document.getElementById("loading").remove()
+                                }
+                            }, 500);
                         })
                     })
                 })
                 fromDay++
-                var create = firebase.database().ref('tickets').child('baf').child(toYear).child(fromMonths).child(fromDays).set()
             }
             //fromMonth++
         }
