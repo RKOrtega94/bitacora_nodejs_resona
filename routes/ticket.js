@@ -46,7 +46,6 @@ function addTicket(req, res) {
             hour: currentHour,
             status: 'P'
         })
-    console.log('ref:' + ref)
     res.redirect('/ticket')
 }
 

@@ -5,6 +5,8 @@ const router = express.Router()
 const admin = require('firebase-admin')
 
 function addRequest(req, res, ticket) {
+    ticket == 'new' ? ticket = req.body.txtTicket : ticket = ticket
+
     var date = new Date()
     var day = '' + date.getDate();
     var month = '' + (date.getMonth() + 1)
@@ -28,6 +30,25 @@ function addRequest(req, res, ticket) {
 
     var currentHour = hour + ':' + minutes
     var currentDate = date.getFullYear() + '-' + month + '-' + day
+
+    if (req.body.txtTicket) {
+        var ref = admin.database()
+            .ref('tickets')
+            .child('pw')
+            .child(date.getFullYear())
+            .child(month)
+            .child(day)
+            .child(req.session.user.username)
+            .child(req.body.txtTicket)
+            .set({
+                ticket: req.body.txtTicket,
+                dni: req.body.txtDni,
+                date: currentDate,
+                hour: currentHour,
+                status: 'P'
+            })
+    }
+
     var update = admin.database()
         .ref('tickets')
         .child('pw')

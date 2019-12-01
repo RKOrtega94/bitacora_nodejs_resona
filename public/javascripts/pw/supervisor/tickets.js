@@ -1,6 +1,10 @@
 var selectUser = document.getElementById('txtAsesor')
 var table;
 
+$(document).ready(function () {
+  $('#txtAsesor').select2();
+});
+
 function addOption(item) {
   var option = document.createElement('option')
   option.text = item.username
