@@ -45,7 +45,8 @@ function createTicket(req) {
           ticket: req.body.txtTicket,
           tmo: req.body.txtTmo,
           date: currentDate,
-          hour: currentHour
+          hour: currentHour,
+          coment: req.body.txtComent
         })
       break
     case 'pw':

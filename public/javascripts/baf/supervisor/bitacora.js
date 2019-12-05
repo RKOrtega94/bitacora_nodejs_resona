@@ -10,6 +10,20 @@ $(document).ready(function () {
     })
 })
 
+function loadSpinner() {
+    var spinner = document.getElementById("loading")
+    spinner.innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
+    spinner.style.display = 'block'
+}
+
+function quitSpinner() {
+    setTimeout(function () {
+        if (document.getElementById("loading")) {
+            document.getElementById("loading").style.display = 'none'
+        }
+    }, 10);
+}
+
 $(function () {
     var from = $("#txtStartDate")
         .datepicker({
@@ -46,36 +60,21 @@ $(function () {
 })
 
 function addRow(user, ticket, data) {
+    loadSpinner()
     table = $('#dataTable').DataTable();
-    if (data.hour) {
-        table.row.add([
-            user,
-            ticket,
-            data.anillamador,
-            data.dni,
-            data.pir,
-            data.date,
-            data.hour,
-            '0:' + data.tmo
-        ])
-            .draw(true);
-    } else {
-        table.row.add([
-            user,
-            ticket,
-            data.anillamador,
-            data.dni,
-            data.pir,
-            data.date,
-            'Sin Hora',
-            '0:' + data.tmo
-        ])
-            .draw(true);
-    }
-
-    setTimeout(function () {
-        document.getElementById("loading").remove()
-    }, 500);
+    table.row.add([
+        user,
+        ticket,
+        data.anillamador,
+        data.dni,
+        data.pir,
+        data.date,
+        data.hour ? data.hour : 'Sin Hora',
+        '0:' + data.tmo,
+        data.coment ? data.coment : 'Sin comentario'
+    ])
+        .draw(true);
+    quitSpinner()
 }
 
 function search() {
@@ -89,7 +88,6 @@ function search() {
         fromDate.classList.add('border-danger')
         toDate.classList.add('border-danger')
     } else {
-        document.getElementById("loading").innerHTML = "<div class=\"spinner-border text-success\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>"
         if (userId.value == 0) {
             var fromYear = fromDate.value.substring(0, 4)
             var toYear = toDate.value.substring(0, 4)
@@ -121,11 +119,6 @@ function search() {
                             var data = ticketSapshot.val()
                             var ticket = ticketSapshot.key
                             addRow(userResult, ticket, data)
-                            setTimeout(function () {
-                                if (document.getElementById("loading")) {
-                                    document.getElementById("loading").remove()
-                                }
-                            }, 500);
                         })
                     })
                 })
