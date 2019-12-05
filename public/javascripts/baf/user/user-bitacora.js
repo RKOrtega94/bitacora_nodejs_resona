@@ -93,7 +93,7 @@ function addRow(data) {
   table.row.add([
     data.anillamador,
     data.dni,
-    data.escalado,
+    data.escalado ? 'Ticket escalado en Omnicanal' : 'N/A',
     data.ticket,
     data.tmo
   ]).draw(true);
