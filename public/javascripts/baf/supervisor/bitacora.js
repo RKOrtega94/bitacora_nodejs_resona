@@ -67,7 +67,7 @@ function addRow(user, ticket, data) {
         ticket,
         data.anillamador,
         data.dni,
-        data.pir,
+        data.escalado ? 'Ticket escalado en Omnicanal' : 'N/A',
         data.date,
         data.hour ? data.hour : 'Sin Hora',
         '0:' + data.tmo,

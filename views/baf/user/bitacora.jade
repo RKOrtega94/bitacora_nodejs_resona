@@ -20,28 +20,21 @@ block content
             form.user(action='/bitacora' method='POST' style='width: 100%' onsubmit='cls()')
               .row(style='width: 100%')
                 .col
-                  input#txtAnillamador.form-control(type='tel' aria-describedby='emailHelp' placeholder='Anillamador' name='txtAnillamador' required='true' pattern='[0-9]+' title='Only numbers')
+                  input#txtAnillamador.form-control(type='tel' placeholder='Anillamador' name='txtAnillamador' required='true' pattern='[0-9]+' title='Only numbers')
                 .col
-                  input#txtDni.form-control(type='text' aria-describedby='emailHelp' placeholder='Identificación del cliente' name='txtDni' required='true')
+                  input#txtDni.form-control(type='text' placeholder='Identificación del cliente' name='txtDni' required='true')
                 .col
-                  select#txtPir.form-control(name='txtPir' required='true')
-                    option(selected='' value='') Requerimiento...
-                    option(value='CONSULTA / COMERCIAL') CONSULTA / COMERCIAL
-                    option(value='CONSULTA / FACTURACIÓN') CONSULTA / FACTURACIÓN
-                    option(value='CONSULTA / TÉCNICO') CONSULTA / TÉCNICO
-                    option(value='PETICIÓN / COMERCIAL') PETICIÓN / COMERCIAL
-                    option(value='PETICIÓN / FACTURACIÓN') PETICIÓN / FACTURACIÓN
-                    option(value='RECLAMO / FACTURACIÓN') RECLAMO / FACTURACIÓN
-                    option(value='SOPORTE / COMERCIAL') SOPORTE / COMERCIAL
-                    option(value='SOPORTE / TÉCNICO') SOPORTE / TÉCNICO
+                  input#txtTicket.form-control(type='text' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
                 .col
-                  input#txtTicket.form-control(type='text' aria-describedby='emailHelp' placeholder='Ticket' name='txtTicket' required='true' pattern='[0-9]+' title='Only numbers')
-                .col
-                  input#txtTmo.form-control(type='text' aria-describedby='emailHelp' placeholder='Tiempo de llamada mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
+                  input#txtTmo.form-control(type='text' placeholder='Tiempo de llamada mm:ss' name='txtTmo' required='true' pattern='[0-9]{2}:[0-9]{2}' title='Invalid format')
               .row.text-center(style='width: 100%')
-                .col
+                .col-3.form-check
                   br
-                  textarea#txtComent.form-control(name="txtComent" placeholder='Comentario' required='true')
+                  label.form-check-label(for="txtEscalado") Ticket pendiente en Omnicanal
+                  input#txtEscalado.form-check-input(type="checkbox" name="txtEscalado")
+                .col-9
+                  br
+                  textarea#txtComent.form-control(name="txtComent" placeholder='Comentario (Únicamente se llena en caso de tener un ticket pausado en Omnicanal)' disabled)
               .row.text-center(style='width: 100%')
                 .col
                   br
@@ -59,14 +52,14 @@ block content
                     tr
                       th(width='150px') Anillamador
                       th(width='150px') Identificación
-                      th PIR
+                      th Escalado
                       th(width='150px') Ticket
                       th(width='150px') Tiempo
                   tfoot
                     tr
                       th Anillamador
                       th Identificación
-                      th PIR
+                      th Escalado
                       th Ticket
                       th Tiempo
                   tbody

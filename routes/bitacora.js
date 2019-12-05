@@ -41,12 +41,12 @@ function createTicket(req) {
         .set({
           anillamador: req.body.txtAnillamador,
           dni: req.body.txtDni,
-          pir: req.body.txtPir,
+          escalado: req.body.txtEscalado ? 'Ticket escalado' : 'N/A',
           ticket: req.body.txtTicket,
           tmo: req.body.txtTmo,
           date: currentDate,
           hour: currentHour,
-          coment: req.body.txtComent
+          coment: req.body.txtComent ? req.body.txtComent : 'N/A'
         })
       break
     case 'pw':

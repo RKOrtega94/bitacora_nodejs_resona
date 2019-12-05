@@ -14,6 +14,14 @@ var date = new Date()
 var day = '' + date.getDate();
 var month = '' + (date.getMonth() + 1)
 
+$('#txtEscalado').change(function () {
+  if ($(this).is(':checked')) {
+    document.getElementById('txtComent').disabled = false
+  } else {
+    document.getElementById('txtComent').disabled = true
+  }
+});
+
 if (day.length <= 1) {
   day = '0' + day;
 }
@@ -85,7 +93,7 @@ function addRow(data) {
   table.row.add([
     data.anillamador,
     data.dni,
-    data.pir,
+    data.escalado,
     data.ticket,
     data.tmo
   ]).draw(true);
