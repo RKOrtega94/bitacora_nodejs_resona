@@ -73,8 +73,8 @@ function addRow(data) {
     data.date,
     data.anillamador,
     data.dni,
-    data.pir,
     data.ticket,
+    data.escalado ? 'Ticket escalado en Omnicanal' : 'N/A',
     data.tmo
   ]).draw(true);
 }

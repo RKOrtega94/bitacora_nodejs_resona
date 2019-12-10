@@ -30,14 +30,19 @@ block content
               .row.text-center(style='width: 100%')
                 .col-3.form-check
                   br
-                  label.form-check-label(for="txtEscalado") Ticket pendiente en Omnicanal
+                  label.form-check-label(for="txtEscalado") Ticket abierto?
+                  br
                   input#txtEscalado.form-check-input(type="checkbox" name="txtEscalado")
                 .col-9
                   br
                   textarea#txtComent.form-control(name="txtComent" placeholder='Comentario (Únicamente se llena en caso de tener un ticket pausado en Omnicanal)' disabled)
-              .row.text-center(style='width: 100%')
+              .row
                 .col
                   br
+                  p.text-warning
+                    | Solamente marcar la casilla de "Ticket abierto", cuando se haya registrado en Omnicanal sobre un ticket abierto.
+              .row.text-center(style='width: 100%')
+                .col
                   button.btn.btn-outline-success.align-content-center(type='submit') Guardar
           // /.container-fluid
           br

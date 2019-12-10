@@ -108,7 +108,7 @@ try {
                 break
         }
         txtType.selectedIndex = indexType
-        txtContact.value = data.contact
+        txtContact.value = data.contact ? data.contact : ''
         snapshot.forEach(data => {
             addRow(data.key, data.val())
         })
