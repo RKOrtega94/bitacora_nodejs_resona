@@ -45,9 +45,10 @@ $(function () {
     }
 })
 
-function addRow(ticket, interaction) {
+function addRow(ticket, interaction, userResult) {
     table.row.add([
         ticket.date + ' ' + ticket.hour,
+        userResult,
         ticket.ticket,
         ticket.dni,
         ticket.contact,
@@ -128,7 +129,7 @@ function search() {
                                     case 'type':
                                         break
                                     default:
-                                        addRow(ticket, interactions)
+                                        addRow(ticket, interactions, userResult)
                                         break
                                 }
                                 setTimeout(function () {
