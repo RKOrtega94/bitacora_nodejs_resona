@@ -38,7 +38,7 @@ ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordio
             i.fas.fa-fw.fa-users
             span Usuarios
     li.nav-item
-        a.nav-link.collapsed(href='#', data-toggle='collapse', data-target='#collapseCalidad', aria-expanded='true' aria-controls='collapseCalidad')
+        a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseCalidad' aria-expanded='true' aria-controls='collapseCalidad')
             i.fas.fa-fw.fa-eye
             span Calidad
         #collapseCalidad.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar')
@@ -47,3 +47,5 @@ ul#accordionSidebar.navbar-nav.bg-gradient-success.sidebar.sidebar-dark.accordio
                 a.collapse-item(href='/monitoring/category') Categoría
                 a.collapse-item(href='/monitoring/category/item') Items
                 a.collapse-item(href='/monitoring/category/item/errors') Errores
+    .text-center.d-none.d-md-inline
+        button#sidebarToggle.rounded-circle.border-0
